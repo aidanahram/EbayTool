@@ -1,0 +1,4 @@
+1. Design what is should look like
+2. Ebay API - Aidan
+3. Ali express API integration
+4. Create the user interface
