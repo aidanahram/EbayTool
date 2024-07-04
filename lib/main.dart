@@ -8,8 +8,6 @@
 /// be as simple as possible. 
 library main;
 
-import "dart:async";
-import "dart:io";
 import "package:flutter/material.dart";
 
 import "package:ebay/app.dart";

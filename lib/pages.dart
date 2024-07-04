@@ -7,6 +7,7 @@
 library pages;
 
 export "src/pages/home.dart";
+export "src/pages/add_item.dart";
 
 /// The names of all the pages available in the app.
 /// 
@@ -14,4 +15,6 @@ export "src/pages/home.dart";
 class Routes { 
 	/// The name of the home page.
 	static const String home = "home"; 
+  /// The name of the add product page
+  static const String addItem = "addItem";
 }

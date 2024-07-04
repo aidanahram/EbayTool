@@ -33,7 +33,7 @@ class EbayDashboard extends ReusableReactiveWidget<SettingsModel> {
       ),
       appBarTheme: const AppBarTheme(
         backgroundColor: ebayYellow,
-        foregroundColor: Colors.white,
+        foregroundColor: ebayYellow,
       ),
     ),
     darkTheme: ThemeData.from(
@@ -44,6 +44,7 @@ class EbayDashboard extends ReusableReactiveWidget<SettingsModel> {
     ),
     routes: {
       Routes.home: (_) => const HomePage(),
+      Routes.addItem: (_) => const AddItemPage(),
     },
 	);
 }
