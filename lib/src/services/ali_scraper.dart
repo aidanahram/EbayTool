@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:requests/requests.dart';
 import 'package:crypto/crypto.dart';
 
@@ -36,6 +38,21 @@ void main() async{
   final stringToHash = "${createTokenApi}app_key${appKey}code${code}sign_methodsha256timestamp${currentTime.toString()}";
   print(stringToHash);
 
+  final key = utf8.encode("helloworld"); /// SECRET KEY
+  const testString = "/auth/token/createapp_key12345678code3_500102_JxZ05Ux3cnnSSUm6dCxYg6Q26sign_methodsha256timestamp1517820392000";
+  final bytes = utf8.encode(testString);
 
+  final hmacSha256 = Hmac(sha256, key);
+  final digest = hmacSha256.convert(bytes);
+
+  print("Digest as bytes: ${digest.bytes}");
+  print("Digest as hex string: $digest");
+
+  // final bytes = utf8.encode(stringToHash);
+
+  // final digest = sha256.convert(bytes);
+
+  // print("Digest as bytes: ${digest.bytes}");
+  // print("Digest as hex string: $digest");
 
 }
