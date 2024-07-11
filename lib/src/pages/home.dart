@@ -20,7 +20,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.black,
+        backgroundColor: Colors.orange,
         title: const Text("Ebay Drop Shipping Tool"),
         leading: Builder(
           builder: (context) {
@@ -66,9 +66,20 @@ class _HomePageState extends State<HomePage> {
                   throw "Could not launch $url";
                 }
               }
-            )
-          ]
-        )
+            ),
+            ListTile(
+              title: const Text("Verify your eBay Account"),
+              onTap: () async {
+                final url = Uri.parse("https://ebay.com");//
+                if(await canLaunchUrl(url)){
+                  await launchUrl(url);
+                } else {
+                  throw "Could not launch $url";
+                }
+              }
+            ),
+          ],
+        ),
       ),
       body: Center(
         child: Column(
