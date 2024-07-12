@@ -6,6 +6,7 @@ import 'package:requests/requests.dart';
 import 'package:crypto/crypto.dart';
 
 class AliScraper {
+  final api = "https://api-sg.aliexpress.com/rest";
   const AliScraper();
 
   /// Function to initialize the scraper
@@ -25,25 +26,27 @@ class AliScraper {
 
 void main() async {
   const callbackUrl = "https%3A%2F%2Fwebhook.site%2F492b6fc0-eb70-4d3e-bfb4-a9c23409f82e";
-  const appKey = "508156";
   const baseUrl = "https://api-sg.aliexpress.com";
   const createTokenApi = "/auth/token/create";
-  const code = "3_508156_8VbpoXsK6RfiPK3MCSmP2GpZ32376";
-  final response = await File("C:\\Scripts\\Flutter\\Ebay\\ebay\\secrets.json").readAsString();
-  final data = await jsonDecode(response);
+  final json = await File("C:\\Scripts\\Flutter\\Ebay\\ebay\\secrets.json").readAsString();
+  final data = await jsonDecode(json);
   final appSecret = data["appSecret"];
   print(appSecret);
   
-
+  final currentTime = DateTime.now().millisecondsSinceEpoch;
+  print(currentTime);
+  final params = {
+    "app_key": "508156",
+    "code": "3_508156_OeEzy3orBcoG04X1B6GZ3uOp172",
+    "sign_method": "sha256",
+    "timestamp": currentTime,
+  };
   // final response = await Requests.post("${env["baseUrl"]}/oauth/authorize?response_type=code&force_auth=true&redirect_uri${env["callbackUrl"]}&client_id=${env["appKey"]}");
   // response.throwForStatus();
 
-  final currentTime = DateTime.now().millisecondsSinceEpoch;
-  print(currentTime);
-
   final key = utf8.encode(appSecret); /// SECRET KEY
   // const testString = "/auth/token/createapp_key12345678code3_500102_JxZ05Ux3cnnSSUm6dCxYg6Q26sign_methodsha256timestamp1517820392000";
-  final stringToHash = "${createTokenApi}app_key${appKey}code${code}sign_methodsha256timestamp${currentTime.toString()}";
+  final stringToHash = "${createTokenApi}app_key${params["appKey"]}code${params["code"]}sign_methodsha256timestamp${currentTime.toString()}";
   print(stringToHash);
   final bytes = utf8.encode(stringToHash);
 
@@ -52,12 +55,16 @@ void main() async {
 
   print("Digest as bytes: ${digest.bytes}");
   print("Digest as hex string: $digest");
+  params["sign"] = digest.toString();
+
+  String url = "$baseUrl$createTokenApi?";
+  params.forEach((key, value) {url += "&$key=$value"; });
+  print(url);
+  final response = await Requests.get(url);
+  print(response.body);
 
   // final bytes = utf8.encode(stringToHash);
 
   // final digest = sha256.convert(bytes);
-
-  // print("Digest as bytes: ${digest.bytes}");
-  // print("Digest as hex string: $digest");
 
 }
