@@ -31,7 +31,7 @@ class _AddItemPageState extends State<AddItemPage> {
               padding: const MaterialStatePropertyAll<EdgeInsets>(EdgeInsets.symmetric(horizontal: 16.0)),
               leading: const Icon(Icons.search),
               onSubmitted: (value) {
-                services.ali_scraper.scrapePage(value);
+                print(value);
               },
             ),
           ],

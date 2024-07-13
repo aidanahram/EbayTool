@@ -10,12 +10,18 @@
 library models;
 
 import "src/models/model.dart";
+import "src/models/data/home.dart";
 import "src/models/data/settings.dart";
 
 export "src/models/model.dart";
 
 // Data models
 export "src/models/data/settings.dart";
+export "src/models/data/home.dart";
+
+// Builder models
+export "src/models/data/api_builder.dart";
+export "src/models/view/builders/builder.dart";
 
 
 /// A wrapper model around all other data models used by the app.
@@ -32,8 +38,11 @@ class Models extends Model {
   /// Whether all models have been initialized.
   bool isReady = false;
 
-    /// Caches the settings and updates them to all listeners.
+  /// Caches the settings and updates them to all listeners.
 	final settings = SettingsModel();
+
+  /// Contains persistent data about the dashboard's current state.
+	final home = HomeModel();
 
   @override
 	Future<void> init() async {

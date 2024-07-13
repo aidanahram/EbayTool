@@ -1,4 +1,6 @@
 import 'package:ebay/app.dart';
+import 'package:ebay/models.dart';
+import 'package:ebay/services.dart';
 import 'package:ebay/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:ebay/pages.dart';
@@ -62,6 +64,9 @@ class _HomePageState extends State<HomePage> {
                 final url = Uri.parse("https://api-sg.aliexpress.com/oauth/authorize?response_type=code&force_auth=true&redirect_uri=$redirectUrl&client_id=$appKey");
                 if(await canLaunchUrl(url)){
                   await launchUrl(url);
+                  if(context.mounted){
+                    showDialog<void>(context: context, builder: (_) => APIEditor());
+                  }
                 } else {
                   throw "Could not launch $url";
                 }
@@ -72,10 +77,17 @@ class _HomePageState extends State<HomePage> {
               onTap: () async {
                 final url = Uri.parse("https://ebay.com");//
                 if(await canLaunchUrl(url)){
-                  await launchUrl(url);
+                  await launchUrl(url, mode: LaunchMode.inAppWebView);
                 } else {
                   throw "Could not launch $url";
                 }
+              }
+            ),
+            ListTile(
+              title: const Text("Authenticate it"),
+              onTap: () async {
+                print(models.settings.code!);
+                services.aliScraper.authenticate(models.settings.code!);
               }
             ),
           ],
@@ -105,3 +117,4 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
+

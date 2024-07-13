@@ -30,14 +30,14 @@ export "src/services/ebay_scraper.dart";
 /// To get an instance of this class, use [services].
 class Services {
 	/// A service that handles controller inputs.
-  final ali_scraper = const AliScraper();
+  final aliScraper = const AliScraper();
 
 	Future<void> init() async {
-		await ali_scraper.init();
+		await aliScraper.init();
 	}
 
 	Future<void> dispose() async {
-		await ali_scraper.dispose();
+		await aliScraper.dispose();
 	}
 }
 

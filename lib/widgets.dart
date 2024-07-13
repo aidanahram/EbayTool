@@ -17,6 +17,8 @@ library widgets;
 
 import "package:flutter/material.dart";
 
+export "src/widgets/atomic/editors.dart";
+
 export "src/widgets/generic/reactive_widget.dart";
 
 /// Convenience functions on [BuildContext].

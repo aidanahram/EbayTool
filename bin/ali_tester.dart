@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import "dart:io";
 import 'dart:convert';
 
@@ -6,7 +8,7 @@ import 'package:requests/requests.dart';
 import 'package:crypto/crypto.dart';
 
 main() async {
-  const callbackUrl = "https%3A%2F%2Fwebhook.site%2F492b6fc0-eb70-4d3e-bfb4-a9c23409f82e";
+  //const callbackUrl = "https%3A%2F%2Fwebhook.site%2F492b6fc0-eb70-4d3e-bfb4-a9c23409f82e";
   const baseUrl = "https://api-sg.aliexpress.com";
   const createTokenApi = "/auth/token/create";
   final json = await File("C:\\Scripts\\Flutter\\Ebay\\ebay\\secrets.json").readAsString();

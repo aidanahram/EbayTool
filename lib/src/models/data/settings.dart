@@ -6,4 +6,6 @@ class SettingsModel extends Model {
 	Future<void> init() async {
 
 	}
+
+  String? code;
 }
