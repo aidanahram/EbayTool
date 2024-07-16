@@ -4,15 +4,16 @@ import 'dart:convert';
 import 'dart:io';
 
 //import 'package:flutter/services.dart';
-import 'package:requests/requests.dart';
+import 'package:http/http.dart' as http;
 import 'package:crypto/crypto.dart';
 
 class AliScraper {
-  final api = "https://api-sg.aliexpress.com/rest";
-  const AliScraper();
+  final api = "localhost:8080";
+  AliScraper();
 
   Future<bool> authenticate(String code) async {
-    const createTokenApi = "/auth/token/create";
+    const createTokenApi = "rest/auth/token/create";
+    const createToken = "/auth/token/create";
     print("where is my problem1?");
     //final secrets = await File("C:\\Scripts\\Flutter\\Ebay\\ebay\\secrets.json").readAsString();
     //final data = await jsonDecode(secrets);
@@ -29,7 +30,7 @@ class AliScraper {
     };
 
     final key = utf8.encode(appSecret); /// SECRET KEY
-    final stringToHash = "${createTokenApi}app_key${params["app_key"]}code${params["code"]}sign_methodsha256timestamp${params["timestamp"]}";
+    final stringToHash = "${createToken}app_key${params["app_key"]}code${params["code"]}sign_methodsha256timestamp${params["timestamp"]}";
 
     final bytes = utf8.encode(stringToHash);
 
@@ -38,16 +39,15 @@ class AliScraper {
 
     params["sign"] = digest.toString().toUpperCase();
 
-    String url = "$api$createTokenApi?";
-
+    final uri = Uri.http(api, createTokenApi, params);
+    print(uri.toString());
     print("before response");
-    final response = await Requests.get(url, queryParameters: params, withCredentials: true);
     try {
+      final response = await http.get(uri);
       print(response.body);
       //final json = jsonDecode(response.body);
       //print(json.toString());
     } on Exception catch (e) {
-
       print(e);
     }
     return true;
@@ -69,8 +69,9 @@ class AliScraper {
 }
 
 void main() async {
-  const scrape = AliScraper();
-  scrape.authenticate("3_508156_44yZLeLa3lae4UAmOQ8VulD5457");
+
+  final scrape = AliScraper();
+  scrape.authenticate("3_508156_AoIJKaV5GpKn2J3uwVHmAQ1g437");
 
 
   // const baseUrl = "https://api-sg.aliexpress.com/rest";
