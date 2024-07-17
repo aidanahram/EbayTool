@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:ebay/pages.dart';
 import 'package:ebay/data.dart';
 
-
 class AddItemPage extends StatefulWidget {
   const AddItemPage({super.key});
 
@@ -28,7 +27,8 @@ class _AddItemPageState extends State<AddItemPage> {
             const SizedBox(height: 10.0),
             SearchBar(
               hintText: "Enter link to item",
-              padding: const MaterialStatePropertyAll<EdgeInsets>(EdgeInsets.symmetric(horizontal: 16.0)),
+              padding: const MaterialStatePropertyAll<EdgeInsets>(
+                  EdgeInsets.symmetric(horizontal: 16.0)),
               leading: const Icon(Icons.search),
               onSubmitted: (value) {
                 print(value);

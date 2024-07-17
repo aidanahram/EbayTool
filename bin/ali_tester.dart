@@ -12,7 +12,7 @@
 //   const baseUrl = "https://api-sg.aliexpress.com";
 //   const createTokenApi = "/auth/token/create";
 //   final json = await File("C:\\Scripts\\Flutter\\Ebay\\ebay\\secrets.json").readAsString();
-  
+
 //   const currentTime = "1517820392000";
 //   //DateTime.now().millisecondsSinceEpoch;
 //   final params = {
@@ -40,7 +40,7 @@
 //   params["sign"] = digest.toString().toUpperCase();
 
 //   String url = "$baseUrl$createTokenApi?";
-  
+
 //   print(url);
 //   final response = await Requests.get(url, queryParameters: params);
 //   print(response.body);
@@ -49,7 +49,6 @@
 //   // final bytes = utf8.encode(stringToHash);
 
 //   // final digest = sha256.convert(bytes);
-
 
 //   /// New ATTEMPT
 

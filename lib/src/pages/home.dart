@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:ebay/pages.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -15,7 +14,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final redirectUrl = "https://webhook.site/492b6fc0-eb70-4d3e-bfb4-a9c23409f82e";
+  final redirectUrl =
+      "https://webhook.site/492b6fc0-eb70-4d3e-bfb4-a9c23409f82e";
   final appKey = "508156";
 
   @override
@@ -40,56 +40,54 @@ class _HomePageState extends State<HomePage> {
           padding: EdgeInsets.zero,
           children: [
             DrawerHeader(
-              margin: EdgeInsets.zero,
-              padding: EdgeInsets.zero,
-              child: Row(
-                children: [
-                  Builder(
-                    builder: (context) {
-                      return IconButton(
-                        icon: const Icon(Icons.menu),
-                        onPressed: () {
-                          Scaffold.of(context).closeDrawer();
-                        },
-                      );
-                    },
-                  ),
-                  const Text("Menu"),
-                ],
-              )
-            ),
+                margin: EdgeInsets.zero,
+                padding: EdgeInsets.zero,
+                child: Row(
+                  children: [
+                    Builder(
+                      builder: (context) {
+                        return IconButton(
+                          icon: const Icon(Icons.menu),
+                          onPressed: () {
+                            Scaffold.of(context).closeDrawer();
+                          },
+                        );
+                      },
+                    ),
+                    const Text("Menu"),
+                  ],
+                )),
             ListTile(
-              title: const Text("Authenticate Ali Express Account"),
-              onTap: () async {
-                final url = Uri.parse("https://api-sg.aliexpress.com/oauth/authorize?response_type=code&force_auth=true&redirect_uri=$redirectUrl&client_id=$appKey");
-                if(await canLaunchUrl(url)){
-                  await launchUrl(url);
-                  if(context.mounted){
-                    showDialog<void>(context: context, builder: (_) => APIEditor());
+                title: const Text("Authenticate Ali Express Account"),
+                onTap: () async {
+                  final url = Uri.parse(
+                      "https://api-sg.aliexpress.com/oauth/authorize?response_type=code&force_auth=true&redirect_uri=$redirectUrl&client_id=$appKey");
+                  if (await canLaunchUrl(url)) {
+                    await launchUrl(url);
+                    if (context.mounted) {
+                      showDialog<void>(
+                          context: context, builder: (_) => APIEditor());
+                    }
+                  } else {
+                    throw "Could not launch $url";
                   }
-                } else {
-                  throw "Could not launch $url";
-                }
-              }
-            ),
+                }),
             ListTile(
-              title: const Text("Verify your eBay Account"),
-              onTap: () async {
-                final url = Uri.parse("https://ebay.com");//
-                if(await canLaunchUrl(url)){
-                  await launchUrl(url, mode: LaunchMode.inAppWebView);
-                } else {
-                  throw "Could not launch $url";
-                }
-              }
-            ),
+                title: const Text("Verify your eBay Account"),
+                onTap: () async {
+                  final url = Uri.parse("https://ebay.com"); //
+                  if (await canLaunchUrl(url)) {
+                    await launchUrl(url, mode: LaunchMode.inAppWebView);
+                  } else {
+                    throw "Could not launch $url";
+                  }
+                }),
             ListTile(
-              title: const Text("Authenticate it"),
-              onTap: () async {
-                print(models.settings.code!);
-                services.aliScraper.authenticate(models.settings.code!);
-              }
-            ),
+                title: const Text("Authenticate it"),
+                onTap: () async {
+                  print(models.settings.code!);
+                  services.aliScraper.generateToken(models.settings.code!);
+                }),
           ],
         ),
       ),
@@ -100,7 +98,8 @@ class _HomePageState extends State<HomePage> {
             const SizedBox(height: 10),
             SearchBar(
               hintText: "Search for a product",
-              padding: const MaterialStatePropertyAll<EdgeInsets>(EdgeInsets.symmetric(horizontal: 16.0)),
+              padding: const MaterialStatePropertyAll<EdgeInsets>(
+                  EdgeInsets.symmetric(horizontal: 16.0)),
               leading: const Icon(Icons.search),
               onSubmitted: (value) {
                 print(value);
@@ -113,8 +112,7 @@ class _HomePageState extends State<HomePage> {
         onPressed: () => Navigator.of(context).pushNamed(Routes.addItem),
         tooltip: 'Add new product',
         child: const Icon(Icons.add),
-      ), 
+      ),
     );
   }
 }
-

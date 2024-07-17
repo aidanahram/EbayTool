@@ -29,7 +29,6 @@ import 'dart:convert';
 //     return Future.value(response.headers["location"]);
 //   }
 
-
 //   Future<String> checkStatus(String url) async {
 //     for(int i = 0; i < 3; i++){
 //       final response = await Requests.get(url, headers: headers);

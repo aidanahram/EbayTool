@@ -9,12 +9,12 @@ class APIBuilder extends ValueBuilder<void> {
 
   /// The text controller for the timer name.
   final code = TextEditingController();
-  
+
   @override
   bool get isValid => code.text.isNotEmpty;
 
   @override
-  void get value { /* Use [save] instead */ }
+  void get value {/* Use [save] instead */}
 
   /// Updates the UI.
   void update(_) => notifyListeners();
@@ -22,6 +22,6 @@ class APIBuilder extends ValueBuilder<void> {
   /// Saves the code
   void save() async {
     models.settings.code = code.text;
-    //services.aliScraper.authenticate(code.text);
+    services.aliScraper.generateToken(code.text);
   }
 }
