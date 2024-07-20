@@ -6,6 +6,8 @@ import "package:ebay/widgets.dart";
 
 /// A widget to edit a color, backed by [APIBuilder].
 class APIEditor extends ReactiveWidget<APIBuilder> {
+  const APIEditor({super.key});
+
   @override
   APIBuilder createModel() => APIBuilder();
 

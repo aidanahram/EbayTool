@@ -106,7 +106,7 @@ class AliScraper {
     return true;
   }
 
-  Future<bool> getProduct(String productID) async {
+  Future<String> getProduct(String productID) async {
     const getProductApi = 'aliexpress.ds.product.get';
     final params = {...baseParams};
 
@@ -129,6 +129,7 @@ class AliScraper {
     print(uri);
     try {
       final response = await http.get(uri);
+      print(response.body);
       if (response.statusCode >= 400) {
         print('Recieved error code from server');
         print(response.headers);
@@ -137,13 +138,14 @@ class AliScraper {
         throw Error();
       }
       final json = jsonDecode(response.body);
-      print(json);
+      return response.body;
+      //print(json);
     } on Exception catch (e) {
       print('THERE WAS AN ERROR AND LOGGING IS TOO DIFFICULT');
       print(e);
-      return false;
+      return "";
     }
-    return true;
+    return "";
   }
 
   /// Function to initialize the scraper
@@ -162,7 +164,7 @@ void main() async {
   //await scrape.generateToken('3_508156_WnQxbFRHZukqRTcF9kWKW3D51617');
   print("refresh");
   await scrape.refreshToken('50001601001rl13c4a29aapYZ0mxiqpiyse7bBqeqT2FgjtG2fuVnC2mOTwi4LPYEAfB');
-  await scrape.getProduct('3256804988516839');
+  await scrape.getProduct('3256802200866156');
   // const baseUrl = 'https://api-sg.aliexpress.com/rest';
   // const createTokenApi = '/auth/token/create';
   // //final secrets = await File('C:\\Scripts\\Flutter\\Ebay\\ebay\\secrets.json').readAsString();

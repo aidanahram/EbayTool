@@ -1,7 +1,9 @@
 import 'package:ebay/services.dart';
 import 'package:flutter/material.dart';
+
 import 'package:ebay/pages.dart';
 import 'package:ebay/data.dart';
+import 'package:ebay/widgets.dart';
 
 class AddItemPage extends StatefulWidget {
   const AddItemPage({super.key});
@@ -11,6 +13,7 @@ class AddItemPage extends StatefulWidget {
 }
 
 class _AddItemPageState extends State<AddItemPage> {
+  String response = "";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,10 +33,19 @@ class _AddItemPageState extends State<AddItemPage> {
               padding: const MaterialStatePropertyAll<EdgeInsets>(
                   EdgeInsets.symmetric(horizontal: 16.0)),
               leading: const Icon(Icons.search),
-              onSubmitted: (value) {
-                print(value);
+              onSubmitted: (value) async {
+                response = await services.aliScraper.getProduct(value);
+                setState(() {
+                  
+                });
               },
             ),
+            Expanded(
+              child: Container(
+                padding: const EdgeInsets.all(10.0),
+                child: ProductPreview(response: response,),
+              )
+            )
           ],
         ),
       ),
