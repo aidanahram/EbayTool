@@ -82,12 +82,6 @@ class _HomePageState extends State<HomePage> {
                     throw "Could not launch $url";
                   }
                 }),
-            ListTile(
-                title: const Text("Authenticate it"),
-                onTap: () async {
-                  print(models.settings.code!);
-                  services.aliScraper.generateToken(models.settings.code!);
-                }),
           ],
         ),
       ),

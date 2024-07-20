@@ -33,13 +33,12 @@ class AliScraper {
   }
 
   Future<bool> generateToken(String code) async {
-    print("CMON");
     print("code: $code");
     const createTokenApi = '/auth/token/create';
     final params = {...baseParams};
 
     params['code'] = code;
-    
+
     final currentTime = DateTime.now().millisecondsSinceEpoch;
     params['timestamp'] = currentTime.toString();
 
@@ -48,11 +47,10 @@ class AliScraper {
     //final appSecret = data['appSecret'];
     const appSecret = 'Z3AkHoDLoTsK34fu8txgwtnC8vQyMC4j';
     params['sign'] = sign(appSecret, createTokenApi, params);
-    print("is it this?");
     final uri = Uri.http(api, "/rest$createTokenApi", params);
     try {
       final response = await http.get(uri);
-      if(response.statusCode >= 400){
+      if (response.statusCode >= 400) {
         print('Recieved error code from server');
         print(response.headers);
         print(response.statusCode);
@@ -70,7 +68,7 @@ class AliScraper {
   }
 
   Future<bool> refreshToken(String refreshToken) async {
-    const refreshTokenApi = '/auth/token/create';
+    const refreshTokenApi = '/auth/token/refresh';
     final params = {...baseParams};
 
     params['refresh_token'] = refreshToken;
@@ -78,15 +76,17 @@ class AliScraper {
     final currentTime = DateTime.now().millisecondsSinceEpoch;
     params['timestamp'] = currentTime.toString();
 
-    final secrets = await File('C:\\Scripts\\Flutter\\Ebay\\ebay\\secrets.json').readAsString();
+    final secrets = await File('C:\\Scripts\\Flutter\\Ebay\\ebay\\secrets.json')
+        .readAsString();
     final data = await jsonDecode(secrets);
     final appSecret = data['appSecret'];
     params['sign'] = sign(appSecret, refreshTokenApi, params);
 
     final uri = Uri.http(api, "/rest$refreshTokenApi", params);
+    print(uri);
     try {
       final response = await http.get(uri);
-      if(response.statusCode >= 400){
+      if (response.statusCode >= 400) {
         print('Recieved error code from server');
         print(response.headers);
         print(response.statusCode);
@@ -95,7 +95,7 @@ class AliScraper {
       }
       final json = jsonDecode(response.body);
       print(json);
-      if(json["refresh_token"] == null){
+      if (json["refresh_token"] == null) {
         print("missing refresh token");
       }
     } on Exception catch (e) {
@@ -119,7 +119,9 @@ class AliScraper {
 
 void main() async {
   final scrape = AliScraper();
-  scrape.generateToken('Z3AkHoDLoTsK34fu8txgwtnC8vQyMC4j');
+  //await scrape.generateToken('3_508156_WnQxbFRHZukqRTcF9kWKW3D51617');
+  print("refresh");
+  await scrape.refreshToken('50001601001rl13c4a29aapYZ0mxiqpiyse7bBqeqT2FgjtG2fuVnC2mOTwi4LPYEAfB');
 
   // const baseUrl = 'https://api-sg.aliexpress.com/rest';
   // const createTokenApi = '/auth/token/create';
