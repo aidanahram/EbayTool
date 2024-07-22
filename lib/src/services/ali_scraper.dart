@@ -9,47 +9,18 @@ import 'package:crypto/crypto.dart';
 /// Class to send requests to the aliexpress api
 class AliScraper {
   final api = 'localhost:8080';
-  final baseParams = {
-    'app_key': '508156',
-    'sign_method': 'sha256',
-  };
   AliScraper();
 
-  /// Function to generate hash based on [parameters]
-  String sign(String secret, String api, Map<String, String> parameters) {
-    final sortedByKeyMap = Map.fromEntries(parameters.entries.toList()
-      ..sort((e1, e2) => e1.key.compareTo(e2.key)));
-    utf8.encode(secret);
-    String paramStr = '';
-    if (api.contains('/')) {
-      paramStr += api;
-    }
-    sortedByKeyMap.forEach((key, value) {
-      paramStr += '$key${sortedByKeyMap[key]}';
-    });
-    final hmacSha256 = Hmac(sha256, utf8.encode(secret));
-    final digest = hmacSha256.convert(utf8.encode(paramStr));
-    return digest.toString().toUpperCase();
-  }
-
   Future<bool> generateToken(String code) async {
-    print("code: $code");
     const createTokenApi = '/auth/token/create';
-    final params = {...baseParams};
+    final params = {
+      'code': code,
+      'method': createTokenApi
+    };
 
-    params['code'] = code;
-
-    final currentTime = DateTime.now().millisecondsSinceEpoch;
-    params['timestamp'] = currentTime.toString();
-
-    //final secrets = await File('C:\\Scripts\\Flutter\\Ebay\\ebay\\secrets.json').readAsString();
-    //final data = await jsonDecode(secrets);
-    //final appSecret = data['appSecret'];
-    const appSecret = 'Z3AkHoDLoTsK34fu8txgwtnC8vQyMC4j';
-    params['sign'] = sign(appSecret, createTokenApi, params);
-    final uri = Uri.http(api, "/rest$createTokenApi", params);
+    final uri = Uri.http(api, "/rest$createTokenApi");
     try {
-      final response = await http.get(uri);
+      final response = await http.post(uri, body: jsonEncode(params));
       if (response.statusCode >= 400) {
         print('Recieved error code from server');
         print(response.headers);
@@ -69,23 +40,13 @@ class AliScraper {
 
   Future<bool> refreshToken(String refreshToken) async {
     const refreshTokenApi = '/auth/token/refresh';
-    final params = {...baseParams};
+    final params = {
+      'refresh_token': refreshToken
+    };
 
-    params['refresh_token'] = refreshToken;
-
-    final currentTime = DateTime.now().millisecondsSinceEpoch;
-    params['timestamp'] = currentTime.toString();
-
-    final secrets = await File('C:\\Scripts\\Flutter\\Ebay\\ebay\\secrets.json')
-        .readAsString();
-    final data = await jsonDecode(secrets);
-    final appSecret = data['appSecret'];
-    params['sign'] = sign(appSecret, refreshTokenApi, params);
-
-    final uri = Uri.http(api, "/rest$refreshTokenApi", params);
-    print(uri);
+    final uri = Uri.http(api, "/rest$refreshTokenApi");
     try {
-      final response = await http.get(uri);
+      final response = await http.post(uri, body: jsonEncode(params));
       if (response.statusCode >= 400) {
         print('Recieved error code from server');
         print(response.headers);
@@ -108,28 +69,17 @@ class AliScraper {
 
   Future<String> getProduct(String productID) async {
     const getProductApi = 'aliexpress.ds.product.get';
-    final params = {...baseParams};
+    final params = {
+      'method' : getProductApi,
+      'product_id': productID,
+      'ship_to_country': 'US',
+      'target_currency': 'USD',
+      'target_language': 'en'
+    };
 
-    params['ship_to_country'] = 'US';
-    params['product_id'] = productID;
-    params['target_currency'] = 'USD';
-    params['target_language'] = 'en';
-    params['method'] = getProductApi;
-
-    final currentTime = DateTime.now().millisecondsSinceEpoch;
-    params['timestamp'] = currentTime.toString();
-
-    final secrets = await File('C:\\Scripts\\Flutter\\Ebay\\ebay\\secrets.json')
-        .readAsString();
-    final data = await jsonDecode(secrets);
-    final appSecret = data['appSecret'];
-    params['sign'] = sign(appSecret, getProductApi, params);
-
-    final uri = Uri.http(api, "/sync", params);
-    print(uri);
+    final uri = Uri.http(api, "/sync");
     try {
-      final response = await http.get(uri);
-      print(response.body);
+      final response = await http.post(uri, body: jsonEncode(params));
       if (response.statusCode >= 400) {
         print('Recieved error code from server');
         print(response.headers);
@@ -138,14 +88,13 @@ class AliScraper {
         throw Error();
       }
       final json = jsonDecode(response.body);
+      print(json);
       return response.body;
-      //print(json);
     } on Exception catch (e) {
       print('THERE WAS AN ERROR AND LOGGING IS TOO DIFFICULT');
       print(e);
       return "";
     }
-    return "";
   }
 
   /// Function to initialize the scraper
@@ -161,9 +110,9 @@ class AliScraper {
 
 void main() async {
   final scrape = AliScraper();
-  //await scrape.generateToken('3_508156_WnQxbFRHZukqRTcF9kWKW3D51617');
-  print("refresh");
-  await scrape.refreshToken('50001601001rl13c4a29aapYZ0mxiqpiyse7bBqeqT2FgjtG2fuVnC2mOTwi4LPYEAfB');
+  await scrape.generateToken('3_508156_WnQxbFRHZukqRTcF9kWKW3D51617');
+  //print("refresh");
+  //await scrape.refreshToken('50001601001rl13c4a29aapYZ0mxiqpiyse7bBqeqT2FgjtG2fuVnC2mOTwi4LPYEAfB');
   await scrape.getProduct('3256802200866156');
   // const baseUrl = 'https://api-sg.aliexpress.com/rest';
   // const createTokenApi = '/auth/token/create';
