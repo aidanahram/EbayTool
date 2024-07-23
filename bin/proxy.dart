@@ -84,7 +84,7 @@ class ServerFunctions {
           newParams['sign'] = sign(appSecret, api, newParams);
         }
         final newUri = Uri.parse("$requestUrl${paramQuery(newParams)}");
-        print("Sending a get request to $newUri");
+        print("Sending a get request to:\n$newUri");
         final newRequest = Request('GET', newUri);
         final clientRequest = http.StreamedRequest('GET', newUri)
           ..followRedirects = false
@@ -141,8 +141,11 @@ void main() async {
   final serverFunctions = ServerFunctions(appSecret: appSecret);
  
   print("Shhh the secret is $appSecret");
+  final handler = Pipeline()
+    .addMiddleware(logRequests())
+    .addHandler(serverFunctions.myHandler("https://api-sg.aliexpress.com"));
 
   // params['sign'] = sign(appSecret, getProductApi, params);
-  var server = await shelf_io.serve(serverFunctions.myHandler("https://api-sg.aliexpress.com"), 'localhost', 8080);
+  var server = await shelf_io.serve(handler, 'localhost', 8080);
   print('Proxying at http://${server.address.host}:${server.port}');
 }

@@ -35,9 +35,7 @@ class _AddItemPageState extends State<AddItemPage> {
               leading: const Icon(Icons.search),
               onSubmitted: (value) async {
                 response = await services.aliScraper.getProduct(value);
-                setState(() {
-                  
-                });
+                setState(() {});
               },
             ),
             Expanded(

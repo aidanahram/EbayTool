@@ -1,0 +1,372 @@
+{
+	"aliexpress_ds_product_get_response": {
+	  "result": {
+		"ae_item_sku_info_dtos": {
+		  "ae_item_sku_info_d_t_o": [
+			{
+			  "sku_attr": "14:29#Blue;200007763:201336100",
+			  "offer_sale_price": "14.55",
+			  "ipm_sku_stock": 1000,
+			  "sku_stock": true,
+			  "sku_id": "12000031972659642",
+			  "currency_code": "USD",
+			  "sku_price": "14.55",
+			  "offer_bulk_sale_price": "14.55",
+			  "sku_available_stock": 1000,
+			  "id": "14:29#Blue;200007763:201336100",
+			  "sku_code": "14:29;200007763:201336100",
+			  "ae_sku_property_dtos": {
+				"ae_sku_property_d_t_o": [
+				  {
+					"sku_property_value": "WHITE",
+					"sku_image": "https://ae01.alicdn.com/kf/S04d30d152a7b49f4a61be1e9a36402dc3.jpg",
+					"sku_property_name": "Color",
+					"property_value_definition_name": "Blue",
+					"property_value_id": 29,
+					"sku_property_id": 14
+				  },
+				  {
+					"sku_property_value": "CHINA",
+					"sku_property_name": "Ships From",
+					"property_value_id": 201336100,
+					"sku_property_id": 200007763
+				  }
+				]
+			  }
+			},
+			{
+			  "sku_attr": "14:10#White;200007763:201336103",
+			  "offer_sale_price": "24.66",
+			  "ipm_sku_stock": 0,
+			  "sku_stock": false,
+			  "sku_id": "12000031972659640",
+			  "currency_code": "USD",
+			  "sku_price": "24.66",
+			  "offer_bulk_sale_price": "24.66",
+			  "sku_available_stock": 0,
+			  "id": "14:10#White;200007763:201336103",
+			  "sku_bulk_order": 2,
+			  "sku_code": "14:10;200007763:201336103",
+			  "ae_sku_property_dtos": {
+				"ae_sku_property_d_t_o": [
+				  {
+					"sku_property_value": "Red",
+					"sku_image": "https://ae01.alicdn.com/kf/Sd5df2f4d691c48bcb8279cdde1e0b7bcc.jpg",
+					"sku_property_name": "Color",
+					"property_value_definition_name": "White",
+					"property_value_id": 10,
+					"sku_property_id": 14
+				  },
+				  {
+					"sku_property_value": "Russian Federation",
+					"sku_property_name": "Ships From",
+					"property_value_id": 201336103,
+					"sku_property_id": 200007763
+				  }
+				]
+			  }
+			},
+			{
+			  "sku_attr": "14:94#New Switch WT;200007763:201336100",
+			  "offer_sale_price": "14.86",
+			  "ipm_sku_stock": 999,
+			  "sku_stock": true,
+			  "sku_id": "12000031972659647",
+			  "currency_code": "USD",
+			  "sku_price": "14.86",
+			  "offer_bulk_sale_price": "14.86",
+			  "sku_available_stock": 999,
+			  "id": "14:94#New Switch WT;200007763:201336100",
+			  "sku_code": "14:94;200007763:201336100",
+			  "ae_sku_property_dtos": {
+				"ae_sku_property_d_t_o": [
+				  {
+					"sku_property_value": "grey",
+					"sku_image": "https://ae01.alicdn.com/kf/S9299300748304a409d83b643a66a4e4fo.jpg",
+					"sku_property_name": "Color",
+					"property_value_definition_name": "New Switch WT",
+					"property_value_id": 94,
+					"sku_property_id": 14
+				  },
+				  {
+					"sku_property_value": "CHINA",
+					"sku_property_name": "Ships From",
+					"property_value_id": 201336100,
+					"sku_property_id": 200007763
+				  }
+				]
+			  }
+			},
+			{
+			  "sku_attr": "14:29#Blue;200007763:201336103",
+			  "offer_sale_price": "24.66",
+			  "ipm_sku_stock": 0,
+			  "sku_stock": false,
+			  "sku_id": "12000031972659645",
+			  "currency_code": "USD",
+			  "sku_price": "24.66",
+			  "offer_bulk_sale_price": "24.66",
+			  "sku_available_stock": 0,
+			  "id": "14:29#Blue;200007763:201336103",
+			  "sku_bulk_order": 2,
+			  "sku_code": "14:29;200007763:201336103",
+			  "ae_sku_property_dtos": {
+				"ae_sku_property_d_t_o": [
+				  {
+					"sku_property_value": "WHITE",
+					"sku_image": "https://ae01.alicdn.com/kf/S04d30d152a7b49f4a61be1e9a36402dc3.jpg",
+					"sku_property_name": "Color",
+					"property_value_definition_name": "Blue",
+					"property_value_id": 29,
+					"sku_property_id": 14
+				  },
+				  {
+					"sku_property_value": "Russian Federation",
+					"sku_property_name": "Ships From",
+					"property_value_id": 201336103,
+					"sku_property_id": 200007763
+				  }
+				]
+			  }
+			},
+			{
+			  "sku_attr": "14:94#New Switch WT;200007763:201336103",
+			  "offer_sale_price": "24.66",
+			  "ipm_sku_stock": 0,
+			  "sku_stock": false,
+			  "sku_id": "12000031972659650",
+			  "currency_code": "USD",
+			  "sku_price": "24.66",
+			  "offer_bulk_sale_price": "24.66",
+			  "sku_available_stock": 0,
+			  "id": "14:94#New Switch WT;200007763:201336103",
+			  "sku_bulk_order": 2,
+			  "sku_code": "14:94;200007763:201336103",
+			  "ae_sku_property_dtos": {
+				"ae_sku_property_d_t_o": [
+				  {
+					"sku_property_value": "grey",
+					"sku_image": "https://ae01.alicdn.com/kf/S9299300748304a409d83b643a66a4e4fo.jpg",
+					"sku_property_name": "Color",
+					"property_value_definition_name": "New Switch WT",
+					"property_value_id": 94,
+					"sku_property_id": 14
+				  },
+				  {
+					"sku_property_value": "Russian Federation",
+					"sku_property_name": "Ships From",
+					"property_value_id": 201336103,
+					"sku_property_id": 200007763
+				  }
+				]
+			  }
+			},
+			{
+			  "sku_attr": "14:175#New Switch BU;200007763:201336103",
+			  "offer_sale_price": "24.66",
+			  "ipm_sku_stock": 0,
+			  "sku_stock": false,
+			  "sku_id": "12000031972659655",
+			  "currency_code": "USD",
+			  "sku_price": "24.66",
+			  "offer_bulk_sale_price": "24.66",
+			  "sku_available_stock": 0,
+			  "id": "14:175#New Switch BU;200007763:201336103",
+			  "sku_bulk_order": 2,
+			  "sku_code": "14:175;200007763:201336103",
+			  "ae_sku_property_dtos": {
+				"ae_sku_property_d_t_o": [
+				  {
+					"sku_property_value": "green",
+					"sku_image": "https://ae01.alicdn.com/kf/Sb7704468813946f2babd467dfcd97725e.jpg",
+					"sku_property_name": "Color",
+					"property_value_definition_name": "New Switch BU",
+					"property_value_id": 175,
+					"sku_property_id": 14
+				  },
+				  {
+					"sku_property_value": "Russian Federation",
+					"sku_property_name": "Ships From",
+					"property_value_id": 201336103,
+					"sku_property_id": 200007763
+				  }
+				]
+			  }
+			},
+			{
+			  "sku_attr": "14:10#White;200007763:201336100",
+			  "offer_sale_price": "14.57",
+			  "ipm_sku_stock": 984,
+			  "sku_stock": true,
+			  "sku_id": "12000031972659637",
+			  "currency_code": "USD",
+			  "sku_price": "14.57",
+			  "offer_bulk_sale_price": "14.57",
+			  "sku_available_stock": 984,
+			  "id": "14:10#White;200007763:201336100",
+			  "sku_code": "14:10;200007763:201336100",
+			  "ae_sku_property_dtos": {
+				"ae_sku_property_d_t_o": [
+				  {
+					"sku_property_value": "Red",
+					"sku_image": "https://ae01.alicdn.com/kf/Sd5df2f4d691c48bcb8279cdde1e0b7bcc.jpg",
+					"sku_property_name": "Color",
+					"property_value_definition_name": "White",
+					"property_value_id": 10,
+					"sku_property_id": 14
+				  },
+				  {
+					"sku_property_value": "CHINA",
+					"sku_property_name": "Ships From",
+					"property_value_id": 201336100,
+					"sku_property_id": 200007763
+				  }
+				]
+			  }
+			},
+			{
+			  "sku_attr": "14:175#New Switch BU;200007763:201336100",
+			  "offer_sale_price": "15.31",
+			  "ipm_sku_stock": 999,
+			  "sku_stock": true,
+			  "sku_id": "12000031972659652",
+			  "currency_code": "USD",
+			  "sku_price": "15.31",
+			  "offer_bulk_sale_price": "15.31",
+			  "sku_available_stock": 999,
+			  "id": "14:175#New Switch BU;200007763:201336100",
+			  "sku_code": "14:175;200007763:201336100",
+			  "ae_sku_property_dtos": {
+				"ae_sku_property_d_t_o": [
+				  {
+					"sku_property_value": "green",
+					"sku_image": "https://ae01.alicdn.com/kf/Sb7704468813946f2babd467dfcd97725e.jpg",
+					"sku_property_name": "Color",
+					"property_value_definition_name": "New Switch BU",
+					"property_value_id": 175,
+					"sku_property_id": 14
+				  },
+				  {
+					"sku_property_value": "CHINA",
+					"sku_property_name": "Ships From",
+					"property_value_id": 201336100,
+					"sku_property_id": 200007763
+				  }
+				]
+			  }
+			}
+		  ]
+		},
+		"ae_multimedia_info_dto": {
+		  "image_urls": "https://ae01.alicdn.com/kf/S0c54cd2ca2334da78949bc492c14338eX.jpg;https://ae01.alicdn.com/kf/S86ece1da5670423689e9b3b0d0c40bb1i.jpg;https://ae01.alicdn.com/kf/S14cf831d453d41ab84585a35dab2a16cE.jpg;https://ae01.alicdn.com/kf/Sa629c494fdc5405192611375067c7bb98.jpg;https://ae01.alicdn.com/kf/S1f31b5a1945e45aa8f4696f0c5e1a60bk.jpg;https://ae01.alicdn.com/kf/S0681245e66ce49e89eb19b417204a15dF.jpg"
+		},
+		"package_info_dto": {
+		  "package_width": 20,
+		  "package_height": 10,
+		  "package_length": 30,
+		  "gross_weight": "0.200",
+		  "package_type": false,
+		  "product_unit": 100000015
+		},
+		"logistics_info_dto": {
+		  "delivery_time": 7,
+		  "ship_to_country": "US"
+		},
+		"product_id_converter_result": {
+		  "main_product_id": 1005004635872052,
+		  "sub_product_id": "{\"US\":3256804449557300}"
+		},
+		"ae_item_base_info_dto": {
+		  "mobile_detail": "{\"version\":\"2.0.0\",\"moduleList\":[{\"type\":\"image\",\"data\":{\"url\":\"https://ae01.alicdn.com/kf/S66f7e7d5297c404f88a7fdfcf8002f7do.jpg\",\"style\":{\"width\":3380,\"height\":260}}},{\"type\":\"text\",\"data\":{\"content\":\"Warm Tips:\",\"style\":{\"fontSize\":16,\"fontWeight\":\"bold\",\"color\":\"#fa0505\"}}},{\"type\":\"text\",\"data\":{\"content\":\"If the CD is damaged during transportation, please contact me in time, I will send the software link to you.\",\"style\":{\"paddingLeft\":16,\"paddingRight\":16,\"paddingTop\":10,\"paddingBottom\":10,\"fontSize\":14,\"fontWeight\":\"regular\",\"align\":\"left\",\"color\":\"#666666\",\"fontFamily\":\"OpenSans\",\"backgroundColor\":\"#FFFFFF\"}}},{\"type\":\"text\",\"data\":{\"content\":\"New Switch Function:\",\"style\":{\"fontSize\":16,\"fontWeight\":\"bold\",\"color\":\"#f30909\"}}},{\"type\":\"text\",\"data\":{\"content\":\"With the switch on the device,you can use it do more cars .Since some cars need disconnect,then can use k+dcan,also somes need connect that two pin then can do,but with our switch,you can use derectly easier,so we say it can support more cars easier\",\"style\":{\"paddingLeft\":16,\"paddingRight\":16,\"paddingTop\":10,\"paddingBottom\":10,\"fontSize\":14,\"fontWeight\":\"regular\",\"align\":\"left\",\"color\":\"#666666\",\"fontFamily\":\"OpenSans\",\"backgroundColor\":\"#FFFFFF\"}}},{\"type\":\"text\",\"data\":{\"content\":\"With FTDI Chip with Switch, works For BMW with 8 pin and with K-LINE protocol.\",\"style\":{\"paddingLeft\":16,\"paddingRight\":16,\"paddingTop\":10,\"paddingBottom\":10,\"fontSize\":14,\"fontWeight\":\"regular\",\"align\":\"left\",\"color\":\"#666666\",\"fontFamily\":\"OpenSans\",\"backgroundColor\":\"#FFFFFF\"}}},{\"type\":\"image\",\"data\":{\"url\":\"https://ae01.alicdn.com/kf/Ae786ad95f5e64753ba56ce789d376fd0p.jpg\",\"style\":{\"width\":1000,\"height\":1000,\"paddingBottom\":10}}},{\"type\":\"text\",\"data\":{\"content\":\"Specifictions:\",\"style\":{\"fontSize\":16,\"fontWeight\":\"bold\",\"color\":\"#fd0c0c\"}}},{\"type\":\"text\",\"data\":{\"content\":\"PCB board chip:FTDI Chip Stable Function\\n\\nRequire Window System:Windows XP/WIN 7 Only(close anti-virus program)\\n\\nLanguage:English\",\"style\":{\"paddingLeft\":16,\"paddingRight\":16,\"paddingTop\":10,\"paddingBottom\":10,\"fontSize\":14,\"fontWeight\":\"regular\",\"align\":\"left\",\"color\":\"#666666\",\"fontFamily\":\"OpenSans\",\"backgroundColor\":\"#FFFFFF\"}}},{\"type\":\"text\",\"data\":{\"content\":\"Description:\",\"style\":{\"fontSize\":16,\"fontWeight\":\"bold\",\"color\":\"#f90505\"}}},{\"type\":\"text\",\"data\":{\"content\":\"Interface USB OBD2 for BMW - Ediabas - K+DCAN allows full diagnostic for BMW from 1998 to 2008 (all functions as in OMNITEC interface). Build in 2 lines K and D-Can magisterial\",\"style\":{\"paddingLeft\":16,\"paddingRight\":16,\"paddingTop\":10,\"paddingBottom\":10,\"fontSize\":14,\"fontWeight\":\"regular\",\"align\":\"left\",\"color\":\"#666666\",\"fontFamily\":\"OpenSans\",\"backgroundColor\":\"#FFFFFF\"}}},{\"type\":\"text\",\"data\":{\"content\":\"Features:\",\"style\":{\"fontSize\":16,\"fontWeight\":\"bold\",\"color\":\"#f20606\"}}},{\"type\":\"text\",\"data\":{\"content\":\"1. Read and delete errors\\n\\n2. Adaptations\\n\\n3. Driver programming\\n\\n4. Applu coding\\n\\n- And others...\",\"style\":{\"paddingLeft\":16,\"paddingRight\":16,\"paddingTop\":10,\"paddingBottom\":10,\"fontSize\":14,\"fontWeight\":\"regular\",\"align\":\"left\",\"color\":\"#666666\",\"fontFamily\":\"OpenSans\",\"backgroundColor\":\"#FFFFFF\"}}},{\"type\":\"text\",\"data\":{\"content\":\"Supports Protocols:\",\"style\":{\"fontSize\":16,\"fontWeight\":\"bold\",\"color\":\"#f80a0a\"}}},{\"type\":\"text\",\"data\":{\"content\":\"Fast magisterial D-CAN and PT-CAN (500 kbit/s)\\n\\nSlow magisterial K-CAN (100 kbit/s)\\n\\nStandard For BMW protocol (For BMW OBD interface).\\n\\n\\nD-CAN for\\n\\n- E60, E61 old 03/2007\\n\\n- E83 old 09/2006\\n\\n- E81, E87 old 03/2007\\n\\n- E90, E91, E92, E93 old 03/2007\\n\\n- E70 (new model X5)\\n\\n- R56 (new model MINI)\\n\\nPT-CAN, K-CAN - fully switchable speed of magisterial CAN - you can diagnose driver without any car\\n\\nProtocol \\\"For BMW OBD interface\\\" for Older Cars\\n\\n- From 1995 to 1998 (don't need K-line).\\n\\n- From 1998 to 03/2008 (all models)\",\"style\":{\"paddingLeft\":16,\"paddingRight\":16,\"paddingTop\":10,\"paddingBottom\":10,\"fontSize\":14,\"fontWeight\":\"regular\",\"align\":\"left\",\"color\":\"#666666\",\"fontFamily\":\"OpenSans\",\"backgroundColor\":\"#FFFFFF\"}}},{\"type\":\"text\",\"data\":{\"content\":\"Package Included:\",\"style\":{\"fontSize\":16,\"fontWeight\":\"bold\",\"color\":\"#ff0101\"}}},{\"type\":\"text\",\"data\":{\"content\":\"1 x K+DCAN USB Interface\\n\\n1 x CD Driver\",\"style\":{\"paddingLeft\":16,\"paddingRight\":16,\"paddingTop\":10,\"paddingBottom\":10,\"fontSize\":14,\"fontWeight\":\"regular\",\"align\":\"left\",\"color\":\"#666666\",\"fontFamily\":\"OpenSans\",\"backgroundColor\":\"#FFFFFF\"}}},{\"type\":\"image\",\"data\":{\"url\":\"https://ae01.alicdn.com/kf/Sde45d02d5f424c558a76b37741eabd6de.jpg\",\"style\":{\"width\":3380,\"height\":260}}},{\"type\":\"image\",\"data\":{\"url\":\"https://ae01.alicdn.com/kf/S1001e58ea7b440fa9c13b433ceb28f7c1.jpg\",\"style\":{\"width\":800,\"height\":800}}},{\"type\":\"image\",\"data\":{\"url\":\"https://ae01.alicdn.com/kf/Sd742c1cfb1bf497b972abf23dd498da5L.jpg\",\"style\":{\"width\":800,\"height\":800}}},{\"type\":\"image\",\"data\":{\"url\":\"https://ae01.alicdn.com/kf/S3cf368aea12a482082184d930cd6c661V.jpg\",\"style\":{\"width\":800,\"height\":800}}},{\"type\":\"image\",\"data\":{\"url\":\"https://ae01.alicdn.com/kf/Sf643f3babf0c459189845a19468bc0400.jpg\",\"style\":{\"width\":800,\"height\":800}}},{\"type\":\"image\",\"data\":{\"url\":\"https://ae01.alicdn.com/kf/Sd5d74f932ebe4be2bc64f1271d1dba64o.jpg\",\"style\":{\"width\":1000,\"height\":1551}}},{\"type\":\"text\",\"data\":{\"content\":\"- And others...\",\"style\":{\"paddingLeft\":16,\"paddingRight\":16,\"paddingTop\":10,\"paddingBottom\":10,\"fontSize\":14,\"fontWeight\":\"regular\",\"align\":\"left\",\"color\":\"#666666\",\"fontFamily\":\"OpenSans\",\"backgroundColor\":\"#FFFFFF\"}}},{\"type\":\"text\",\"data\":{\"content\":\"Supports Protocols:\",\"style\":{\"paddingLeft\":16,\"paddingRight\":16,\"paddingTop\":10,\"paddingBottom\":10,\"fontSize\":14,\"fontWeight\":\"regular\",\"align\":\"left\",\"color\":\"#666666\",\"fontFamily\":\"OpenSans\",\"backgroundColor\":\"#FFFFFF\"}}},{\"type\":\"text\",\"data\":{\"content\":\"Fast magisterial D-CAN and PT-CAN (500 kbit/s)\",\"style\":{\"paddingLeft\":16,\"paddingRight\":16,\"paddingTop\":10,\"paddingBottom\":10,\"fontSize\":14,\"fontWeight\":\"regular\",\"align\":\"left\",\"color\":\"#666666\",\"fontFamily\":\"OpenSans\",\"backgroundColor\":\"#FFFFFF\"}}},{\"type\":\"text\",\"data\":{\"content\":\"Slow magisterial K-CAN (100 kbit/s)\",\"style\":{\"paddingLeft\":16,\"paddingRight\":16,\"paddingTop\":10,\"paddingBottom\":10,\"fontSize\":14,\"fontWeight\":\"regular\",\"align\":\"left\",\"color\":\"#666666\",\"fontFamily\":\"OpenSans\",\"backgroundColor\":\"#FFFFFF\"}}},{\"type\":\"text\",\"data\":{\"content\":\"Standard For BMW protocol (For BMW OBD interface).\",\"style\":{\"paddingLeft\":16,\"paddingRight\":16,\"paddingTop\":10,\"paddingBottom\":10,\"fontSize\":14,\"fontWeight\":\"regular\",\"align\":\"left\",\"color\":\"#666666\",\"fontFamily\":\"OpenSans\",\"backgroundColor\":\"#FFFFFF\"}}},{\"type\":\"text\",\"data\":{\"content\":\"D-CAN for\",\"style\":{\"paddingLeft\":16,\"paddingRight\":16,\"paddingTop\":10,\"paddingBottom\":10,\"fontSize\":14,\"fontWeight\":\"regular\",\"align\":\"left\",\"color\":\"#666666\",\"fontFamily\":\"OpenSans\",\"backgroundColor\":\"#FFFFFF\"}}},{\"type\":\"text\",\"data\":{\"content\":\"- E60, E61 old 03/2007\",\"style\":{\"paddingLeft\":16,\"paddingRight\":16,\"paddingTop\":10,\"paddingBottom\":10,\"fontSize\":14,\"fontWeight\":\"regular\",\"align\":\"left\",\"color\":\"#666666\",\"fontFamily\":\"OpenSans\",\"backgroundColor\":\"#FFFFFF\"}}},{\"type\":\"text\",\"data\":{\"content\":\"- E83 old 09/2006\",\"style\":{\"paddingLeft\":16,\"paddingRight\":16,\"paddingTop\":10,\"paddingBottom\":10,\"fontSize\":14,\"fontWeight\":\"regular\",\"align\":\"left\",\"color\":\"#666666\",\"fontFamily\":\"OpenSans\",\"backgroundColor\":\"#FFFFFF\"}}},{\"type\":\"text\",\"data\":{\"content\":\"- E81, E87 old 03/2007\",\"style\":{\"paddingLeft\":16,\"paddingRight\":16,\"paddingTop\":10,\"paddingBottom\":10,\"fontSize\":14,\"fontWeight\":\"regular\",\"align\":\"left\",\"color\":\"#666666\",\"fontFamily\":\"OpenSans\",\"backgroundColor\":\"#FFFFFF\"}}},{\"type\":\"text\",\"data\":{\"content\":\"- E90, E91, E92, E93 old 03/2007\",\"style\":{\"paddingLeft\":16,\"paddingRight\":16,\"paddingTop\":10,\"paddingBottom\":10,\"fontSize\":14,\"fontWeight\":\"regular\",\"align\":\"left\",\"color\":\"#666666\",\"fontFamily\":\"OpenSans\",\"backgroundColor\":\"#FFFFFF\"}}},{\"type\":\"text\",\"data\":{\"content\":\"- E70 (new model X5)\",\"style\":{\"paddingLeft\":16,\"paddingRight\":16,\"paddingTop\":10,\"paddingBottom\":10,\"fontSize\":14,\"fontWeight\":\"regular\",\"align\":\"left\",\"color\":\"#666666\",\"fontFamily\":\"OpenSans\",\"backgroundColor\":\"#FFFFFF\"}}},{\"type\":\"text\",\"data\":{\"content\":\"- R56 (new model MINI)\",\"style\":{\"paddingLeft\":16,\"paddingRight\":16,\"paddingTop\":10,\"paddingBottom\":10,\"fontSize\":14,\"fontWeight\":\"regular\",\"align\":\"left\",\"color\":\"#666666\",\"fontFamily\":\"OpenSans\",\"backgroundColor\":\"#FFFFFF\"}}},{\"type\":\"text\",\"data\":{\"content\":\"PT-CAN, K-CAN - fully switchable speed of magisterial CAN - you can diagnose driver without any car\",\"style\":{\"paddingLeft\":16,\"paddingRight\":16,\"paddingTop\":10,\"paddingBottom\":10,\"fontSize\":14,\"fontWeight\":\"regular\",\"align\":\"left\",\"color\":\"#666666\",\"fontFamily\":\"OpenSans\",\"backgroundColor\":\"#FFFFFF\"}}},{\"type\":\"text\",\"data\":{\"content\":\"Protocol \\\"For BMW OBD interface\\\" for Older Cars\",\"style\":{\"paddingLeft\":16,\"paddingRight\":16,\"paddingTop\":10,\"paddingBottom\":10,\"fontSize\":14,\"fontWeight\":\"regular\",\"align\":\"left\",\"color\":\"#666666\",\"fontFamily\":\"OpenSans\",\"backgroundColor\":\"#FFFFFF\"}}},{\"type\":\"image\",\"data\":{\"url\":\"https://ae01.alicdn.com/kf/Sd34e359d4e70438fb77ec6159e3d3b627.jpg\",\"style\":{\"width\":3380,\"height\":260}}},{\"type\":\"image\",\"data\":{\"url\":\"https://ae01.alicdn.com/kf/Scb121ce2731d45afb11d8dc5eb2acad2t.jpg\",\"style\":{\"width\":800,\"height\":800}}},{\"type\":\"image\",\"data\":{\"url\":\"https://ae01.alicdn.com/kf/S45095df6fa4f4691b0f61178e41ff427U.jpg\",\"style\":{\"width\":800,\"height\":800}}},{\"type\":\"image\",\"data\":{\"url\":\"https://ae01.alicdn.com/kf/Scaf62c9acbbc4bcbad87c2b2a3269b57N.jpg\",\"style\":{\"width\":800,\"height\":800}}},{\"type\":\"image\",\"data\":{\"url\":\"https://ae01.alicdn.com/kf/S9d5978f9ef8d4d769f05815aec082116d.jpg\",\"style\":{\"width\":800,\"height\":800}}},{\"type\":\"image\",\"data\":{\"url\":\"https://ae01.alicdn.com/kf/Se33cddf3693143cd807d215b978d2df8m.jpg\",\"style\":{\"width\":1000,\"height\":1551}}}]}",
+		  "subject": "Best For BMW K DCAN With Switch OBDII Diagnostic Interface For BMW Series K+CAN K-Line OBD2 Scanner FTDI FT232 Full Chips",
+		  "evaluation_count": "40",
+		  "sales_count": "4",
+		  "product_status_type": "onSelling",
+		  "avg_evaluation_rating": "4.6",
+		  "currency_code": "USD",
+		  "category_id": 200003406,
+		  "product_id": 3256804449557300,
+		  "detail": "\u003Cp\u003E\u003Ckse:widget data-widget-type=\"customText\" id=\"1005000000618034\" type=\"relation\"\u003E\u003C/kse:widget\u003E\u003Cimg src=\"https://ae01.alicdn.com/kf/S66f7e7d5297c404f88a7fdfcf8002f7do.jpg\" slate-data-type=\"image\"/\u003E\u003C/p\u003E\u003Cp style=\"font-family:&quot;Open Sans&quot;, Roboto, Arial, Helvetica, sans-serif, SimSun;font-size:14px;font-weight:400;letter-spacing:normal;line-height:inherit;text-align:start;white-space:normal;color:rgb(34, 34, 34);background-color:rgb(255, 255, 255);margin:0px;margin-bottom:0px;margin-top:0px;margin-left:0px;margin-right:0px;padding:0px;padding-bottom:0px;padding-top:0px;padding-left:0px;padding-right:0px;box-sizing:border-box\" align=\"start\"\u003E\u003Cspan style=\"color:rgb(244, 78, 59);font-size:20px\"\u003E\u003Cstrong\u003EWarm Tips:\u003C/strong\u003E\u003C/span\u003E\u003C/p\u003E\u003Cp style=\"font-family:&quot;Open Sans&quot;, Roboto, Arial, Helvetica, sans-serif, SimSun;font-size:14px;font-weight:400;letter-spacing:normal;line-height:inherit;text-align:start;white-space:normal;color:rgb(34, 34, 34);background-color:rgb(255, 255, 255);margin:0px;margin-bottom:0px;margin-top:0px;margin-left:0px;margin-right:0px;padding:0px;padding-bottom:0px;padding-top:0px;padding-left:0px;padding-right:0px;box-sizing:border-box\" align=\"start\"\u003E\u003Cbr/\u003E\u003C/p\u003E\u003Cp\u003E\u003Cspan style=\"font-size:16px\"\u003EIf the CD is damaged during transportation, please contact me in time, I will send the software link to you.\u003C/span\u003E\u003C/p\u003E\u003Cp\u003E\u003Cbr/\u003E\u003C/p\u003E\u003Cp\u003E\u003Cbr/\u003E\u003Cspan style=\"color:rgb(244, 78, 59);font-size:20px\"\u003E\u003Cstrong\u003ENew Switch Function:\u003C/strong\u003E\u003C/span\u003E\u003C/p\u003E\u003Cp style=\"font-family:&quot;Open Sans&quot;, Roboto, Arial, Helvetica, sans-serif, SimSun;font-size:14px;font-weight:400;letter-spacing:normal;line-height:inherit;text-align:start;white-space:normal;color:rgb(34, 34, 34);background-color:rgb(255, 255, 255);margin:0px;margin-bottom:0px;margin-top:0px;margin-left:0px;margin-right:0px;padding:0px;padding-bottom:0px;padding-top:0px;padding-left:0px;padding-right:0px;box-sizing:border-box\" align=\"start\"\u003E\u003Cbr/\u003E\u003Cspan style=\"font-size:16px\"\u003EWith the switch on the device,you can use it do more cars .Since some cars need disconnect,then can use k+dcan,also somes need connect that two pin then can do,but with our switch,you can use derectly easier,so we say it can support more cars easier\u003C/span\u003E\u003C/p\u003E\u003Cp style=\"font-family:&quot;Open Sans&quot;, Roboto, Arial, Helvetica, sans-serif, SimSun;font-size:14px;font-weight:400;letter-spacing:normal;line-height:inherit;text-align:start;white-space:normal;color:rgb(34, 34, 34);background-color:rgb(255, 255, 255);margin:0px;margin-bottom:0px;margin-top:0px;margin-left:0px;margin-right:0px;padding:0px;padding-bottom:0px;padding-top:0px;padding-left:0px;padding-right:0px;box-sizing:border-box\" align=\"start\"\u003E\u003Cspan style=\"font-size:16px\"\u003E\u003Cbr/\u003EWith FTDI Chip with Switch, works For BMW with 8 pin and with K-LINE protocol.\u003C/span\u003E\u003C/p\u003E\u003Cp\u003E\u003Cimg src=\"https://ae01.alicdn.com/kf/Ae786ad95f5e64753ba56ce789d376fd0p.jpg\" slate-data-type=\"image\"/\u003E\u003Cbr/\u003E\u003C/p\u003E\u003Cp\u003E\u003Cspan style=\"color:rgb(244, 78, 59);font-size:20px\"\u003E\u003Cstrong\u003ESpecifictions:\u003C/strong\u003E\u003C/span\u003E\u003C/p\u003E\u003Cp style=\"font-family:&quot;Open Sans&quot;, Roboto, Arial, Helvetica, sans-serif, SimSun;font-size:14px;font-weight:400;letter-spacing:normal;line-height:inherit;text-align:start;white-space:normal;color:rgb(34, 34, 34);background-color:rgb(255, 255, 255);margin:0px;margin-bottom:0px;margin-top:0px;margin-left:0px;margin-right:0px;padding:0px;padding-bottom:0px;padding-top:0px;padding-left:0px;padding-right:0px;box-sizing:border-box\" align=\"start\"\u003E\u003Cbr/\u003E\u003Cspan style=\"font-size:16px\"\u003EPCB board chip:FTDI Chip Stable Function\u003C/span\u003E\u003C/p\u003E\u003Cp style=\"font-family:&quot;Open Sans&quot;, Roboto, Arial, Helvetica, sans-serif, SimSun;font-size:14px;font-weight:400;letter-spacing:normal;line-height:inherit;text-align:start;white-space:normal;color:rgb(34, 34, 34);background-color:rgb(255, 255, 255);margin:0px;margin-bottom:0px;margin-top:0px;margin-left:0px;margin-right:0px;padding:0px;padding-bottom:0px;padding-top:0px;padding-left:0px;padding-right:0px;box-sizing:border-box\" align=\"start\"\u003E\u003Cstrong\u003E\u003Cspan style=\"color:rgb(244, 78, 59);font-size:16px\"\u003ERequire Window System:Windows XP/WIN 7 Only(close anti-virus program)\u003C/span\u003E\u003C/strong\u003E\u003C/p\u003E\u003Cp style=\"font-family:&quot;Open Sans&quot;, Roboto, Arial, Helvetica, sans-serif, SimSun;font-size:14px;font-weight:400;letter-spacing:normal;line-height:inherit;text-align:start;white-space:normal;color:rgb(34, 34, 34);background-color:rgb(255, 255, 255);margin:0px;margin-bottom:0px;margin-top:0px;margin-left:0px;margin-right:0px;padding:0px;padding-bottom:0px;padding-top:0px;padding-left:0px;padding-right:0px;box-sizing:border-box\" align=\"start\"\u003E\u003Cspan style=\"font-size:16px\"\u003ELanguage:English\u003C/span\u003E\u003Cbr/\u003E\u003C/p\u003E\u003Cp\u003E\u003Cbr/\u003E\u003Cbr/\u003E\u003C/p\u003E\u003Cp style=\"font-family:&quot;Open Sans&quot;, Roboto, Arial, Helvetica, sans-serif, SimSun;font-size:14px;font-weight:400;letter-spacing:normal;line-height:inherit;text-align:start;white-space:normal;color:rgb(34, 34, 34);background-color:rgb(255, 255, 255);margin:0px;margin-bottom:0px;margin-top:0px;margin-left:0px;margin-right:0px;padding:0px;padding-bottom:0px;padding-top:0px;padding-left:0px;padding-right:0px;box-sizing:border-box\" align=\"start\"\u003E\u003Cspan style=\"color:rgb(244, 78, 59);font-size:20px\"\u003E\u003Cstrong\u003EDescription:\u003C/strong\u003E\u003C/span\u003E\u003C/p\u003E\u003Cp style=\"font-family:&quot;Open Sans&quot;, Roboto, Arial, Helvetica, sans-serif, SimSun;font-size:14px;font-weight:400;letter-spacing:normal;line-height:inherit;text-align:start;white-space:normal;color:rgb(34, 34, 34);background-color:rgb(255, 255, 255);margin:0px;margin-bottom:0px;margin-top:0px;margin-left:0px;margin-right:0px;padding:0px;padding-bottom:0px;padding-top:0px;padding-left:0px;padding-right:0px;box-sizing:border-box\" align=\"start\"\u003E\u003Cbr/\u003E\u003C/p\u003E\u003Cp style=\"font-family:&quot;Open Sans&quot;, Roboto, Arial, Helvetica, sans-serif, SimSun;font-size:14px;font-weight:400;letter-spacing:normal;line-height:inherit;text-align:start;white-space:normal;color:rgb(34, 34, 34);background-color:rgb(255, 255, 255);margin:0px;margin-bottom:0px;margin-top:0px;margin-left:0px;margin-right:0px;padding:0px;padding-bottom:0px;padding-top:0px;padding-left:0px;padding-right:0px;box-sizing:border-box\" align=\"start\"\u003E\u003Cspan style=\"font-size:16px\"\u003EInterface USB OBD2 for BMW - Ediabas - K+DCAN allows full diagnostic for BMW from 1998 to 2008 (all functions as in OMNITEC interface). Build in 2 lines K and D-Can magisterial\u003C/span\u003E\u003C/p\u003E\u003Cp\u003E\u003Cbr/\u003E\u003C/p\u003E\u003Cp\u003E\u003Cbr/\u003E\u003C/p\u003E\u003Cp style=\"font-family:&quot;Open Sans&quot;, Roboto, Arial, Helvetica, sans-serif, SimSun;font-size:14px;font-weight:400;letter-spacing:normal;line-height:inherit;text-align:start;white-space:normal;color:rgb(34, 34, 34);background-color:rgb(255, 255, 255);margin:0px;margin-bottom:0px;margin-top:0px;margin-left:0px;margin-right:0px;padding:0px;padding-bottom:0px;padding-top:0px;padding-left:0px;padding-right:0px;box-sizing:border-box\" align=\"start\"\u003E\u003Cspan style=\"color:rgb(244, 78, 59);font-size:20px\"\u003E\u003Cstrong\u003EFeatures:\u003C/strong\u003E\u003C/span\u003E\u003C/p\u003E\u003Cp style=\"font-family:&quot;Open Sans&quot;, Roboto, Arial, Helvetica, sans-serif, SimSun;font-size:14px;font-weight:400;letter-spacing:normal;line-height:inherit;text-align:start;white-space:normal;color:rgb(34, 34, 34);background-color:rgb(255, 255, 255);margin:0px;margin-bottom:0px;margin-top:0px;margin-left:0px;margin-right:0px;padding:0px;padding-bottom:0px;padding-top:0px;padding-left:0px;padding-right:0px;box-sizing:border-box\" align=\"start\"\u003E\u003Cbr/\u003E\u003C/p\u003E\u003Cp style=\"font-family:&quot;Open Sans&quot;, Roboto, Arial, Helvetica, sans-serif, SimSun;font-size:14px;font-weight:400;letter-spacing:normal;line-height:inherit;text-align:start;white-space:normal;color:rgb(34, 34, 34);background-color:rgb(255, 255, 255);margin:0px;margin-bottom:0px;margin-top:0px;margin-left:0px;margin-right:0px;padding:0px;padding-bottom:0px;padding-top:0px;padding-left:0px;padding-right:0px;box-sizing:border-box\" align=\"start\"\u003E\u003Cspan style=\"font-size:16px\"\u003E1. Read and delete errors\u003C/span\u003E\u003C/p\u003E\u003Cp style=\"font-family:&quot;Open Sans&quot;, Roboto, Arial, Helvetica, sans-serif, SimSun;font-size:14px;font-weight:400;letter-spacing:normal;line-height:inherit;text-align:start;white-space:normal;color:rgb(34, 34, 34);background-color:rgb(255, 255, 255);margin:0px;margin-bottom:0px;margin-top:0px;margin-left:0px;margin-right:0px;padding:0px;padding-bottom:0px;padding-top:0px;padding-left:0px;padding-right:0px;box-sizing:border-box\" align=\"start\"\u003E\u003Cspan style=\"font-size:16px\"\u003E2. Adaptations\u003C/span\u003E\u003C/p\u003E\u003Cp style=\"font-family:&quot;Open Sans&quot;, Roboto, Arial, Helvetica, sans-serif, SimSun;font-size:14px;font-weight:400;letter-spacing:normal;line-height:inherit;text-align:start;white-space:normal;color:rgb(34, 34, 34);background-color:rgb(255, 255, 255);margin:0px;margin-bottom:0px;margin-top:0px;margin-left:0px;margin-right:0px;padding:0px;padding-bottom:0px;padding-top:0px;padding-left:0px;padding-right:0px;box-sizing:border-box\" align=\"start\"\u003E\u003Cspan style=\"font-size:16px\"\u003E3. Driver programming\u003C/span\u003E\u003C/p\u003E\u003Cp style=\"font-family:&quot;Open Sans&quot;, Roboto, Arial, Helvetica, sans-serif, SimSun;font-size:14px;font-weight:400;letter-spacing:normal;line-height:inherit;text-align:start;white-space:normal;color:rgb(34, 34, 34);background-color:rgb(255, 255, 255);margin:0px;margin-bottom:0px;margin-top:0px;margin-left:0px;margin-right:0px;padding:0px;padding-bottom:0px;padding-top:0px;padding-left:0px;padding-right:0px;box-sizing:border-box\" align=\"start\"\u003E\u003Cspan style=\"font-size:16px\"\u003E4. Applu coding\u003C/span\u003E\u003C/p\u003E\u003Cp style=\"font-family:&quot;Open Sans&quot;, Roboto, Arial, Helvetica, sans-serif, SimSun;font-size:14px;font-weight:400;letter-spacing:normal;line-height:inherit;text-align:start;white-space:normal;color:rgb(34, 34, 34);background-color:rgb(255, 255, 255);margin:0px;margin-bottom:0px;margin-top:0px;margin-left:0px;margin-right:0px;padding:0px;padding-bottom:0px;padding-top:0px;padding-left:0px;padding-right:0px;box-sizing:border-box\" align=\"start\"\u003E\u003Cspan style=\"font-size:16px\"\u003E- And others...\u003C/span\u003E\u003C/p\u003E\u003Cp\u003E\u003Cbr/\u003E\u003C/p\u003E\u003Cp\u003E\u003Cbr/\u003E\u003C/p\u003E\u003Cp style=\"font-family:&quot;Open Sans&quot;, Roboto, Arial, Helvetica, sans-serif, SimSun;font-size:14px;font-weight:400;letter-spacing:normal;line-height:inherit;text-align:start;white-space:normal;color:rgb(34, 34, 34);background-color:rgb(255, 255, 255);margin:0px;margin-bottom:0px;margin-top:0px;margin-left:0px;margin-right:0px;padding:0px;padding-bottom:0px;padding-top:0px;padding-left:0px;padding-right:0px;box-sizing:border-box\" align=\"start\"\u003E\u003Cspan style=\"color:rgb(244, 78, 59);font-size:20px\"\u003E\u003Cstrong\u003ESupports Protocols:\u003C/strong\u003E\u003C/span\u003E\u003C/p\u003E\u003Cp style=\"font-family:&quot;Open Sans&quot;, Roboto, Arial, Helvetica, sans-serif, SimSun;font-size:14px;font-weight:400;letter-spacing:normal;line-height:inherit;text-align:start;white-space:normal;color:rgb(34, 34, 34);background-color:rgb(255, 255, 255);margin:0px;margin-bottom:0px;margin-top:0px;margin-left:0px;margin-right:0px;padding:0px;padding-bottom:0px;padding-top:0px;padding-left:0px;padding-right:0px;box-sizing:border-box\" align=\"start\"\u003E\u003Cbr/\u003E\u003C/p\u003E\u003Cp style=\"font-family:&quot;Open Sans&quot;, Roboto, Arial, Helvetica, sans-serif, SimSun;font-size:14px;font-weight:400;letter-spacing:normal;line-height:inherit;text-align:start;white-space:normal;color:rgb(34, 34, 34);background-color:rgb(255, 255, 255);margin:0px;margin-bottom:0px;margin-top:0px;margin-left:0px;margin-right:0px;padding:0px;padding-bottom:0px;padding-top:0px;padding-left:0px;padding-right:0px;box-sizing:border-box\" align=\"start\"\u003E\u003Cspan style=\"font-size:16px\"\u003EFast magisterial D-CAN and PT-CAN (500 kbit/s)\u003C/span\u003E\u003C/p\u003E\u003Cp style=\"font-family:&quot;Open Sans&quot;, Roboto, Arial, Helvetica, sans-serif, SimSun;font-size:14px;font-weight:400;letter-spacing:normal;line-height:inherit;text-align:start;white-space:normal;color:rgb(34, 34, 34);background-color:rgb(255, 255, 255);margin:0px;margin-bottom:0px;margin-top:0px;margin-left:0px;margin-right:0px;padding:0px;padding-bottom:0px;padding-top:0px;padding-left:0px;padding-right:0px;box-sizing:border-box\" align=\"start\"\u003E\u003Cspan style=\"font-size:16px\"\u003ESlow magisterial K-CAN (100 kbit/s)\u003C/span\u003E\u003C/p\u003E\u003Cp style=\"font-family:&quot;Open Sans&quot;, Roboto, Arial, Helvetica, sans-serif, SimSun;font-size:14px;font-weight:400;letter-spacing:normal;line-height:inherit;text-align:start;white-space:normal;color:rgb(34, 34, 34);background-color:rgb(255, 255, 255);margin:0px;margin-bottom:0px;margin-top:0px;margin-left:0px;margin-right:0px;padding:0px;padding-bottom:0px;padding-top:0px;padding-left:0px;padding-right:0px;box-sizing:border-box\" align=\"start\"\u003E\u003Cspan style=\"font-size:16px\"\u003EStandard For BMW protocol (For BMW OBD interface).\u003C/span\u003E\u003C/p\u003E\u003Cp style=\"font-family:&quot;Open Sans&quot;, Roboto, Arial, Helvetica, sans-serif, SimSun;font-size:14px;font-weight:400;letter-spacing:normal;line-height:inherit;text-align:start;white-space:normal;color:rgb(34, 34, 34);background-color:rgb(255, 255, 255);margin:0px;margin-bottom:0px;margin-top:0px;margin-left:0px;margin-right:0px;padding:0px;padding-bottom:0px;padding-top:0px;padding-left:0px;padding-right:0px;box-sizing:border-box\" align=\"start\"\u003E\u003Cspan style=\"font-size:16px\"\u003E\u003Cbr/\u003ED-CAN for\u003C/span\u003E\u003C/p\u003E\u003Cp style=\"font-family:&quot;Open Sans&quot;, Roboto, Arial, Helvetica, sans-serif, SimSun;font-size:14px;font-weight:400;letter-spacing:normal;line-height:inherit;text-align:start;white-space:normal;color:rgb(34, 34, 34);background-color:rgb(255, 255, 255);margin:0px;margin-bottom:0px;margin-top:0px;margin-left:0px;margin-right:0px;padding:0px;padding-bottom:0px;padding-top:0px;padding-left:0px;padding-right:0px;box-sizing:border-box\" align=\"start\"\u003E\u003Cspan style=\"font-size:16px\"\u003E- E60, E61 old 03/2007\u003C/span\u003E\u003C/p\u003E\u003Cp style=\"font-family:&quot;Open Sans&quot;, Roboto, Arial, Helvetica, sans-serif, SimSun;font-size:14px;font-weight:400;letter-spacing:normal;line-height:inherit;text-align:start;white-space:normal;color:rgb(34, 34, 34);background-color:rgb(255, 255, 255);margin:0px;margin-bottom:0px;margin-top:0px;margin-left:0px;margin-right:0px;padding:0px;padding-bottom:0px;padding-top:0px;padding-left:0px;padding-right:0px;box-sizing:border-box\" align=\"start\"\u003E\u003Cspan style=\"font-size:16px\"\u003E- E83 old 09/2006\u003C/span\u003E\u003C/p\u003E\u003Cp style=\"font-family:&quot;Open Sans&quot;, Roboto, Arial, Helvetica, sans-serif, SimSun;font-size:14px;font-weight:400;letter-spacing:normal;line-height:inherit;text-align:start;white-space:normal;color:rgb(34, 34, 34);background-color:rgb(255, 255, 255);margin:0px;margin-bottom:0px;margin-top:0px;margin-left:0px;margin-right:0px;padding:0px;padding-bottom:0px;padding-top:0px;padding-left:0px;padding-right:0px;box-sizing:border-box\" align=\"start\"\u003E\u003Cspan style=\"font-size:16px\"\u003E- E81, E87 old 03/2007\u003C/span\u003E\u003C/p\u003E\u003Cp style=\"font-family:&quot;Open Sans&quot;, Roboto, Arial, Helvetica, sans-serif, SimSun;font-size:14px;font-weight:400;letter-spacing:normal;line-height:inherit;text-align:start;white-space:normal;color:rgb(34, 34, 34);background-color:rgb(255, 255, 255);margin:0px;margin-bottom:0px;margin-top:0px;margin-left:0px;margin-right:0px;padding:0px;padding-bottom:0px;padding-top:0px;padding-left:0px;padding-right:0px;box-sizing:border-box\" align=\"start\"\u003E\u003Cspan style=\"font-size:16px\"\u003E- E90, E91, E92, E93 old 03/2007\u003C/span\u003E\u003C/p\u003E\u003Cp style=\"font-family:&quot;Open Sans&quot;, Roboto, Arial, Helvetica, sans-serif, SimSun;font-size:14px;font-weight:400;letter-spacing:normal;line-height:inherit;text-align:start;white-space:normal;color:rgb(34, 34, 34);background-color:rgb(255, 255, 255);margin:0px;margin-bottom:0px;margin-top:0px;margin-left:0px;margin-right:0px;padding:0px;padding-bottom:0px;padding-top:0px;padding-left:0px;padding-right:0px;box-sizing:border-box\" align=\"start\"\u003E\u003Cspan style=\"font-size:16px\"\u003E- E70 (new model X5)\u003C/span\u003E\u003C/p\u003E\u003Cp style=\"font-family:&quot;Open Sans&quot;, Roboto, Arial, Helvetica, sans-serif, SimSun;font-size:14px;font-weight:400;letter-spacing:normal;line-height:inherit;text-align:start;white-space:normal;color:rgb(34, 34, 34);background-color:rgb(255, 255, 255);margin:0px;margin-bottom:0px;margin-top:0px;margin-left:0px;margin-right:0px;padding:0px;padding-bottom:0px;padding-top:0px;padding-left:0px;padding-right:0px;box-sizing:border-box\" align=\"start\"\u003E\u003Cspan style=\"font-size:16px\"\u003E- R56 (new model MINI)\u003C/span\u003E\u003C/p\u003E\u003Cp style=\"font-family:&quot;Open Sans&quot;, Roboto, Arial, Helvetica, sans-serif, SimSun;font-size:14px;font-weight:400;letter-spacing:normal;line-height:inherit;text-align:start;white-space:normal;color:rgb(34, 34, 34);background-color:rgb(255, 255, 255);margin:0px;margin-bottom:0px;margin-top:0px;margin-left:0px;margin-right:0px;padding:0px;padding-bottom:0px;padding-top:0px;padding-left:0px;padding-right:0px;box-sizing:border-box\" align=\"start\"\u003E\u003Cspan style=\"font-size:16px\"\u003EPT-CAN, K-CAN - fully switchable speed of magisterial CAN - you can diagnose driver without any car\u003C/span\u003E\u003C/p\u003E\u003Cp style=\"font-family:&quot;Open Sans&quot;, Roboto, Arial, Helvetica, sans-serif, SimSun;font-size:14px;font-weight:400;letter-spacing:normal;line-height:inherit;text-align:start;white-space:normal;color:rgb(34, 34, 34);background-color:rgb(255, 255, 255);margin:0px;margin-bottom:0px;margin-top:0px;margin-left:0px;margin-right:0px;padding:0px;padding-bottom:0px;padding-top:0px;padding-left:0px;padding-right:0px;box-sizing:border-box\" align=\"start\"\u003E\u003Cspan style=\"font-size:16px\"\u003EProtocol &quot;For BMW OBD interface&quot; for Older Cars\u003C/span\u003E\u003C/p\u003E\u003Cp style=\"font-family:&quot;Open Sans&quot;, Roboto, Arial, Helvetica, sans-serif, SimSun;font-size:14px;font-weight:400;letter-spacing:normal;line-height:inherit;text-align:start;white-space:normal;color:rgb(34, 34, 34);background-color:rgb(255, 255, 255);margin:0px;margin-bottom:0px;margin-top:0px;margin-left:0px;margin-right:0px;padding:0px;padding-bottom:0px;padding-top:0px;padding-left:0px;padding-right:0px;box-sizing:border-box\" align=\"start\"\u003E\u003Cspan style=\"font-size:16px\"\u003E- From 1995 to 1998 (don&#x27;t need K-line).\u003C/span\u003E\u003C/p\u003E\u003Cp style=\"font-family:&quot;Open Sans&quot;, Roboto, Arial, Helvetica, sans-serif, SimSun;font-size:14px;font-weight:400;letter-spacing:normal;line-height:inherit;text-align:start;white-space:normal;color:rgb(34, 34, 34);background-color:rgb(255, 255, 255);margin:0px;margin-bottom:0px;margin-top:0px;margin-left:0px;margin-right:0px;padding:0px;padding-bottom:0px;padding-top:0px;padding-left:0px;padding-right:0px;box-sizing:border-box\" align=\"start\"\u003E\u003Cspan style=\"font-size:16px\"\u003E- From 1998 to 03/2008 (all models)\u003C/span\u003E\u003C/p\u003E\u003Cp\u003E\u003Cbr/\u003E\u003C/p\u003E\u003Cp\u003E\u003Cbr/\u003E\u003Cspan style=\"color:rgb(244, 78, 59);font-size:20px\"\u003E\u003Cstrong\u003EPackage Included:\u003C/strong\u003E\u003C/span\u003E\u003C/p\u003E\u003Cp style=\"font-family:&quot;Open Sans&quot;, Roboto, Arial, Helvetica, sans-serif, SimSun;font-size:14px;font-weight:400;letter-spacing:normal;line-height:inherit;text-align:start;white-space:normal;color:rgb(34, 34, 34);background-color:rgb(255, 255, 255);margin:0px;margin-bottom:0px;margin-top:0px;margin-left:0px;margin-right:0px;padding:0px;padding-bottom:0px;padding-top:0px;padding-left:0px;padding-right:0px;box-sizing:border-box\" align=\"start\"\u003E\u003Cbr/\u003E\u003C/p\u003E\u003Cp style=\"font-family:&quot;Open Sans&quot;, Roboto, Arial, Helvetica, sans-serif, SimSun;font-size:14px;font-weight:400;letter-spacing:normal;line-height:inherit;text-align:start;white-space:normal;color:rgb(34, 34, 34);background-color:rgb(255, 255, 255);margin:0px;margin-bottom:0px;margin-top:0px;margin-left:0px;margin-right:0px;padding:0px;padding-bottom:0px;padding-top:0px;padding-left:0px;padding-right:0px;box-sizing:border-box\" align=\"start\"\u003E\u003Cspan style=\"font-size:16px\"\u003E1 x K+DCAN USB Interface\u003C/span\u003E\u003C/p\u003E\u003Cp style=\"font-family:&quot;Open Sans&quot;, Roboto, Arial, Helvetica, sans-serif, SimSun;font-size:14px;font-weight:400;letter-spacing:normal;line-height:inherit;text-align:start;white-space:normal;color:rgb(34, 34, 34);background-color:rgb(255, 255, 255);margin:0px;margin-bottom:0px;margin-top:0px;margin-left:0px;margin-right:0px;padding:0px;padding-bottom:0px;padding-top:0px;padding-left:0px;padding-right:0px;box-sizing:border-box\" align=\"start\"\u003E\u003Cspan style=\"font-size:16px\"\u003E1 x CD Driver\u003C/span\u003E\u003C/p\u003E\u003Cp style=\"font-family:&quot;Open Sans&quot;, Roboto, Arial, Helvetica, sans-serif, SimSun;font-size:14px;font-weight:400;letter-spacing:normal;line-height:inherit;text-align:start;white-space:normal;color:rgb(34, 34, 34);background-color:rgb(255, 255, 255);margin:0px;margin-bottom:0px;margin-top:0px;margin-left:0px;margin-right:0px;padding:0px;padding-bottom:0px;padding-top:0px;padding-left:0px;padding-right:0px;box-sizing:border-box\" align=\"start\"\u003E\u003Cimg src=\"https://ae01.alicdn.com/kf/Sd34e359d4e70438fb77ec6159e3d3b627.jpg\" slate-data-type=\"image\"/\u003E\u003C/p\u003E\u003Cp style=\"font-family:&quot;Open Sans&quot;, Roboto, Arial, Helvetica, sans-serif, SimSun;font-size:14px;font-weight:400;letter-spacing:normal;line-height:inherit;text-align:start;white-space:normal;color:rgb(34, 34, 34);background-color:rgb(255, 255, 255);margin:0px;margin-bottom:0px;margin-top:0px;margin-left:0px;margin-right:0px;padding:0px;padding-bottom:0px;padding-top:0px;padding-left:0px;padding-right:0px;box-sizing:border-box\" align=\"start\"\u003E\u003Cimg src=\"https://ae01.alicdn.com/kf/Scb121ce2731d45afb11d8dc5eb2acad2t.jpg\" slate-data-type=\"image\"/\u003E\u003Cimg src=\"https://ae01.alicdn.com/kf/S45095df6fa4f4691b0f61178e41ff427U.jpg\" slate-data-type=\"image\"/\u003E\u003Cimg src=\"https://ae01.alicdn.com/kf/Scaf62c9acbbc4bcbad87c2b2a3269b57N.jpg\" slate-data-type=\"image\"/\u003E\u003Cimg src=\"https://ae01.alicdn.com/kf/S9d5978f9ef8d4d769f05815aec082116d.jpg\" slate-data-type=\"image\"/\u003E\u003Cimg src=\"https://ae01.alicdn.com/kf/Se33cddf3693143cd807d215b978d2df8m.jpg\" slate-data-type=\"image\"/\u003E\u003C/p\u003E"
+		},
+		"ae_item_properties": {
+		  "ae_item_property": [
+			{
+			  "attr_name_id": 2,
+			  "attr_value_id": 5576452410,
+			  "attr_name": "Brand Name",
+			  "attr_value": "aermotor"
+			},
+			{
+			  "attr_name_id": 219,
+			  "attr_value_id": 9441741844,
+			  "attr_name": "Origin",
+			  "attr_value": "Mainland China"
+			},
+			{
+			  "attr_name_id": 200009187,
+			  "attr_value_id": -1,
+			  "attr_name": "Hardware Version",
+			  "attr_value": "FTDI FT232RL Full Chips"
+			},
+			{
+			  "attr_name_id": 200009188,
+			  "attr_value_id": -1,
+			  "attr_name": "Software Version",
+			  "attr_value": "Newest Version"
+			},
+			{
+			  "attr_name_id": 200000204,
+			  "attr_value_id": 200001424,
+			  "attr_name": "Item Type",
+			  "attr_value": "Code Readers & Scan Tools"
+			},
+			{
+			  "attr_name_id": 200001763,
+			  "attr_value_id": 349907,
+			  "attr_name": "Software Update",
+			  "attr_value": "Yes"
+			},
+			{
+			  "attr_name_id": -1,
+			  "attr_value_id": -1,
+			  "attr_name": "OS",
+			  "attr_value": "WIN XP/ WIN 7"
+			},
+			{
+			  "attr_name_id": -1,
+			  "attr_value_id": -1,
+			  "attr_name": "Language",
+			  "attr_value": "English"
+			},
+			{
+			  "attr_name_id": -1,
+			  "attr_value_id": -1,
+			  "attr_name": "Function",
+			  "attr_value": "Professional For BMW Car Diagnostic Interface"
+			},
+			{
+			  "attr_name_id": -1,
+			  "attr_name": "Choice",
+			  "attr_value": "yes"
+			},
+			{
+			  "attr_name_id": -2,
+			  "attr_name": "semi_Choice",
+			  "attr_value": "yes"
+			}
+		  ]
+		},
+		"ae_store_info": {
+		  "store_id": 1100739139,
+		  "shipping_speed_rating": "4.7",
+		  "communication_rating": "4.6",
+		  "store_name": "TopOBD2 Store",
+		  "store_country_code": "CN",
+		  "item_as_described_rating": "4.6"
+		}
+	  },
+	  "rsp_code": 200,
+	  "rsp_msg": "Call succeeds",
+	  "request_id": "2140f4e617216997929178261"
+	}
+  }
