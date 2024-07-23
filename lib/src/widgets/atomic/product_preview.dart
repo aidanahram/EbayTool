@@ -4,13 +4,14 @@ import 'dart:convert';
 class ProductPreview extends StatefulWidget {
   final String response;
 
-  const ProductPreview({super.key, required this.response});
+  ProductPreview({super.key, required this.response});
 
   @override
   State<ProductPreview> createState() => _ProductPreviewState();
 }
 
 class _ProductPreviewState extends State<ProductPreview> {
+  int mainIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -21,17 +22,31 @@ class _ProductPreviewState extends State<ProductPreview> {
       final imageLinks = getProductImages(data);
       return SingleChildScrollView(
         scrollDirection: Axis.vertical,
-        child: SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: Row(
-            children: [for (final link in imageLinks) Image.network(
-              link, width: 100, height: 100,
-            )]
-          ),
-        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Text("Images of Product"),
+            Image.network(imageLinks[mainIndex], width: 500, height: 500),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [for(int i = 0; i < imageLinks.length; i++) Material(
+                child: InkWell(
+                  onTap: () {setState(() { mainIndex = i; }); },
+                  child: Image.network(
+                    imageLinks[i], width: 150, height: 150,
+                  )
+                )
+              )]
+            ),  
+          ],
+        )
       );
     }
   }
+}
+
+class ItemImageWidget extends InkWell{
+  const ItemImageWidget({super.key});
 }
 
 List<String> getProductImages(dynamic data){
