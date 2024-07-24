@@ -1,21 +1,19 @@
 import 'package:ebay/services.dart';
+import 'package:ebay/src/models/view/ali_product.dart';
 import 'package:flutter/material.dart';
 
 import 'package:ebay/pages.dart';
 import 'package:ebay/data.dart';
 import 'package:ebay/widgets.dart';
 
-class AddItemPage extends StatefulWidget {
+class AddItemPage extends ReactiveWidget<AliProductModel> {
   const AddItemPage({super.key});
 
   @override
-  State<AddItemPage> createState() => _AddItemPageState();
-}
+  AliProductModel createModel() => AliProductModel();
 
-class _AddItemPageState extends State<AddItemPage> {
-  String response = "";
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, AliProductModel model) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.black,
@@ -34,16 +32,42 @@ class _AddItemPageState extends State<AddItemPage> {
                   EdgeInsets.symmetric(horizontal: 16.0)),
               leading: const Icon(Icons.search),
               onSubmitted: (value) async {
-                response = await services.aliScraper.getProduct(value);
-                setState(() {});
+                model.response = await services.aliScraper.getProduct(value);
+                model.init();
               },
             ),
             Expanded(
               child: Container(
                 padding: const EdgeInsets.all(10.0),
-                child: ProductPreview(response: response,),
-              )
-            )
+                child: model.response == "" ? const SizedBox.shrink() : SingleChildScrollView(
+                scrollDirection: Axis.vertical,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(model.itemName,
+                      style: const TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      )
+                    ),
+                    const Text("Images of Product"),
+                    Image.network(model.imageLinks[model.mainIndex], width: 500, height: 500),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [for(int i = 0; i < model.imageLinks.length; i++) Material(
+                        child: InkWell(
+                          onTap: () { model.setMainImage(i); },
+                          child: Image.network(
+                            model.imageLinks[i], width: 150, height: 150,
+                          )
+                        )
+                      )]
+                    ),  
+                  ],
+                ),
+              ),
+              ),
+            ),
           ],
         ),
       ),

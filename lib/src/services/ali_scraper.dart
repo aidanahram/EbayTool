@@ -87,8 +87,6 @@ class AliScraper {
         print(response.body);
         throw Error();
       }
-      final json = jsonDecode(response.body);
-      print(json);
       return response.body;
     } on Exception catch (e) {
       print('THERE WAS AN ERROR AND LOGGING IS TOO DIFFICULT');
