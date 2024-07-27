@@ -7,7 +7,7 @@ import 'dart:io';
 import 'dart:convert';
 import 'package:crypto/crypto.dart';
 
-class ServerFunctions {
+class EbayServer {
   final String appSecret;
 
   static const baseParams = {
@@ -15,7 +15,7 @@ class ServerFunctions {
     'sign_method': 'sha256',
   };
 
-  const ServerFunctions({required this.appSecret});
+  const EbayServer({required this.appSecret});
 
   Map<String, String> stringify(Map<String, dynamic> map){
     final Map<String, String> newMap = {};
@@ -135,17 +135,17 @@ class ServerFunctions {
 
 
 void main() async {
-  final secrets = await File('C:\\Scripts\\Flutter\\Ebay\\ebay\\secrets.json').readAsString();
+  final secrets = await File('C:\\Scripts\\Flutter\\Ebay\\ebay\\secrets.env').readAsString();
   final data = await jsonDecode(secrets);
   final appSecret = data['appSecret'];
-  final serverFunctions = ServerFunctions(appSecret: appSecret);
+  final serverFunctions = EbayServer(appSecret: appSecret);
  
   print("Shhh the secret is $appSecret");
-  final handler = Pipeline()
+  final handler = const Pipeline()
     .addMiddleware(logRequests())
     .addHandler(serverFunctions.myHandler("https://api-sg.aliexpress.com"));
 
   // params['sign'] = sign(appSecret, getProductApi, params);
-  var server = await shelf_io.serve(handler, 'localhost', 8080);
+  var server = await shelf_io.serve(handler, 'localhost', 8081);
   print('Proxying at http://${server.address.host}:${server.port}');
 }

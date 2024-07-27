@@ -6,14 +6,15 @@ import "package:ebay/widgets.dart";
 
 /// A widget to edit a color, backed by [APIBuilder].
 class APIEditor extends ReactiveWidget<APIBuilder> {
-  const APIEditor({super.key});
+  final String website;
+  const APIEditor({super.key, required this.website});
 
   @override
-  APIBuilder createModel() => APIBuilder();
+  APIBuilder createModel() => APIBuilder(website: website);
 
   @override
   Widget build(BuildContext context, APIBuilder model) => AlertDialog(
-        title: const Text("Authenticate AliExpress API"),
+        title: Text("Authenticate $website API"),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -21,7 +22,7 @@ class APIEditor extends ReactiveWidget<APIBuilder> {
               height: 50,
               width: double.infinity,
               child: TextField(
-                controller: model.code,
+                controller: model.url,
                 onChanged: model.update,
                 decoration: const InputDecoration(hintText: "Code From Url"),
               ),

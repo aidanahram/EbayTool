@@ -14,7 +14,7 @@
 library services;
 
 import "src/services/ali_scraper.dart";
-//import "src/services/ebay_scraper.dart";
+import "src/services/ebay_scraper.dart";
 
 export "src/services/ali_scraper.dart";
 export "src/services/ebay_scraper.dart";
@@ -32,12 +32,16 @@ class Services {
   /// A service that handles controller inputs.
   final aliScraper = AliScraper();
 
+  final ebayScraper = EbayScraper();
+
   Future<void> init() async {
     await aliScraper.init();
+    await ebayScraper.init();
   }
 
   Future<void> dispose() async {
     await aliScraper.dispose();
+    await ebayScraper.dispose();
   }
 }
 

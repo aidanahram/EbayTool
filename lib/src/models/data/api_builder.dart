@@ -4,14 +4,14 @@ import "package:ebay/services.dart";
 
 /// Save the API code based on user input
 class APIBuilder extends ValueBuilder<void> {
-  /// Whether the code worked or not
-  bool? success;
+  final String website;
+  APIBuilder({required this.website});
 
   /// The text controller for the timer name.
-  final code = TextEditingController();
+  final url = TextEditingController();
 
   @override
-  bool get isValid => code.text.isNotEmpty;
+  bool get isValid => url.text.isNotEmpty;
 
   @override
   void get value {/* Use [save] instead */}
@@ -21,7 +21,20 @@ class APIBuilder extends ValueBuilder<void> {
 
   /// Saves the code
   void save() async {
-    models.settings.code = code.text;
-    services.aliScraper.generateToken(code.text);
+    final uri = Uri.parse(url.text);
+    try {
+      final code = uri.queryParameters['code'];
+      print("code: $code");
+      switch (website) {
+        case ("AliExpress"):
+          services.aliScraper.generateToken(code!);
+        case ("Ebay"):
+          services.ebayScraper.generateToken(code!);
+      }
+    } on Exception catch (e){
+      print("Unable to save code");
+      print(e);
+      return;
+    }
   }
 }
