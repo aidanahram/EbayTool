@@ -6,16 +6,19 @@ import 'package:http/http.dart' as http;
 import 'dart:io';
 import 'dart:convert';
 import 'package:crypto/crypto.dart';
+import 'utils.dart';
 
 class AliServer {
   final String appSecret;
+  final String appId;
 
-  static const baseParams = {
-    'app_key': '508156',
+  final Map<String, String> baseParams = {
     'sign_method': 'sha256',
   };
 
-  const AliServer({required this.appSecret});
+  AliServer({required this.appSecret, required this.appId}){
+    baseParams['app_key'] = appId;
+  }
 
   Map<String, String> stringify(Map<String, dynamic> map){
     final Map<String, String> newMap = {};
@@ -91,7 +94,7 @@ class AliServer {
           ..headers.addAll(newRequest.headers)
           ..headers['Host'] = uri.authority;
 
-        _addHeader(clientRequest.headers, 'via',
+        addHeader(clientRequest.headers, 'via',
           '${newRequest.protocolVersion} $proxyName');
 
         newRequest
@@ -102,7 +105,7 @@ class AliServer {
           .ignore();
 
         final clientResponse = await nonNullClient.send(clientRequest);
-        _addHeader(clientResponse.headers, 'via', '1.1 $proxyName');
+        addHeader(clientResponse.headers, 'via', '1.1 $proxyName');
         clientResponse.headers.remove('transfer-encoding');
 
         // If the original response was gzipped, it will be decoded by [client]
@@ -113,10 +116,10 @@ class AliServer {
 
           // Add a Warning header. See
           // http://www.w3.org/Protocols/rfc2616/rfc2616-sec13.html#sec13.5.2
-          _addHeader(
+          addHeader(
               clientResponse.headers, 'warning', '214 $proxyName "GZIP decoded"');
         }
-        _addHeader(clientResponse.headers, "Access-Control-Allow-Origin", "*");
+        addHeader(clientResponse.headers, "Access-Control-Allow-Origin", "*");
         return Response(clientResponse.statusCode,
         body: clientResponse.stream, headers: clientResponse.headers);
       } on Exception catch (e) {
@@ -125,11 +128,6 @@ class AliServer {
       }
     };
   }
-
-  void _addHeader(Map<String, String> headers, String name, String value) {
-    final existing = headers[name];
-    headers[name] = existing == null ? value : '$existing, $value';
-  }    
 }
 
 
@@ -137,8 +135,9 @@ class AliServer {
 void main() async {
   final secrets = await File('C:\\Scripts\\Flutter\\Ebay\\ebay\\secrets.env').readAsString();
   final data = await jsonDecode(secrets);
-  final appSecret = data['appSecret'];
-  final serverFunctions = AliServer(appSecret: appSecret);
+  final appSecret = data['aliAppSecret'];
+  final appId = data['aliAppId'];
+  final serverFunctions = AliServer(appSecret: appSecret, appId: appId);
  
   print("Shhh the secret is $appSecret");
   final handler = const Pipeline()

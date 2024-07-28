@@ -3,26 +3,32 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class EbayScraper{
-  String? token;
-  final baseEndpoint = "https://api.ebay.com/sell/feed/v1";
-  Map<String, String> headers = {
-    "Accept": "application/json",
-    "Content-Type": "application/json",
-    "X-EBAY-C-MARKETPLACE-ID": "EBAY_US"
-  };
+  final api = 'localhost:8081';
 
   EbayScraper();
 
-   /// Function to initialize the scraper
+  /// Function to initialize the scraper
   Future<void> init() async {}
 
   /// Function to dispose of the scraper
   Future<void> dispose() async {}
 
   Future<void> generateToken(String code) async {
-    const endpoint = "https://api.ebay.com/identity/v1/oauth2/token";
-    
-    //base64Encode(bytes)
+    final uri = Uri.http(api, '/identity/v1/oauth2/token');
+    //final endpoint = Uri.parse("https://api.ebay.com/identity/v1/oauth2/token");
+    final Map<String, String> headers = {
+      'Content-Type': 'application/x-www-form-urlencoded',
+      'Authorization': 'true',
+    };
+    final Map<String, String> payload = {
+      'grant_type': 'authorization_code',
+      'code': code,
+      'redirect_uri': 'Aidan_Ahram-AidanAhr-first--jssslhkm',
+    };
+    final response = await http.post(uri, headers: headers, body: jsonEncode(payload));
+    print(response);
+    print(response.headers);
+    print("BODY: ${response.body}");
   }
   
   // Future<String> createTask() async {
@@ -72,5 +78,6 @@ class EbayScraper{
 
 void main(){
   final scraper = EbayScraper();
+  scraper.generateToken('v^1.1#i^1#r^1#p^3#f^0#I^3#t^Ul41XzI6RDM4M0NBRDA3RjQwM0UyMUU1MEU3MzEwMEExRTlBODVfMl8xI0VeMjYw');
   //scraper.gatherProductData();
 }

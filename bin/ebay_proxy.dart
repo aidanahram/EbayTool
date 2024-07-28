@@ -6,16 +6,16 @@ import 'package:http/http.dart' as http;
 import 'dart:io';
 import 'dart:convert';
 import 'package:crypto/crypto.dart';
+import 'utils.dart';
 
 class EbayServer {
   final String appSecret;
+  final String appId;
+  late String auth;
 
-  static const baseParams = {
-    'app_key': '508156',
-    'sign_method': 'sha256',
-  };
-
-  const EbayServer({required this.appSecret});
+  EbayServer({required this.appSecret, required this.appId}){
+    auth = base64.encode(utf8.encode("$appId:$appSecret"));
+  }
 
   Map<String, String> stringify(Map<String, dynamic> map){
     final Map<String, String> newMap = {};
@@ -65,36 +65,29 @@ class EbayServer {
     return (serverRequest) async {
       // http://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html#sec9.8
       final requestUrl = uri.resolve(serverRequest.url.toString());
-      final body = await serverRequest.readAsString();
+      print(requestUrl);
+      //final body = await serverRequest.readAsString();
+      //print(body);
+      print(serverRequest.headers);
+      final headers = serverRequest.headers;
       try {
-        final params = await jsonDecode(body);
-        if(!params.containsKey("method")){
-          print("Request is missing method key in body");
-          return Response.badRequest(body: "Request is missing method key");
+        if(serverRequest.headers['authorization'] == 'true'){
+          print("need to add auth");
+          serverRequest = serverRequest.change(headers: {'authorization': 'Basic $auth'});
+          print("NEW HEADERS: ");
+          print(serverRequest.headers);
         }
-        final Map<String, String> newParams = stringify(params);
-        newParams.addAll(baseParams);
-        final currentTime = DateTime.now().millisecondsSinceEpoch;
-        newParams['timestamp'] = currentTime.toString();
-        final api = newParams['method'];
-        if(api!.contains('/')){
-          newParams.remove('method');
-          newParams['sign'] = sign(appSecret, api, newParams);
-        } else {
-          newParams['sign'] = sign(appSecret, api, newParams);
-        }
-        final newUri = Uri.parse("$requestUrl${paramQuery(newParams)}");
-        print("Sending a get request to:\n$newUri");
-        final newRequest = Request('GET', newUri);
-        final clientRequest = http.StreamedRequest('GET', newUri)
+        print("Sending a post request to:\n$requestUrl");
+        
+        final clientRequest = http.StreamedRequest('POST', requestUrl)
           ..followRedirects = false
-          ..headers.addAll(newRequest.headers)
+          ..headers.addAll(serverRequest.headers)
           ..headers['Host'] = uri.authority;
 
-        _addHeader(clientRequest.headers, 'via',
-          '${newRequest.protocolVersion} $proxyName');
+        addHeader(clientRequest.headers, 'via',
+          '${serverRequest.protocolVersion} $proxyName');
 
-        newRequest
+        serverRequest
           .read()
           .forEach(clientRequest.sink.add)
           .catchError(clientRequest.sink.addError)
@@ -102,7 +95,7 @@ class EbayServer {
           .ignore();
 
         final clientResponse = await nonNullClient.send(clientRequest);
-        _addHeader(clientResponse.headers, 'via', '1.1 $proxyName');
+        addHeader(clientResponse.headers, 'via', '1.1 $proxyName');
         clientResponse.headers.remove('transfer-encoding');
 
         // If the original response was gzipped, it will be decoded by [client]
@@ -113,10 +106,10 @@ class EbayServer {
 
           // Add a Warning header. See
           // http://www.w3.org/Protocols/rfc2616/rfc2616-sec13.html#sec13.5.2
-          _addHeader(
+          addHeader(
               clientResponse.headers, 'warning', '214 $proxyName "GZIP decoded"');
         }
-        _addHeader(clientResponse.headers, "Access-Control-Allow-Origin", "*");
+        addHeader(clientResponse.headers, "Access-Control-Allow-Origin", "*");
         return Response(clientResponse.statusCode,
         body: clientResponse.stream, headers: clientResponse.headers);
       } on Exception catch (e) {
@@ -125,11 +118,6 @@ class EbayServer {
       }
     };
   }
-
-  void _addHeader(Map<String, String> headers, String name, String value) {
-    final existing = headers[name];
-    headers[name] = existing == null ? value : '$existing, $value';
-  }    
 }
 
 
@@ -137,13 +125,14 @@ class EbayServer {
 void main() async {
   final secrets = await File('C:\\Scripts\\Flutter\\Ebay\\ebay\\secrets.env').readAsString();
   final data = await jsonDecode(secrets);
-  final appSecret = data['appSecret'];
-  final serverFunctions = EbayServer(appSecret: appSecret);
+  final appSecret = data['ebayAppSecret'];
+  final appKey = data['ebayAppId'];
+  final serverFunctions = EbayServer(appSecret: appSecret, appId: appKey);
  
   print("Shhh the secret is $appSecret");
   final handler = const Pipeline()
     .addMiddleware(logRequests())
-    .addHandler(serverFunctions.myHandler("https://api-sg.aliexpress.com"));
+    .addHandler(serverFunctions.myHandler("https://api.ebay.com"));
 
   // params['sign'] = sign(appSecret, getProductApi, params);
   var server = await shelf_io.serve(handler, 'localhost', 8081);
