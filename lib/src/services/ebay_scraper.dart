@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 
-class EbayScraper{
+class EbayScraper {
   final api = 'localhost:8081';
 
   EbayScraper();
@@ -15,9 +15,9 @@ class EbayScraper{
 
   Future<void> generateToken(String code) async {
     final uri = Uri.http(api, '/identity/v1/oauth2/token');
-    //final endpoint = Uri.parse("https://api.ebay.com/identity/v1/oauth2/token");
     final Map<String, String> headers = {
       'Content-Type': 'application/x-www-form-urlencoded',
+      //'Authorization': 'Basic ${base64.encode(utf8.encode("$appId:$appSecret"))}',
       'Authorization': 'true',
     };
     final Map<String, String> payload = {
@@ -25,12 +25,18 @@ class EbayScraper{
       'code': code,
       'redirect_uri': 'Aidan_Ahram-AidanAhr-first--jssslhkm',
     };
-    final response = await http.post(uri, headers: headers, body: jsonEncode(payload));
-    print(response);
-    print(response.headers);
-    print("BODY: ${response.body}");
+    print("Sending first");
+    try {
+      final response = await http.post(uri, headers: headers, body: payload);
+      print("wheres the error");
+      print(response.statusCode);
+      print(response.headers);
+      print("BODY: ${response.body}");
+    } on Exception catch (e) {
+      print(e);
+    }
   }
-  
+
   // Future<String> createTask() async {
   //   final url = "$baseEndpoint/inventory_task";
   //   final payload = {
@@ -76,8 +82,9 @@ class EbayScraper{
   // }
 }
 
-void main(){
+void main() {
   final scraper = EbayScraper();
-  scraper.generateToken('v^1.1#i^1#r^1#p^3#f^0#I^3#t^Ul41XzI6RDM4M0NBRDA3RjQwM0UyMUU1MEU3MzEwMEExRTlBODVfMl8xI0VeMjYw');
+  scraper.generateToken(
+      'v^1.1#i^1#p^3#f^0#r^1#I^3#t^Ul41XzExOkY1MUUwQUUzMjc0N0E4ODU2OUY2MENDMzYxQzQ5N0Q5XzFfMSNFXjI2MA==');
   //scraper.gatherProductData();
 }

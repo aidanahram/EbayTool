@@ -22,12 +22,13 @@ class AliProductModel with ChangeNotifier {
 
   AliProductModel();
 
-  void init(){
-    try{
+  void init() {
+    try {
       data = json.decode(response);
       imageLinks = _getProductImages(data);
       items = _getSubItems(data);
-      productName = data['aliexpress_ds_product_get_response']['result']['ae_item_base_info_dto']['subject'];
+      productName = data['aliexpress_ds_product_get_response']['result']
+          ['ae_item_base_info_dto']['subject'];
       notifyListeners();
     } on Exception catch (e) {
       print("Error was thrown while trying to initialize");
@@ -35,20 +36,25 @@ class AliProductModel with ChangeNotifier {
     }
   }
 
-  List<String> _getProductImages(dynamic data){
-    final urls = data['aliexpress_ds_product_get_response']['result']['ae_multimedia_info_dto']['image_urls'];
+  List<String> _getProductImages(dynamic data) {
+    final urls = data['aliexpress_ds_product_get_response']['result']
+        ['ae_multimedia_info_dto']['image_urls'];
     return urls.toString().split(';');
   }
 
-  List<SubItem>  _getSubItems(dynamic data){
+  List<SubItem> _getSubItems(dynamic data) {
     List<SubItem> res = [];
-    
-    final items = data['aliexpress_ds_product_get_response']['result']['ae_item_sku_info_dtos']['ae_item_sku_info_d_t_o'];
-    for(final item in items){
-      final name = item['ae_sku_property_dtos']['ae_sku_property_d_t_o'][0]['property_value_definition_name'];
+
+    final items = data['aliexpress_ds_product_get_response']['result']
+        ['ae_item_sku_info_dtos']['ae_item_sku_info_d_t_o'];
+    for (final item in items) {
+      final name = item['ae_sku_property_dtos']['ae_sku_property_d_t_o'][0]
+          ['property_value_definition_name'];
       final price = item['offer_sale_price'];
-      if(item['ae_sku_property_dtos']['ae_sku_property_d_t_o'][0].containsKey('sku_image')){
-        final imageLink = item['ae_sku_property_dtos']['ae_sku_property_d_t_o'][0]['sku_image'];
+      if (item['ae_sku_property_dtos']['ae_sku_property_d_t_o'][0]
+          .containsKey('sku_image')) {
+        final imageLink = item['ae_sku_property_dtos']['ae_sku_property_d_t_o']
+            [0]['sku_image'];
         res.add(SubItem(name, price, imageLink: imageLink));
       } else {
         res.add(SubItem(name, price));
@@ -57,10 +63,8 @@ class AliProductModel with ChangeNotifier {
     return res;
   }
 
-  void setMainImage(int index){
+  void setMainImage(int index) {
     mainIndex = index;
     notifyListeners();
   }
-
-
 }

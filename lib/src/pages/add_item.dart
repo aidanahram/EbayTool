@@ -39,50 +39,79 @@ class AddItemPage extends ReactiveWidget<AliProductModel> {
             Expanded(
               child: Container(
                 padding: const EdgeInsets.all(10.0),
-                child: model.response == "" ? const SizedBox.shrink() : SingleChildScrollView(
-                scrollDirection: Axis.vertical,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(model.productName,
-                      style: const TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      )
-                    ),
-                    const Text("Images of Product"),
-                    Image.network(model.imageLinks[model.mainIndex], width: 450, height: 450),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [for(int i = 0; i < model.imageLinks.length; i++) Material(
-                        child: InkWell(
-                          onTap: () { model.setMainImage(i); },
-                          child: Image.network(
-                            model.imageLinks[i], width: 150, height: 150,
-                          ),
+                child: model.response == ""
+                    ? const SizedBox.shrink()
+                    : SingleChildScrollView(
+                        scrollDirection: Axis.vertical,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(model.productName,
+                                style: const TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                )),
+                            const Text("Images of Product"),
+                            Image.network(model.imageLinks[model.mainIndex],
+                                width: 450, height: 450),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                for (int i = 0;
+                                    i < model.imageLinks.length;
+                                    i++)
+                                  Material(
+                                    child: InkWell(
+                                      onTap: () {
+                                        model.setMainImage(i);
+                                      },
+                                      child: Image.network(
+                                        model.imageLinks[i],
+                                        width: 150,
+                                        height: 150,
+                                      ),
+                                    ),
+                                  ),
+                              ],
+                            ),
+                            const SizedBox(
+                              height: 30.0,
+                            ),
+                            const Text(
+                              "Items Found on Page. Select one and choose which images to keep. Beware of duplicates",
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 10.0,
+                            ),
+                            Row(
+                              children: [
+                                for (int i = 0; i < model.items.length; i++)
+                                  Column(
+                                    children: [
+                                      Text(model.items[i].name),
+                                      model.items[i].imageLink != null
+                                          ? Image.network(
+                                              model.items[i].imageLink!,
+                                              width: 200,
+                                              height: 200,
+                                            )
+                                          : const SizedBox(
+                                              width: 200, height: 200),
+                                      Text(model.items[i].price.toString()),
+                                    ],
+                                  ),
+                                const SizedBox(
+                                  width: 10.0,
+                                ),
+                              ],
+                            ),
+                          ],
                         ),
-                      ),],
-                    ),
-                    const SizedBox(height: 30.0,),
-                    const Text("Items Found on Page. Select one and choose which images to keep. Beware of duplicates",
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
                       ),
-                    ),
-                    const SizedBox(height: 10.0,),
-                    Row(
-                      children: [for(int i = 0; i < model.items.length; i++) Column(children: [
-                        Text(model.items[i].name),
-                        model.items[i].imageLink != null ? Image.network(model.items[i].imageLink!, width: 200, height: 200,) : const SizedBox(width: 200, height: 200),
-                        Text(model.items[i].price.toString()),
-                      ],),
-                      const SizedBox(width: 10.0,),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
               ),
             ),
           ],

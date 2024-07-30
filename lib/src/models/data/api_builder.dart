@@ -24,14 +24,13 @@ class APIBuilder extends ValueBuilder<void> {
     final uri = Uri.parse(url.text);
     try {
       final code = uri.queryParameters['code'];
-      print("code: $code");
       switch (website) {
         case ("AliExpress"):
           services.aliScraper.generateToken(code!);
         case ("Ebay"):
           services.ebayScraper.generateToken(code!);
       }
-    } on Exception catch (e){
+    } on Exception catch (e) {
       print("Unable to save code");
       print(e);
       return;

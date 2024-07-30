@@ -19,10 +19,7 @@ class AliScraper {
 
   Future<bool> generateToken(String code) async {
     const createTokenApi = '/auth/token/create';
-    final params = {
-      'code': code,
-      'method': createTokenApi
-    };
+    final params = {'code': code, 'method': createTokenApi};
 
     final uri = Uri.http(api, "/rest$createTokenApi");
     try {
@@ -46,9 +43,7 @@ class AliScraper {
 
   Future<bool> refreshToken(String refreshToken) async {
     const refreshTokenApi = '/auth/token/refresh';
-    final params = {
-      'refresh_token': refreshToken
-    };
+    final params = {'refresh_token': refreshToken};
 
     final uri = Uri.http(api, "/rest$refreshTokenApi");
     try {
@@ -76,7 +71,7 @@ class AliScraper {
   Future<String> getProduct(String productID) async {
     const getProductApi = 'aliexpress.ds.product.get';
     final params = {
-      'method' : getProductApi,
+      'method': getProductApi,
       'product_id': productID,
       'ship_to_country': 'US',
       'target_currency': 'USD',

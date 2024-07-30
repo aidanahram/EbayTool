@@ -16,11 +16,11 @@ class AliServer {
     'sign_method': 'sha256',
   };
 
-  AliServer({required this.appSecret, required this.appId}){
+  AliServer({required this.appSecret, required this.appId}) {
     baseParams['app_key'] = appId;
   }
 
-  Map<String, String> stringify(Map<String, dynamic> map){
+  Map<String, String> stringify(Map<String, dynamic> map) {
     final Map<String, String> newMap = {};
     map.forEach((key, value) {
       newMap[key] = value.toString();
@@ -28,7 +28,7 @@ class AliServer {
     return newMap;
   }
 
-  String paramQuery(Map<String, String> params){
+  String paramQuery(Map<String, String> params) {
     String result = "?";
     params.forEach((key, value) {
       result += "$key=$value&";
@@ -71,7 +71,7 @@ class AliServer {
       final body = await serverRequest.readAsString();
       try {
         final params = await jsonDecode(body);
-        if(!params.containsKey("method")){
+        if (!params.containsKey("method")) {
           print("Request is missing method key in body");
           return Response.badRequest(body: "Request is missing method key");
         }
@@ -80,7 +80,7 @@ class AliServer {
         final currentTime = DateTime.now().millisecondsSinceEpoch;
         newParams['timestamp'] = currentTime.toString();
         final api = newParams['method'];
-        if(api!.contains('/')){
+        if (api!.contains('/')) {
           newParams.remove('method');
           newParams['sign'] = sign(appSecret, api, newParams);
         } else {
@@ -95,14 +95,14 @@ class AliServer {
           ..headers['Host'] = uri.authority;
 
         addHeader(clientRequest.headers, 'via',
-          '${newRequest.protocolVersion} $proxyName');
+            '${newRequest.protocolVersion} $proxyName');
 
         newRequest
-          .read()
-          .forEach(clientRequest.sink.add)
-          .catchError(clientRequest.sink.addError)
-          .whenComplete(clientRequest.sink.close)
-          .ignore();
+            .read()
+            .forEach(clientRequest.sink.add)
+            .catchError(clientRequest.sink.addError)
+            .whenComplete(clientRequest.sink.close)
+            .ignore();
 
         final clientResponse = await nonNullClient.send(clientRequest);
         addHeader(clientResponse.headers, 'via', '1.1 $proxyName');
@@ -116,33 +116,33 @@ class AliServer {
 
           // Add a Warning header. See
           // http://www.w3.org/Protocols/rfc2616/rfc2616-sec13.html#sec13.5.2
-          addHeader(
-              clientResponse.headers, 'warning', '214 $proxyName "GZIP decoded"');
+          addHeader(clientResponse.headers, 'warning',
+              '214 $proxyName "GZIP decoded"');
         }
         addHeader(clientResponse.headers, "Access-Control-Allow-Origin", "*");
         return Response(clientResponse.statusCode,
-        body: clientResponse.stream, headers: clientResponse.headers);
+            body: clientResponse.stream, headers: clientResponse.headers);
       } on Exception catch (e) {
         print(e);
-        return Response.internalServerError(body: "Problem with server please check logs");
+        return Response.internalServerError(
+            body: "Problem with server please check logs");
       }
     };
   }
 }
 
-
-
 void main() async {
-  final secrets = await File('C:\\Scripts\\Flutter\\Ebay\\ebay\\secrets.env').readAsString();
+  final secrets = await File('C:\\Scripts\\Flutter\\Ebay\\ebay\\secrets.env')
+      .readAsString();
   final data = await jsonDecode(secrets);
   final appSecret = data['aliAppSecret'];
   final appId = data['aliAppId'];
   final serverFunctions = AliServer(appSecret: appSecret, appId: appId);
- 
+
   print("Shhh the secret is $appSecret");
   final handler = const Pipeline()
-    .addMiddleware(logRequests())
-    .addHandler(serverFunctions.myHandler("https://api-sg.aliexpress.com"));
+      .addMiddleware(logRequests())
+      .addHandler(serverFunctions.myHandler("https://api-sg.aliexpress.com"));
 
   // params['sign'] = sign(appSecret, getProductApi, params);
   var server = await shelf_io.serve(handler, 'localhost', 8080);
