@@ -1,4 +1,4 @@
-import 'dart:convert';
+// import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 
@@ -25,14 +25,17 @@ class EbayScraper {
       'code': code,
       'redirect_uri': 'Aidan_Ahram-AidanAhr-first--jssslhkm',
     };
-    print("Sending first");
     try {
       final response = await http.post(uri, headers: headers, body: payload);
-      print("wheres the error");
-      print(response.statusCode);
-      print(response.headers);
-      print("BODY: ${response.body}");
+      if (response.statusCode >= 400) {
+        print('Recieved error code from server');
+        print(response.headers);
+        print(response.statusCode);
+        print(response.body);
+        throw Error();
+      }
     } on Exception catch (e) {
+      print('THERE WAS AN ERROR AND LOGGING IS TOO DIFFICULT');
       print(e);
     }
   }

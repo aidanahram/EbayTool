@@ -2,11 +2,9 @@
 
 import 'package:shelf/shelf.dart';
 import 'package:shelf/shelf_io.dart' as shelf_io;
-import 'package:shelf_proxy/shelf_proxy.dart';
 import 'package:http/http.dart' as http;
 import 'dart:io';
 import 'dart:convert';
-import 'package:crypto/crypto.dart';
 import 'utils.dart';
 
 class EbayServer {

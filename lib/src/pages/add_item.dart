@@ -2,8 +2,8 @@ import 'package:ebay/services.dart';
 import 'package:ebay/src/models/view/ali_product.dart';
 import 'package:flutter/material.dart';
 
-import 'package:ebay/pages.dart';
-import 'package:ebay/data.dart';
+// import 'package:ebay/pages.dart';
+// import 'package:ebay/data.dart';
 import 'package:ebay/widgets.dart';
 
 class AddItemPage extends ReactiveWidget<AliProductModel> {
