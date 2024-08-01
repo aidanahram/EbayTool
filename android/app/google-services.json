@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1095906260558",
+    "project_id": "dropper-c7adc",
+    "storage_bucket": "dropper-c7adc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1095906260558:android:8cb4ce44454c5cd2a2b51f",
+        "android_client_info": {
+          "package_name": "com.example.ebay"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCUUWieWD78wTHfm4r3qPRiE4U6JIn7zVM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

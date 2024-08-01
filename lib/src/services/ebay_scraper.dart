@@ -17,7 +17,6 @@ class EbayScraper {
     final uri = Uri.http(api, '/identity/v1/oauth2/token');
     final Map<String, String> headers = {
       'Content-Type': 'application/x-www-form-urlencoded',
-      //'Authorization': 'Basic ${base64.encode(utf8.encode("$appId:$appSecret"))}',
       'Authorization': 'true',
     };
     final Map<String, String> payload = {
@@ -34,10 +33,15 @@ class EbayScraper {
         print(response.body);
         throw Error();
       }
+      print(response.body);
     } on Exception catch (e) {
       print('THERE WAS AN ERROR AND LOGGING IS TOO DIFFICULT');
       print(e);
     }
+  }
+
+  Future<void> getProducts() async {
+
   }
 
   // Future<String> createTask() async {

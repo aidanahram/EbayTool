@@ -1,6 +1,6 @@
 // import 'package:ebay/app.dart';
 // import 'package:ebay/models.dart';
-// import 'package:ebay/services.dart';
+import 'package:ebay/services.dart';
 import 'package:ebay/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:ebay/pages.dart';
@@ -37,6 +37,10 @@ class _HomePageState extends State<HomePage> {
             );
           },
         ),
+        actions: [IconButton(
+          icon: const Icon(Icons.refresh),
+          onPressed: services.ebayScraper.getProducts,
+        ),]
       ),
       drawer: Drawer(
         child: ListView(
@@ -100,7 +104,7 @@ class _HomePageState extends State<HomePage> {
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
-          children: <Widget>[
+          children: [
             const SizedBox(height: 10),
             SearchBar(
               hintText: "Search for a product",
