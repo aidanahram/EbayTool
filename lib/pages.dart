@@ -18,4 +18,7 @@ class Routes {
 
   /// The name of the add product page
   static const String addItem = "addItem";
+
+  /// The name of the login page
+  static const String login = "login";
 }

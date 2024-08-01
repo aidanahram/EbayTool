@@ -6,6 +6,7 @@
 /// library (except for main.dart).
 library app;
 
+import "package:ebay/src/pages/login.dart";
 import "package:flutter/material.dart";
 import "package:ebay/models.dart";
 import "package:ebay/pages.dart";
@@ -22,7 +23,7 @@ class EbayDashboard extends ReusableReactiveWidget<SettingsModel> {
   @override
   Widget build(BuildContext context, SettingsModel model) => MaterialApp(
         title: "Ebay Drop Shipping Tool",
-        home: const HomePage(),
+        home: const LoginPage(),
         debugShowCheckedModeBanner: false,
         themeMode: ThemeMode.system,
         theme: ThemeData(
@@ -43,6 +44,7 @@ class EbayDashboard extends ReusableReactiveWidget<SettingsModel> {
           ),
         ),
         routes: {
+          Routes.login: (_) => const LoginPage(),
           Routes.home: (_) => const HomePage(),
           Routes.addItem: (_) => const AddItemPage(),
         },

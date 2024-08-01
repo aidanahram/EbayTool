@@ -17,6 +17,7 @@ import "package:ebay/app.dart";
 // import "package:ebay/services.dart";
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
