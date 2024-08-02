@@ -11,7 +11,6 @@ library main;
 import "package:ebay/widgets.dart";
 import "package:flutter/gestures.dart";
 import "package:flutter/material.dart";
-import "package:flutter_web_plugins/url_strategy.dart";
 
 import "package:ebay/app.dart";
 import "package:ebay/models.dart";
@@ -20,7 +19,6 @@ import "package:ebay/services.dart";
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   //GoRouter.optionURLReflectsImperativeAPIs = true;
-  usePathUrlStrategy();
   await services.init();
   await models.init();
   runApp(AppDashboard());

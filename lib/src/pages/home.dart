@@ -113,7 +113,13 @@ class _HomePageState extends State<HomePage> {
                       color: Colors.black,
                     ),
                     title: const Text('Logout'),
-                    onTap: () => models.user.signOut,
+                    onTap: () async {
+                      await models.user.signOut();
+                      if(context.mounted){
+                        Navigator.of(context).pop();
+                      }
+                      
+                    },
                   ),
                 ),
               )
@@ -139,7 +145,7 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => router.go("/add_item"),
+        onPressed: () => Navigator.of(context).pushNamed(Routes.addItem),
         tooltip: 'Add new product',
         child: const Icon(Icons.add),
       ),

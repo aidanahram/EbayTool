@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 import "package:ebay/data.dart";
 import "package:ebay/models.dart";
 import "package:ebay/pages.dart";
@@ -41,7 +43,8 @@ class UserModel extends DataModel {
     userProfile = null;
     notifyListeners();
     await models.onSignOut();
-    router.go("/login");
+    // Navigation.of()
+    // router.go("/login");
   }
 
   @override

@@ -21,9 +21,9 @@ class AppDashboard extends ReusableReactiveWidget<SettingsModel> {
   AppDashboard() : super(models.settings);
 
   @override
-  Widget build(BuildContext context, SettingsModel model) => MaterialApp.router(
+  Widget build(BuildContext context, SettingsModel model) => MaterialApp(
         title: "Ebay Drop Shipping Tool",
-        routerConfig: router,
+        home: const LoginPage(),
         debugShowCheckedModeBanner: false,
         themeMode: ThemeMode.system,
         theme: ThemeData(
@@ -43,10 +43,10 @@ class AppDashboard extends ReusableReactiveWidget<SettingsModel> {
             secondary: ebayYellow,
           ),
         ),
-        // routes: {
-        //   Routes.login: (_) => const LoginPage(),
-        //   Routes.home: (_) => const HomePage(),
-        //   Routes.addItem: (_) => const AddItemPage(),
-        // },
+        routes: {
+          Routes.login: (_) => const LoginPage(),
+          Routes.home: (_) => const HomePage(),
+          Routes.addItem: (_) => const AddItemPage(),
+        },
       );
 }
