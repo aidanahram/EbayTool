@@ -9,15 +9,18 @@
 /// This library may depend on the data and services library.
 library models;
 
+import "package:ebay/data.dart";
+
 import "src/models/model.dart";
-import "src/models/data/home.dart";
+import "src/models/view/app.dart";
+import "src/models/data/user.dart";
 import "src/models/data/settings.dart";
 
 export "src/models/model.dart";
 
 // Data models
 export "src/models/data/settings.dart";
-export "src/models/data/home.dart";
+export "src/models/view/app.dart";
 
 // Builder models
 export "src/models/data/api_builder.dart";
@@ -33,7 +36,7 @@ export "src/models/view/builders/builder.dart";
 /// 1. Add it as a field
 /// 2. Initialize it in [init]
 /// 3. Add it to the `MultiProvider` in `app.dart`
-class Models extends Model {
+class Models extends DataModel {
   /// Whether all models have been initialized.
   bool isReady = false;
 
@@ -41,13 +44,17 @@ class Models extends Model {
   final settings = SettingsModel();
 
   /// Contains persistent data about the dashboard's current state.
-  final home = HomeModel();
+  final app = AppModel();
+
+  /// The user data model.
+  final user = UserModel();
 
   @override
   Future<void> init() async {
     // initialize all models here
     await settings.init();
-
+    await app.init();
+    await user.init();
     isReady = true;
   }
 
@@ -56,6 +63,18 @@ class Models extends Model {
     settings.dispose();
 
     super.dispose();
+  }
+
+  @override
+  Future<void> onSignIn(UserProfile profile) async {
+    await user.onSignIn(profile);
+    await app.onSignIn(profile);
+  }
+
+  @override
+  Future<void> onSignOut() async {
+    await user.onSignOut();
+    await app.onSignOut();
   }
 }
 

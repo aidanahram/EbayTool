@@ -1,5 +1,5 @@
 // import 'package:ebay/app.dart';
-// import 'package:ebay/models.dart';
+import 'package:ebay/models.dart';
 import 'package:ebay/services.dart';
 import 'package:ebay/widgets.dart';
 import 'package:flutter/material.dart';
@@ -43,44 +43,44 @@ class _HomePageState extends State<HomePage> {
         ),]
       ),
       drawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
+        child: Column(
           children: [
             DrawerHeader(
-                margin: EdgeInsets.zero,
-                padding: EdgeInsets.zero,
-                child: Row(
-                  children: [
-                    Builder(
-                      builder: (context) {
-                        return IconButton(
-                          icon: const Icon(Icons.menu),
-                          onPressed: () {
-                            Scaffold.of(context).closeDrawer();
-                          },
-                        );
-                      },
-                    ),
-                    const Text("Menu"),
-                  ],
-                )),
+              child: Row(
+                children: [
+                  Builder(
+                    builder: (context) {
+                      return IconButton(
+                        icon: const Icon(Icons.menu),
+                        onPressed: () {
+                          Scaffold.of(context).closeDrawer();
+                        },
+                      );
+                    },
+                  ),
+                  const Text("Menu"),
+                ],
+            )),
             ListTile(
-                title: const Text("Verify Ali Express Account"),
-                onTap: () async {
-                  final url = Uri.parse(aliSignOn);
-                  if (await canLaunchUrl(url)) {
-                    await launchUrl(url);
-                    if (context.mounted) {
-                      showDialog<void>(
-                          context: context,
-                          builder: (_) => const APIEditor(
-                                website: "AliExpress",
-                              ));
-                    }
-                  } else {
-                    throw "Could not launch $url";
+              title: const Text("Verify Ali Express Account"),
+              onTap: () async {
+                final url = Uri.parse(aliSignOn);
+                if (await canLaunchUrl(url)) {
+                  await launchUrl(url);
+                  if (context.mounted) {
+                    showDialog<void>(
+                        context: context,
+                        builder: (_) => const APIEditor(
+                              website: "AliExpress",
+                            ));
                   }
-                }),
+                } else {
+                  throw "Could not launch $url";
+                }
+              }),
+            const Divider(
+              color: Colors.grey,
+            ),
             ListTile(
                 title: const Text("Verify eBay Account"),
                 onTap: () async {
@@ -98,6 +98,26 @@ class _HomePageState extends State<HomePage> {
                     throw "Could not launch $url";
                   }
                 }),
+            const Divider(
+              color: Colors.grey,
+            ),
+            Expanded(
+                child: Align(
+                  alignment: FractionalOffset.bottomCenter,
+                  child: ListTile(
+                    hoverColor: Colors.blue,
+                    dense: true,
+                    visualDensity: const VisualDensity(vertical: -4),
+                    leading: const Icon(
+                      Icons.logout,
+                      color: Colors.black,
+                    ),
+                    title: const Text('Logout'),
+                    onTap: () => models.user.signOut,
+                  ),
+                ),
+              )
+
           ],
         ),
       ),
@@ -119,7 +139,7 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => Navigator.of(context).pushNamed(Routes.addItem),
+        onPressed: () => router.go("/add_item"),
         tooltip: 'Add new product',
         child: const Icon(Icons.add),
       ),

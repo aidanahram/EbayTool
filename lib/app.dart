@@ -16,14 +16,14 @@ import "package:ebay/widgets.dart";
 const ebayYellow = Color.fromARGB(255, 255, 238, 0);
 
 /// The main class for the app.
-class EbayDashboard extends ReusableReactiveWidget<SettingsModel> {
+class AppDashboard extends ReusableReactiveWidget<SettingsModel> {
   /// Creates the main app.
-  EbayDashboard() : super(models.settings);
+  AppDashboard() : super(models.settings);
 
   @override
-  Widget build(BuildContext context, SettingsModel model) => MaterialApp(
+  Widget build(BuildContext context, SettingsModel model) => MaterialApp.router(
         title: "Ebay Drop Shipping Tool",
-        home: const LoginPage(),
+        routerConfig: router,
         debugShowCheckedModeBanner: false,
         themeMode: ThemeMode.system,
         theme: ThemeData(
@@ -43,10 +43,10 @@ class EbayDashboard extends ReusableReactiveWidget<SettingsModel> {
             secondary: ebayYellow,
           ),
         ),
-        routes: {
-          Routes.login: (_) => const LoginPage(),
-          Routes.home: (_) => const HomePage(),
-          Routes.addItem: (_) => const AddItemPage(),
-        },
+        // routes: {
+        //   Routes.login: (_) => const LoginPage(),
+        //   Routes.home: (_) => const HomePage(),
+        //   Routes.addItem: (_) => const AddItemPage(),
+        // },
       );
 }

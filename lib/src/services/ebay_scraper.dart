@@ -1,16 +1,19 @@
 // import 'dart:convert';
 
+import 'package:ebay/src/services/service.dart';
 import 'package:http/http.dart' as http;
 
-class EbayScraper {
+class EbayScraper extends Service{
   final api = 'localhost:8081';
 
   EbayScraper();
 
   /// Function to initialize the scraper
+  @override
   Future<void> init() async {}
 
   /// Function to dispose of the scraper
+  @override
   Future<void> dispose() async {}
 
   Future<void> generateToken(String code) async {

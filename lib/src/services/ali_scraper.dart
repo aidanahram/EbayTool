@@ -1,18 +1,21 @@
 // ignore_for_file: avoid_print
 
 import 'dart:convert';
-
 import 'package:http/http.dart' as http;
 
+import 'service.dart';
+
 /// Class to send requests to the aliexpress api
-class AliScraper {
+class AliScraper extends Service{
   final api = 'localhost:8080';
   AliScraper();
 
   /// Function to initialize the scraper
+  @override
   Future<void> init() async {}
 
   /// Function to dispose of the scraper
+  @override
   Future<void> dispose() async {}
 
   Future<bool> generateToken(String code) async {

@@ -6,7 +6,12 @@ import 'package:flutter/material.dart';
 import 'home.dart';
 
 class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
+  /// The route to redirect to after sign-in or sign-up, if any.
+  final String? redirect;
+  /// Whether to skip to the signup page.
+  final bool? showSignUp;
+  /// Creates the login page.
+  const LoginPage({super.key, this.redirect, this.showSignUp});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +25,6 @@ class LoginPage extends StatelessWidget {
             ],
           );
         }
-
         return const HomePage();
       },
     );

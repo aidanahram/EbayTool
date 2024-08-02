@@ -11,3 +11,6 @@
 library data;
 
 export "src/data/item.dart";
+export "src/data/user_profile.dart";
+export "src/data/types.dart";
+export "src/data/product.dart";
