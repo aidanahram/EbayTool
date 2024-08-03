@@ -21,6 +21,7 @@ export "src/widgets/atomic/editors.dart";
 export "src/widgets/atomic/product_preview.dart";
 
 export "src/widgets/generic/reactive_widget.dart";
+export "src/widgets/generic/text_input.dart";
 
 /// Convenience functions on [BuildContext].
 extension BuildContextUtils on BuildContext {

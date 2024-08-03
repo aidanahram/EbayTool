@@ -6,8 +6,8 @@
 /// library (except for main.dart).
 library app;
 
-import "package:ebay/src/pages/login.dart";
 import "package:flutter/material.dart";
+import "package:flutter_web_plugins/url_strategy.dart";
 import "package:ebay/models.dart";
 import "package:ebay/pages.dart";
 import "package:ebay/widgets.dart";
@@ -16,15 +16,15 @@ import "package:ebay/widgets.dart";
 const ebayYellow = Color.fromARGB(255, 255, 238, 0);
 
 /// The main class for the app.
-class AppDashboard extends ReusableReactiveWidget<SettingsModel> {
+class AppDashboard extends ReusableReactiveWidget<AppModel> {
   /// Creates the main app.
-  AppDashboard() : super(models.settings);
+  const AppDashboard(super.model);
 
   @override
-  Widget build(BuildContext context, SettingsModel model) => MaterialApp(
+  Widget build(BuildContext context, AppModel model) => MaterialApp.router(
         title: "Ebay Drop Shipping Tool",
-        home: const LoginPage(),
         debugShowCheckedModeBanner: false,
+        routerConfig: router,
         themeMode: ThemeMode.system,
         theme: ThemeData(
           useMaterial3: false,
@@ -43,10 +43,5 @@ class AppDashboard extends ReusableReactiveWidget<SettingsModel> {
             secondary: ebayYellow,
           ),
         ),
-        routes: {
-          Routes.login: (_) => const LoginPage(),
-          Routes.home: (_) => const HomePage(),
-          Routes.addItem: (_) => const AddItemPage(),
-        },
       );
 }

@@ -11,8 +11,8 @@ library models;
 
 import "package:ebay/data.dart";
 
+import "src/data/app.dart";
 import "src/models/model.dart";
-import "src/models/view/app.dart";
 import "src/models/data/user.dart";
 import "src/models/data/settings.dart";
 
@@ -20,11 +20,14 @@ export "src/models/model.dart";
 
 // Data models
 export "src/models/data/settings.dart";
-export "src/models/view/app.dart";
+export "src/data/app.dart";
+
 
 // Builder models
 export "src/models/data/api_builder.dart";
 export "src/models/view/builders/builder.dart";
+
+export 'src/models/view/login.dart';
 
 /// A wrapper model around all other data models used by the app.
 ///

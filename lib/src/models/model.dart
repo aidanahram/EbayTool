@@ -28,3 +28,12 @@ abstract class ViewModel extends Model {
 	/// Calls [init] right away but does not await it.
 	ViewModel() { init(); }
 }
+
+/// A model to build a value from the UI.
+abstract class BuilderModel<T> extends ViewModel {
+	/// The value being edited.
+	T build();
+
+	/// Whether the value of [build] is ready to be accessed.
+	bool get isReady;
+}

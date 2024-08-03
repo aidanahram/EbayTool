@@ -21,5 +21,5 @@ void main() async {
   //GoRouter.optionURLReflectsImperativeAPIs = true;
   await services.init();
   await models.init();
-  runApp(AppDashboard());
+  runApp(AppDashboard(models.app));
 }

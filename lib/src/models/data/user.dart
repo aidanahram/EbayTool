@@ -24,7 +24,9 @@ class UserModel extends DataModel {
 
   /// Signs the user in and downloads their profile.
   Future<void> signIn() async {
+    print("SIGNIN");
     final uid = services.auth.userID;
+    print(uid);
     if (uid == null) return;
     final profile = await services.database.getUserProfile(uid);
     if (profile == null) return;
@@ -43,8 +45,7 @@ class UserModel extends DataModel {
     userProfile = null;
     notifyListeners();
     await models.onSignOut();
-    // Navigation.of()
-    // router.go("/login");
+    router.go("/login");
   }
 
   @override

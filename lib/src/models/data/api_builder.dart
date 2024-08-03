@@ -24,6 +24,10 @@ class APIBuilder extends ValueBuilder<void> {
     final uri = Uri.parse(url.text);
     try {
       final code = uri.queryParameters['code'];
+      if(code == null){
+        print("Unable to save code");
+        return;
+      }
       switch (website) {
         case ("AliExpress"):
           services.aliScraper.generateToken(code!);

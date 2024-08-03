@@ -5,6 +5,8 @@ import "package:flutter/foundation.dart";
 
 import "service.dart";
 
+const googleID = "1095906260558-d54anrdq5j0cr18vfm4paq7trvfvi09q.apps.googleusercontent.com";
+
 /// Handles authentication for the app.
 class AuthService extends Service {
   /// The Firebase Auth plugin.
