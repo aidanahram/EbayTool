@@ -28,9 +28,10 @@ class UserModel extends DataModel {
     final uid = services.auth.userID;
     print(uid);
     if (uid == null) return;
-    final profile = await services.database.getUserProfile(uid);
-    if (profile == null) return;
-    await models.onSignIn(profile);
+    //TODO: implement database
+    //final profile = await services.database.getUserProfile(uid);
+    //if (profile == null) return;
+    //await models.onSignIn(profile);
   }
 
   @override
@@ -53,7 +54,8 @@ class UserModel extends DataModel {
 
   /// Updates the user's profile.
   Future<void> updateProfile(UserProfile profile) async {
-    await services.database.saveUserProfile(profile);
+    //TODO fix this
+    //await services.database.saveUserProfile(profile);
     userProfile = profile;
     notifyListeners();
   }

@@ -19,9 +19,6 @@ class LoginViewModel extends BuilderModel<UserProfile> {
   /// The username entered in the text field, if any.
   String? get username => usernameController.text.trim().nullIfEmpty;
 
-  /// The image uploaded, if any.
-  String? imageUrl;
-
   /// The error when saving, if any.
   String? error;
 
@@ -60,7 +57,6 @@ class LoginViewModel extends BuilderModel<UserProfile> {
   @override
   bool get isReady => userID != null
     && username != null
-    && imageUrl != null
     && !isSaving;  
 
   @override
@@ -76,9 +72,11 @@ class LoginViewModel extends BuilderModel<UserProfile> {
     error = null;
     notifyListeners();
     await services.auth.signIn();
-    await models.user.signIn();
+    //await models.user.signIn(); /// THIS CALLS DATABASE WHICH HASNT BEEN CONFIGURED YET
     final email = services.auth.user?.email;
+    print("did we get here?");
     if (email == null) return;
+    print("$email is email null?");
     if (models.user.isSignedIn) {
       print("user signed in");
       router.go(redirect);

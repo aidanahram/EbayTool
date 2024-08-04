@@ -145,7 +145,7 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => Navigator.of(context).pushNamed(Routes.addItem),
+        onPressed: () => router.go("/home/add_item"),
         tooltip: 'Add new product',
         child: const Icon(Icons.add),
       ),
