@@ -29,9 +29,11 @@ class UserModel extends DataModel {
     print(uid);
     if (uid == null) return;
     //TODO: implement database
+    print("retreiving user from database");
+    services.database.getProfile(uid);
     //final profile = await services.database.getUserProfile(uid);
-    //if (profile == null) return;
-    //await models.onSignIn(profile);
+    // if (profile == null) return;
+    // await models.onSignIn(profile);
   }
 
   @override

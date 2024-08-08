@@ -12,7 +12,12 @@
           "package_name": "com.example.ebay"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "1095906260558-d54anrdq5j0cr18vfm4paq7trvfvi09q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyCUUWieWD78wTHfm4r3qPRiE4U6JIn7zVM"
@@ -20,7 +25,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1095906260558-d54anrdq5j0cr18vfm4paq7trvfvi09q.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1095906260558-hh9t3o8v1upqjdoho8dogn629jq0st3n.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.ebay"
+              }
+            }
+          ]
         }
       }
     }

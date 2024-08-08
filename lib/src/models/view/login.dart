@@ -72,11 +72,9 @@ class LoginViewModel extends BuilderModel<UserProfile> {
     error = null;
     notifyListeners();
     await services.auth.signIn();
-    //await models.user.signIn(); /// THIS CALLS DATABASE WHICH HASNT BEEN CONFIGURED YET
+    await models.user.signIn(); 
     final email = services.auth.user?.email;
-    print("did we get here?");
     if (email == null) return;
-    print("$email is email null?");
     if (models.user.isSignedIn) {
       print("user signed in");
       router.go(redirect);

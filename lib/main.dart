@@ -9,7 +9,6 @@
 library main;
 
 import "package:ebay/widgets.dart";
-import "package:flutter/gestures.dart";
 import "package:flutter/material.dart";
 
 import "package:ebay/app.dart";

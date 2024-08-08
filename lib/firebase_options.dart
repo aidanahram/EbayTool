@@ -25,15 +25,9 @@ class DefaultFirebaseOptions {
       case TargetPlatform.iOS:
         return ios;
       case TargetPlatform.macOS:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for macos - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return macos;
       case TargetPlatform.windows:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for windows - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return windows;
       case TargetPlatform.linux:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for linux - '
@@ -70,7 +64,28 @@ class DefaultFirebaseOptions {
     messagingSenderId: '1095906260558',
     projectId: 'dropper-c7adc',
     storageBucket: 'dropper-c7adc.appspot.com',
+    iosClientId: '1095906260558-hh9t3o8v1upqjdoho8dogn629jq0st3n.apps.googleusercontent.com',
     iosBundleId: 'com.example.ebay',
+  );
+
+  static const FirebaseOptions macos = FirebaseOptions(
+    apiKey: 'AIzaSyDoL8yCXlUGvnXQ_rRKZfMaYuJG-S_OqoY',
+    appId: '1:1095906260558:ios:a3f29e84799816e3a2b51f',
+    messagingSenderId: '1095906260558',
+    projectId: 'dropper-c7adc',
+    storageBucket: 'dropper-c7adc.appspot.com',
+    iosClientId: '1095906260558-hh9t3o8v1upqjdoho8dogn629jq0st3n.apps.googleusercontent.com',
+    iosBundleId: 'com.example.ebay',
+  );
+
+  static const FirebaseOptions windows = FirebaseOptions(
+    apiKey: 'AIzaSyAdtEEfZlLB0y6l6TLZmflJWNk3EjuDzbY',
+    appId: '1:1095906260558:web:ad5e86371a8e2a09a2b51f',
+    messagingSenderId: '1095906260558',
+    projectId: 'dropper-c7adc',
+    authDomain: 'dropper-c7adc.firebaseapp.com',
+    storageBucket: 'dropper-c7adc.appspot.com',
+    measurementId: 'G-QQ3PWR9E0T',
   );
 
 }

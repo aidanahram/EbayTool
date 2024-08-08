@@ -121,20 +121,3 @@ class FilterOption extends StatelessWidget {
     ],
   );
 }
-
-  // @override
-  // Widget build(BuildContext context) {
-  //   return StreamBuilder<User?>(
-  //     stream: FirebaseAuth.instance.authStateChanges(),
-  //     builder: (context, snapshot) {
-  //       if (!snapshot.hasData) {
-  //         return SignInScreen(
-  //           providers: [
-  //             GoogleProvider(clientId: "1095906260558-d54anrdq5j0cr18vfm4paq7trvfvi09q.apps.googleusercontent.com"),  // new
-  //           ],
-  //         );
-  //       }
-  //       return const HomePage();
-  //     },
-  //   );
-  // }
