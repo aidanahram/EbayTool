@@ -117,10 +117,8 @@ class _HomePageState extends State<HomePage> {
                         ),
                         title: const Text('Settings'),
                         onTap: () async {
-                          await models.user.signOut();
-                          if(context.mounted){
-                            Navigator.of(context).pop();
-                          }
+                          // TODO: ADD A SETTINGS PAGE
+                          print("NEED TO CREATE A SETTINGS PAGE");
                         },
                       ),
                       ListTile(
