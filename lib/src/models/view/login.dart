@@ -13,11 +13,17 @@ class LoginViewModel extends BuilderModel<UserProfile> {
   /// The user ID, if the user is signed in.
   UserID? get userID => services.auth.userID;
   
-  /// The text controller for the username text field.
-  final usernameController = TextEditingController();
+  /// The text controller for the first name text field.
+  final firstNameController = TextEditingController();
+
+  /// The text controller for the last name text field.
+  final lastNameController = TextEditingController();
   
   /// The username entered in the text field, if any.
-  String? get username => usernameController.text.trim().nullIfEmpty;
+  String? get firstName => firstNameController.text.trim().nullIfEmpty;
+
+  /// The username entered in the text field, if any.
+  String? get lastName => lastNameController.text.trim().nullIfEmpty;
 
   /// The error when saving, if any.
   String? error;
@@ -39,29 +45,34 @@ class LoginViewModel extends BuilderModel<UserProfile> {
 
   @override
   Future<void> init() async {
-    usernameController.addListener(notifyListeners);
+    firstNameController.addListener(notifyListeners);
+    lastNameController.addListener(notifyListeners);
     final profile = models.user.userProfile;
     if (profile != null) {
       initialProfile = profile;
-      usernameController.text = profile.name;
+      firstNameController.text = profile.firstName;
+      lastNameController.text = profile.lastName;
       theme = profile.theme;
     }
   }
 
   @override
   void dispose() {
-    usernameController.dispose();
+    firstNameController.dispose();
+    lastNameController.dispose();
     super.dispose();
   }
 
   @override
   bool get isReady => userID != null
-    && username != null
+    && firstName != null
+    && lastName != null
     && !isSaving;  
 
   @override
   UserProfile build() => UserProfile(
-    name: username!, 
+    firstName: firstName!, 
+    lastName: lastName!, 
     id: userID!,
     theme: theme,
   );

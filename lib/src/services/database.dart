@@ -23,46 +23,13 @@ class Database extends Service {
   // );
 
   @override
-  Future<void> init() async { 
-    //print(users1);
-  }
+  Future<void> init() async { }
 
   @override
   Future<void> dispose() async { }
 
-  void getProfile(UserID userId){
-    print(userId);
-    print(firestore.collection("users"));
-    final city = <String, String>{
-      "name": "Los Angeles",
-      "state": "CA",
-      "country": "USA"
-    };
-
-    firestore.collection("users")
-      .doc("LA")
-      .set(city)
-      .onError((e, _) => print("Error writing document: $e"));
-    //print(things.getAll());
-  }
-
   /// Gets the currently signed-in user's profile.
   Future<UserProfile?> getUserProfile(UserID userId) async{
-    print(userId); 
-    print(firestore);
-    print(users);
-    final city = <String, String>{
-      "name": "Los Angeles",
-      "state": "CA",
-      "country": "USA"
-    };
-
-    firestore.collection("users")
-      .doc("LA")
-      .set(city)
-      .onError((e, _) => print("Error writing document: $e"));
-
-      print("borken yet?");
       return users.doc(userId).getData();
     }
 

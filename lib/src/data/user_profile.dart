@@ -6,28 +6,33 @@ import "types.dart";
 class UserProfile {
   /// The user's ID.
   final UserID id;
-  /// The user's name.
-  final String name;
+  /// The user's first name.
+  final String firstName;
+  /// The user's last name.
+  final String lastName;
   /// The user's theme preference.
   final ThemeMode theme;
 
   /// Creates a new User object.
   UserProfile({
     required this.id,
-    required this.name, 
+    required this.firstName, 
+    required this.lastName, 
     required this.theme,
   });
 
   /// Creates a new User object from a JSON object.
   UserProfile.fromJson(Json json) : 
-    name = json["name"],
+    firstName = json["first name"],
+    lastName = json["last name"],
     id = json["id"],
     theme = json["theme"] == null ? ThemeMode.system : ThemeMode.values.byName(json["theme"]);
 
   /// Convert this user to its JSON representation
   Json toJson() => {
     "id": id,
-    "name": name,
+    "first name": firstName,
+    "last name": lastName,
     "theme": theme.name,
   };
 }

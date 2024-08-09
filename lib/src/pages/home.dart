@@ -104,23 +104,43 @@ class _HomePageState extends State<HomePage> {
             Expanded(
                 child: Align(
                   alignment: FractionalOffset.bottomCenter,
-                  child: ListTile(
-                    hoverColor: Colors.blue,
-                    dense: true,
-                    visualDensity: const VisualDensity(vertical: -4),
-                    leading: const Icon(
-                      Icons.logout,
-                      color: Colors.black,
-                    ),
-                    title: const Text('Logout'),
-                    onTap: () async {
-                      await models.user.signOut();
-                      if(context.mounted){
-                        Navigator.of(context).pop();
-                      }
-                      
-                    },
-                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      ListTile(
+                        hoverColor: Colors.blue,
+                        dense: true,
+                        visualDensity: const VisualDensity(vertical: -4),
+                        leading: const Icon(
+                          Icons.settings,
+                          color: Colors.black,
+                        ),
+                        title: const Text('Settings'),
+                        onTap: () async {
+                          await models.user.signOut();
+                          if(context.mounted){
+                            Navigator.of(context).pop();
+                          }
+                        },
+                      ),
+                      ListTile(
+                        hoverColor: Colors.blue,
+                        dense: true,
+                        visualDensity: const VisualDensity(vertical: -4),
+                        leading: const Icon(
+                          Icons.logout,
+                          color: Colors.black,
+                        ),
+                        title: const Text('Logout'),
+                        onTap: () async {
+                          await models.user.signOut();
+                          if(context.mounted){
+                            Navigator.of(context).pop();
+                          }
+                        },
+                      ),
+                    ],
+                  )
                 ),
               )
 

@@ -24,16 +24,12 @@ class UserModel extends DataModel {
 
   /// Signs the user in and downloads their profile.
   Future<void> signIn() async {
-    print("SIGNIN");
     final uid = services.auth.userID;
-    print(uid);
     if (uid == null) return;
-    //TODO: implement database
-    print("retreiving user from database");
-    services.database.getProfile(uid);
-    //final profile = await services.database.getUserProfile(uid);
-    // if (profile == null) return;
-    // await models.onSignIn(profile);
+    print("retreiving user $uid from database");
+    final profile = await services.database.getUserProfile(uid);
+    if (profile == null) return;
+    await models.onSignIn(profile);
   }
 
   @override
@@ -56,8 +52,7 @@ class UserModel extends DataModel {
 
   /// Updates the user's profile.
   Future<void> updateProfile(UserProfile profile) async {
-    //TODO fix this
-    //await services.database.saveUserProfile(profile);
+    await services.database.saveUserProfile(profile);
     userProfile = profile;
     notifyListeners();
   }

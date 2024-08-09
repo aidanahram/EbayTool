@@ -58,11 +58,15 @@ class LoginPage extends ReactiveWidget<LoginViewModel> {
 
   List<Widget> _signUp(BuildContext context, LoginViewModel model) => [
     Text((showSignUp ?? false) ? "Edit account" : "Create an account", style: context.textTheme.headlineLarge),
-    const SizedBox(height: 16),
-    const SizedBox(height: 16),
+    const SizedBox(height: 24),
     SizedBox(
       width: 200, 
-      child: InputContainer(text: "Name", controller: model.usernameController),
+      child: InputContainer(text: "First Name", controller: model.firstNameController),
+    ),
+    const SizedBox(height: 10),
+    SizedBox(
+      width: 200, 
+      child: InputContainer(text: "Last Name", controller: model.lastNameController),
     ),
     const SizedBox(height: 16),
     SizedBox(
