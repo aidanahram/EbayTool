@@ -39,6 +39,7 @@ class EbayScraper extends Service{
         throw Error();
       }
       print(response.body);
+      print(jsonDecode(response.body).runtimeType);
       return jsonDecode(response.body);
     } on Exception catch (e) {
       print('THERE WAS AN ERROR AND LOGGING IS TOO DIFFICULT');

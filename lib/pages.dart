@@ -9,12 +9,13 @@ library pages;
 import "package:flutter/material.dart";
 import 'package:go_router/go_router.dart';
 
-import "package:ebay/data.dart";
+//import "package:ebay/data.dart";
 import "package:ebay/models.dart";
 
 import "src/pages/home.dart";
 import "src/pages/add_item.dart";
 import "src/pages/login.dart";
+import "src/pages/settings.dart";
 
 /// All the routes in the app.
 class Routes {
@@ -26,6 +27,9 @@ class Routes {
 
   /// The route for the add item page
   static const addItem = "/add_item";
+
+  /// The route for the settings page
+  static const settings = "/settings";
 
   /// All the routes on the bottom nav bar. Used in [ShellPage].
   static const branches = [home, login];
@@ -51,12 +55,13 @@ final GoRouter router = GoRouter(
     ),
     GoRoute(
       path: "/login",
+      name: "Login",
       builder: (context, state) => LoginPage(redirect: state.uri.queryParameters["redirect"]),
     ),
     ShellRoute(
       pageBuilder: (context, state, child) => NoTransitionPage(
         child: Title(
-          title: state.topRoute?.name ?? "ShopBing",
+          title: state.topRoute?.name ?? "Dropper",
           color: Colors.green,
           child: child,
         ),
@@ -68,31 +73,38 @@ final GoRouter router = GoRouter(
           pageBuilder: (context, state) => const NoTransitionPage(child: HomePage()),
           routes: [
             GoRoute(
-              path: "Add_item",
+              path: "add_item",
               name: "Add an item",
               builder: (context, state) => const AddItemPage(),
             ),
+            GoRoute(
+              path: "settings",
+              name: "Settings",
+              builder: (context, state) => SettingsPage(),
+            ),
           ],
         ),
-        // GoRoute(
-        //   path: Routes.profile,
-        //   name: "My profile",
-        //   pageBuilder: (context, state) => const NoTransitionPage(
-        //     child: UserProfilePage(),
-        //   ),
-        //   routes: [
-        //     GoRoute(
-        //       path: "edit",
-        //       name: "Edit profile",
-        //       builder: (context, state) => LoginPage(
-        //         redirect: state.extra as String?,
-        //         showSignUp: true,
-        //       ),
-        //     ),
-        //   ],
-        // ),
-      ],
+      ]
     ),
+    //     // GoRoute(
+    //     //   path: Routes.profile,
+    //     //   name: "My profile",
+    //     //   pageBuilder: (context, state) => const NoTransitionPage(
+    //     //     child: UserProfilePage(),
+    //     //   ),
+    //     //   routes: [
+    //     //     GoRoute(
+    //     //       path: "edit",
+    //     //       name: "Edit profile",
+    //     //       builder: (context, state) => LoginPage(
+    //     //         redirect: state.extra as String?,
+    //     //         showSignUp: true,
+    //     //       ),
+    //     //     ),
+    //     //   ],
+    //     // ),
+    //   ],
+    // ),
   ],
 );
 

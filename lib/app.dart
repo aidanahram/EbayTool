@@ -7,7 +7,6 @@
 library app;
 
 import "package:flutter/material.dart";
-import "package:flutter_web_plugins/url_strategy.dart";
 import "package:ebay/models.dart";
 import "package:ebay/pages.dart";
 import "package:ebay/widgets.dart";

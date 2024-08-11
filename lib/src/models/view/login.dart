@@ -98,7 +98,7 @@ class LoginViewModel extends BuilderModel<UserProfile> {
     notifyListeners();
   }
 
-   /// Creates a [UserProfile] using the provided image and username.
+   /// Creates a [UserProfile] using the provided information.
   Future<void> signUp() async {
     final profile = build();
     isSaving = true;

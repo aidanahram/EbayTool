@@ -8,7 +8,6 @@
 /// be as simple as possible.
 library main;
 
-import "package:ebay/widgets.dart";
 import "package:flutter/material.dart";
 
 import "package:ebay/app.dart";

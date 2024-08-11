@@ -116,9 +116,8 @@ class _HomePageState extends State<HomePage> {
                           color: Colors.black,
                         ),
                         title: const Text('Settings'),
-                        onTap: () async {
-                          // TODO: ADD A SETTINGS PAGE
-                          print("NEED TO CREATE A SETTINGS PAGE");
+                        onTap: () {
+                          router.go("/home/settings");
                         },
                       ),
                       ListTile(
