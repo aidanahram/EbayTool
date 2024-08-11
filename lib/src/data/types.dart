@@ -10,15 +10,6 @@ extension type const ProductID(String id) { }
 /// A unique ID for every Category
 extension type const CategoryID(String id) { }
 
-/// A unique ID for every seller.
-extension type const SellerID(String id) { }
-
-/// A unique ID for every review.
-extension type const ReviewID(String id) { }
-
-/// A unique ID for every conversation.
-extension type const ConversationID(String id) implements String { }
-
 /// Helpful methods on strings.
 extension StringUtils on String {
   /// Returns this string, or null if it's empty.

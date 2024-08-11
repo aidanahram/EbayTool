@@ -10,9 +10,6 @@ class Product {
   /// This product's unique Product ID.
   final ProductID id;
 
-  /// The seller's unique Seller ID.
-  final SellerID sellerID;
-
   /// The user ID who owns this product and its seller profile.
   final UserID userID;
 
@@ -55,7 +52,6 @@ class Product {
   /// A constructor to create a new product.
   const Product({
     required this.id,
-    required this.sellerID,
     required this.userID,
     required this.title,
     required this.description,
@@ -72,7 +68,6 @@ class Product {
   /// Creates a new Product object from a JSON object.
   Product.fromJson(Json json)
       : id = json["id"],
-        sellerID = json["sellerID"],
         userID = json["userID"],
         title = json["title"],
         description = json["description"],
@@ -88,7 +83,6 @@ class Product {
   /// Convert this Product to its JSON representation
   Json toJson() => {
         "id": id,
-        "sellerID": sellerID,
         "userID": userID,
         "title": title,
         "_searchKeywords": [
