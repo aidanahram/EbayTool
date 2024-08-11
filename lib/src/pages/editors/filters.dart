@@ -1,7 +1,5 @@
 import "package:flutter/material.dart";
 
-import "package:ebay/data.dart";
-import "package:ebay/models.dart";
 import "package:ebay/widgets.dart";
 
 

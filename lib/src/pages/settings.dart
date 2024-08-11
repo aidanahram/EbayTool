@@ -3,11 +3,12 @@ import 'package:flutter/material.dart';
 import "package:ebay/src/pages/editors/filters.dart";
 import "package:ebay/models.dart";
 import "package:ebay/pages.dart";
-import "package:ebay/services.dart";
 import "package:ebay/widgets.dart";
 
 /// The page to create or edit a seller profile.
 class SettingsPage extends ReactiveWidget<LoginViewModel> {
+  const SettingsPage({super.key});
+
   @override
   LoginViewModel createModel() => LoginViewModel(
     redirect: Routes.home,
@@ -48,9 +49,22 @@ class SettingsPage extends ReactiveWidget<LoginViewModel> {
             ),
           ),
           const SizedBox(height: 16),
-          FilledButton(
-            onPressed: model.isReady ? model.signUp : null, 
-            child: const Text("Save"),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              FilledButton(
+                style: const ButtonStyle(
+                  backgroundColor: MaterialStatePropertyAll<Color>(Colors.grey),
+                ),
+                onPressed: () => Navigator.of(context).pop(),
+                child: const Text("Cancel"),
+              ),
+              const SizedBox(width: 10,),
+              FilledButton(
+                onPressed: model.isReady ? model.signUp : null, 
+                child: const Text("Save"),
+              ),
+            ],
           ),
         ],
       ),

@@ -2,7 +2,6 @@ import "package:ebay/data.dart";
 import "package:ebay/models.dart";
 import "package:ebay/pages.dart";
 import "package:ebay/services.dart";
-import "package:firebase_ui_auth/firebase_ui_auth.dart";
 import "package:flutter/material.dart";
 
 /// A view model to sign the user in, show a sign-up form if needed, then redirect to another route.
@@ -116,5 +115,4 @@ class LoginViewModel extends BuilderModel<UserProfile> {
     models.app.setTheme(input);
     notifyListeners();
   }
-
 }
