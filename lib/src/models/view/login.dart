@@ -73,12 +73,13 @@ class LoginViewModel extends BuilderModel<UserProfile> {
     firstName: firstName!, 
     lastName: lastName!, 
     id: userID!,
+    ebayAPI: null,
+    aliAPI: null,
     theme: theme,
   );
 
   /// Once the user is signed in, checks their profile and sets [showSignUp], if needed.
   Future<void> onAuth() async {
-    print("JUST AUTH");
     error = null;
     notifyListeners();
     await services.auth.signIn();
@@ -86,7 +87,6 @@ class LoginViewModel extends BuilderModel<UserProfile> {
     final email = services.auth.user?.email;
     if (email == null) return;
     if (models.user.isSignedIn) {
-      print("user signed in");
       router.go(redirect);
       return;
     } else {

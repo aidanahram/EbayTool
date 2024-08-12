@@ -18,7 +18,7 @@ class AliScraper extends Service{
   @override
   Future<void> dispose() async {}
 
-  Future<bool> generateToken(String code) async {
+  Future<Map<String, dynamic>?> generateToken(String code) async {
     const createTokenApi = '/auth/token/create';
     final params = {'code': code, 'method': createTokenApi};
 
@@ -32,14 +32,13 @@ class AliScraper extends Service{
         print(response.body);
         throw Error();
       }
-      final json = jsonDecode(response.body);
-      print(json);
+      print(response.body);
+      return jsonDecode(response.body);
     } on Exception catch (e) {
       print('THERE WAS AN ERROR AND LOGGING IS TOO DIFFICULT');
       print(e);
-      return false;
+      return null;
     }
-    return true;
   }
 
   Future<bool> refreshToken(String refreshToken) async {

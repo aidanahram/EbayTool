@@ -28,11 +28,18 @@ class APIBuilder extends ValueBuilder<void> {
         print("Unable to save code");
         return;
       }
+      final profile = models.user.userProfile;
+      if(profile == null){
+        print("user not logged in");
+        return;
+      }
       switch (website) {
         case ("AliExpress"):
-          services.aliScraper.generateToken(code!);
+          profile.aliAPI = await services.aliScraper.generateToken(code);
+          models.user.updateProfile(profile);
         case ("Ebay"):
-          services.ebayScraper.generateToken(code!);
+          profile.ebayAPI = await services.ebayScraper.generateToken(code);
+          models.user.updateProfile(profile);
       }
     } on Exception catch (e) {
       print("Unable to save code");

@@ -24,7 +24,7 @@ class APIEditor extends ReactiveWidget<APIBuilder> {
               child: TextField(
                 controller: model.url,
                 onChanged: model.update,
-                decoration: const InputDecoration(hintText: "Code From Url"),
+                decoration: const InputDecoration(hintText: "Url"),
               ),
             ),
           ],

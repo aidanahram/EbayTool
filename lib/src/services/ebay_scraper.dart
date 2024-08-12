@@ -18,7 +18,7 @@ class EbayScraper extends Service{
   @override
   Future<void> dispose() async {}
 
-  Future<dynamic> generateToken(String code) async {
+  Future<Map<String, dynamic>?> generateToken(String code) async {
     final uri = Uri.http(api, '/identity/v1/oauth2/token');
     final Map<String, String> headers = {
       'Content-Type': 'application/x-www-form-urlencoded',
@@ -39,11 +39,11 @@ class EbayScraper extends Service{
         throw Error();
       }
       print(response.body);
-      print(jsonDecode(response.body).runtimeType);
       return jsonDecode(response.body);
     } on Exception catch (e) {
       print('THERE WAS AN ERROR AND LOGGING IS TOO DIFFICULT');
       print(e);
+      return null;
     }
   }
 
