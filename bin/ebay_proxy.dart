@@ -31,14 +31,23 @@ class EbayServer {
     return (serverRequest) async {
       // http://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html#sec9.8
       final requestUrl = uri.resolve(serverRequest.url.toString());
-      print(serverRequest.method);
+      if(serverRequest.method == "OPTIONS"){
+        print(serverRequest.headers);
+        final clientResponse = Response.ok("trust me bro", headers: {
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Credentials": "true",
+          "Access-Control-Allow-Headers": "Origin,Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,locale",
+          "Access-Control-Allow-Methods": "POST, OPTIONS",
+        });
+        return clientResponse;
+      }
       try {
         if (serverRequest.headers['authorization'] == 'true') {
           print("need to add auth");
           serverRequest =
               serverRequest.change(headers: {'authorization': 'Basic $auth'});
         }
-        print("Sending a post request to:\n$requestUrl");
+        print("Sending a ${serverRequest.method} request to:\n$requestUrl");
         // final s = await serverRequest.readAsString();
         // print(s);
 
@@ -76,9 +85,8 @@ class EbayServer {
         addHeader(clientResponse.headers, "Access-Control-Allow-Origin", "*");
         addHeader(
             clientResponse.headers, "Access-Control-Allow-Credentials", "true");
-        //addHeader(clientResponse.headers, "Access-Control-Allow-Headers",
-        //    "Origin,Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,locale");
-        addHeader(clientResponse.headers, "Access-Control-Allow-Headers", "*");
+        addHeader(clientResponse.headers, "Access-Control-Allow-Headers",
+            "Origin,Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,locale");
         addHeader(clientResponse.headers, "Access-Control-Allow-Methods",
             "POST, OPTIONS");
             
