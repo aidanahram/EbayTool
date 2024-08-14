@@ -2,10 +2,7 @@ import "types.dart";
 
 /// A product being listed
 ///
-/// A product can have multiple physical copies available for sale. When it is sold, it is not
-/// removed from the marketplace. Instead, the [quantity] is decremented (if it reaches zero, it is
-/// marked as "unavailable"). This way, customers can see past products and request the seller make
-/// more. If the seller wants to be done with a product, they can de-list it by setting [delisted].
+/// It attaches a ebay listing and aliexpress item
 class Product {
   /// This product's unique Product ID.
   final ProductID id;

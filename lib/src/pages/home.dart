@@ -39,7 +39,7 @@ class _HomePageState extends State<HomePage> {
         ),
         actions: [IconButton(
           icon: const Icon(Icons.refresh),
-          onPressed: services.ebayScraper.getProducts,
+          onPressed: () => models.user.isSignedIn ? services.ebayScraper.getProducts(models.user.userProfile!) : print("user is not signed in")         
         ),]
       ),
       drawer: Drawer(

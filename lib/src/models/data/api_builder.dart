@@ -36,10 +36,15 @@ class APIBuilder extends ValueBuilder<void> {
       switch (website) {
         case ("AliExpress"):
           profile.aliAPI = await services.aliScraper.generateToken(code);
-          models.user.updateProfile(profile);
+          if(profile.aliAPI != null){
+            models.user.updateProfile(profile);
+          }  
         case ("Ebay"):
           profile.ebayAPI = await services.ebayScraper.generateToken(code);
-          models.user.updateProfile(profile);
+          if(profile.ebayAPI != null){
+            profile.ebayAPI!['refresh_token_valid_time'] = DateTime.now().millisecondsSinceEpoch + profile.ebayAPI!['refresh_token_expires_in'];
+            models.user.updateProfile(profile);
+          }
       }
     } on Exception catch (e) {
       print("Unable to save code");

@@ -61,7 +61,7 @@ class SettingsPage extends ReactiveWidget<LoginViewModel> {
               ),
               const SizedBox(width: 10,),
               FilledButton(
-                onPressed: model.isReady ? model.signUp : null, 
+                onPressed: model.isReady ? model.updateUserProfile : null, 
                 child: const Text("Save"),
               ),
             ],

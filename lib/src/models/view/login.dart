@@ -97,10 +97,24 @@ class LoginViewModel extends BuilderModel<UserProfile> {
     notifyListeners();
   }
 
-   /// Creates a [UserProfile] using the provided information.
+  /// Creates a [UserProfile] using the provided information.
   Future<void> signUp() async {
     final profile = build();
     isSaving = true;
+    notifyListeners();
+    await models.user.updateProfile(profile);
+    isSaving = false;
+    notifyListeners();
+    router.go(redirect);
+  }
+
+  Future<void> updateUserProfile() async {
+    final profile = models.user.userProfile;
+    if(profile == null) return;
+    isSaving = true;
+    profile.firstName = firstName!; 
+    profile.lastName = lastName!;
+    profile.theme = theme;
     notifyListeners();
     await models.user.updateProfile(profile);
     isSaving = false;

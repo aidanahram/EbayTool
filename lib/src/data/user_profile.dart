@@ -7,11 +7,11 @@ class UserProfile {
   /// The user's ID.
   final UserID id;
   /// The user's first name.
-  final String firstName;
+  String firstName;
   /// The user's last name.
-  final String lastName;
+  String lastName;
   /// The user's theme preference.
-  final ThemeMode theme;
+  ThemeMode theme;
   /// The API details from ebay
   Json? ebayAPI;
   /// The API details from aliexpress
@@ -26,6 +26,10 @@ class UserProfile {
     required this.aliAPI,
     required this.theme,
   });
+
+  bool get ebayTokenValid => ebayAPI != null && ebayAPI!['refresh_token_valid_time'] > DateTime.now().millisecondsSinceEpoch; 
+
+  bool get aliTokenValid => aliAPI != null && aliAPI!['refresh_token_valid_time'] > DateTime.now().millisecondsSinceEpoch; 
 
   /// Creates a new User object from a JSON object.
   UserProfile.fromJson(Json json) : 
