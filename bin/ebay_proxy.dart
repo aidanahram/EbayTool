@@ -47,6 +47,7 @@ class EbayServer {
           serverRequest =
               serverRequest.change(headers: {'authorization': 'Basic $auth'});
         }
+        print(serverRequest.headers);
         print("Sending a ${serverRequest.method} request to:\n$requestUrl");
         // final s = await serverRequest.readAsString();
         // print(s);

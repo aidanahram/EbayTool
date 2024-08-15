@@ -27,7 +27,9 @@ class UserProfile {
     required this.theme,
   });
 
-  bool get ebayTokenValid => ebayAPI != null && ebayAPI!['refresh_token_valid_time'] > DateTime.now().millisecondsSinceEpoch; 
+  bool get ebayRefreshTokenValid => ebayAPI != null && ebayAPI!['refresh_token_valid_time'] > DateTime.now().millisecondsSinceEpoch; 
+
+  bool get ebayTokenValid => ebayAPI != null && ebayAPI!['token_valid_time'] > DateTime.now().millisecondsSinceEpoch; 
 
   bool get aliTokenValid => aliAPI != null && aliAPI!['refresh_token_valid_time'] > DateTime.now().millisecondsSinceEpoch; 
 

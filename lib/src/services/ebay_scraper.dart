@@ -1,12 +1,13 @@
-import 'dart:convert';
+import "dart:convert";
 
-import 'package:ebay/data.dart';
-import 'package:ebay/src/services/service.dart';
-import 'package:http/http.dart' as http;
+import "package:ebay/data.dart";
+import "package:ebay/src/services/service.dart";
+import "package:http/http.dart" as http;
+import "package:ebay/models.dart";
 
 
 class EbayScraper extends Service{
-  final api = 'localhost:8081';
+  final api = "localhost:8081";
 
   EbayScraper();
 
@@ -19,20 +20,20 @@ class EbayScraper extends Service{
   Future<void> dispose() async {}
 
   Future<Map<String, dynamic>?> generateToken(String code) async {
-    final uri = Uri.http(api, '/identity/v1/oauth2/token');
+    final uri = Uri.http(api, "/identity/v1/oauth2/token");
     final Map<String, String> headers = {
-      'Content-Type': 'application/x-www-form-urlencoded',
-      'Authorization': 'true',
+      "Content-Type": "application/x-www-form-urlencoded",
+      "Authorization": "true",
     };
     final Map<String, String> payload = {
-      'grant_type': 'authorization_code',
-      'code': code,
-      'redirect_uri': 'Aidan_Ahram-AidanAhr-first--jssslhkm',
+      "grant_type": "authorization_code",
+      "code": code,
+      "redirect_uri": "Aidan_Ahram-AidanAhr-first--jssslhkm",
     };
     try {
       final response = await http.post(uri, headers: headers, body: payload);
       if (response.statusCode >= 400) {
-        print('Recieved error code from server');
+        print("Recieved error code from server");
         print(response.headers);
         print(response.statusCode);
         print(response.body);
@@ -41,7 +42,40 @@ class EbayScraper extends Service{
       print(response.body);
       return jsonDecode(response.body);
     } on Exception catch (e) {
-      print('THERE WAS AN ERROR AND LOGGING IS TOO DIFFICULT');
+      print("THERE WAS AN ERROR AND LOGGING IS TOO DIFFICULT");
+      print(e);
+      return null;
+    }
+  }
+
+  Future<Map<String, dynamic>?> refreshToken(UserProfile user) async{
+    if(!user.ebayTokenValid){
+      print("Ebay token not valid");
+      return null;
+    }
+    final uri = Uri.http(api, "/identity/v1/oauth2/token");
+    final Map<String, String> headers = {
+      "Content-Type": "application/x-www-form-urlencoded",
+      "Authorization": "true",
+    };
+    final Map<String, String> payload = {
+      "grant_type": "refresh_token",
+      "refresh_token": user.ebayAPI!["refresh_token"],
+      "redirect_uri": "Aidan_Ahram-AidanAhr-first--jssslhkm",
+    };
+    try {
+      final response = await http.post(uri, headers: headers, body: payload);
+      if (response.statusCode >= 400) {
+        print("Recieved error code from server");
+        print(response.headers);
+        print(response.statusCode);
+        print(response.body);
+        throw Error();
+      }
+      print(response.body);
+      return jsonDecode(response.body);
+    } on Exception catch (e) {
+      print("THERE WAS AN ERROR AND LOGGING IS TOO DIFFICULT");
       print(e);
       return null;
     }
@@ -49,12 +83,26 @@ class EbayScraper extends Service{
 
   Future<void> getProducts(UserProfile user) async {
     if(!user.ebayTokenValid){
-      print("Ebay token not valid");
-      return;
+      if(!user.ebayRefreshTokenValid){
+        print("User needs to reauthorize Ebay API");
+        return;
+      }
+      models.user.refreshToken();
+      user = models.user.userProfile!;
     }
-    final uri = Uri.http(api, '/sell/feed/v1/inventory_task');
-    print(uri);
-    print(user.ebayAPI!["access_token"]);
+    //   if(!user.ebayRefreshTokenValid){
+    //     print("User needs to reauthorize Ebay API");
+    //     return;
+    //   }
+    //   final profile = models.user.userProfile;
+    //   profile!.ebayAPI = await refreshToken(user);
+    //   if(profile.ebayAPI != null){
+    //     profile.ebayAPI!['refresh_token_valid_time'] = DateTime.now().millisecondsSinceEpoch + profile.ebayAPI!['refresh_token_expires_in'];
+    //     profile.ebayAPI!['token_valid_time'] = DateTime.now().millisecondsSinceEpoch + profile.ebayAPI!['expires_in'];
+    //     models.user.updateProfile(profile);
+    //   }
+    // }
+    final uri = Uri.http(api, "/sell/feed/v1/inventory_task");;
     final Map<String, String> headers = {
       "Authorization": "Bearer ${user.ebayAPI!["access_token"]}",
       "Accept": "application/json",
@@ -62,14 +110,13 @@ class EbayScraper extends Service{
       //"X-EBAY-C-MARKETPLACE-ID": "EBAY_US",
     };
     final payload = jsonEncode({
-      'schemaVersion': '1.0',
-      'feedType': 'LMS_ACTIVE_INVENTORY_REPORT',
+      "schemaVersion": "1.0",
+      "feedType": "LMS_ACTIVE_INVENTORY_REPORT",
     });
     try {
       final response = await http.post(uri, headers: headers, body: payload);
-      //final response = await http.post(uri, headers: headers, body: payload);
       if (response.statusCode >= 400) {
-        print('Recieved error code from server');
+        print("Recieved error code from server");
         print(response.headers);
         print(response.statusCode);
         print(response.body);
@@ -77,7 +124,7 @@ class EbayScraper extends Service{
       }
       print(response.body);
     } on Exception catch (e) {
-      print('THERE WAS AN ERROR AND LOGGING IS TOO DIFFICULT');
+      print("THERE WAS AN ERROR AND LOGGING IS TOO DIFFICULT");
       print(e);
     }
   }
@@ -137,15 +184,15 @@ void main() async {
       "X-EBAY-C-MARKETPLACE-ID": "EBAY_US",
     };
     final payload = jsonEncode({
-      'schemaVersion': '1.0',
-      'feedType': 'LMS_ACTIVE_INVENTORY_REPORT',
+      "schemaVersion": "1.0",
+      "feedType": "LMS_ACTIVE_INVENTORY_REPORT",
     });
     try {
-      final response = await http.post(Uri.parse('https://api.ebay.com/sell/feed/v1/inventory_task'), headers: headers, body: payload);
+      final response = await http.post(Uri.parse("https://api.ebay.com/sell/feed/v1/inventory_task"), headers: headers, body: payload);
       print(response.statusCode);
       //final response = await http.post(uri, headers: headers, body: payload);
       if (response.statusCode >= 400) {
-        print('Recieved error code from server');
+        print("Recieved error code from server");
         print(response.headers);
         print(response.statusCode);
         print(response.body);
@@ -153,7 +200,7 @@ void main() async {
       }
       print(response.body);
     } on Exception catch (e) {
-      print('THERE WAS AN ERROR AND LOGGING IS TOO DIFFICULT');
+      print("THERE WAS AN ERROR AND LOGGING IS TOO DIFFICULT");
       print(e);
     }
 }
