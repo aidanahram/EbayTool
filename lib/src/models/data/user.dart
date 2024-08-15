@@ -36,7 +36,6 @@ class UserModel extends DataModel {
   @override
   Future<void> onSignIn(UserProfile profile) async {
     userProfile = profile;
-    refreshToken();
     notifyListeners();
   }
 
@@ -74,7 +73,7 @@ class UserModel extends DataModel {
     saveTokenResponse();
   }
 
-  void saveTokenResponse() {
+  void saveTokenResponse() async {
     if(userProfile == null){
       print("Can't save api response: User is not logged in");
       return;
@@ -83,7 +82,7 @@ class UserModel extends DataModel {
       userProfile!.ebayAPI!['refresh_token_valid_time'] = DateTime.now().millisecondsSinceEpoch + userProfile!.ebayAPI!['refresh_token_expires_in'];
       /// userProfile!.ebayAPI!['expires_in'] is in seconds -- multiply by 1000 to get milliseconds
       userProfile!.ebayAPI!['token_valid_time'] = DateTime.now().millisecondsSinceEpoch + userProfile!.ebayAPI!['expires_in'] * 1000;
-      models.user.updateProfile(userProfile!);
+      await models.user.updateProfile(userProfile!);
     }
   }
 }

@@ -2,6 +2,7 @@
 
 import 'package:shelf/shelf.dart';
 import 'package:shelf/shelf_io.dart' as shelf_io;
+import 'package:shelf_hotreload/shelf_hotreload.dart';
 import 'package:http/http.dart' as http;
 import 'dart:io';
 import 'dart:convert';
@@ -132,6 +133,9 @@ class AliServer {
 }
 
 void main() async {
+  withHotreload(() => createServer());
+}
+Future<HttpServer> createServer() async {
   final secrets = await File('C:\\Scripts\\Flutter\\Ebay\\ebay\\secrets.env')
       .readAsString();
   final data = await jsonDecode(secrets);
@@ -144,7 +148,7 @@ void main() async {
       .addMiddleware(logRequests())
       .addHandler(serverFunctions.myHandler("https://api-sg.aliexpress.com"));
 
-  // params['sign'] = sign(appSecret, getProductApi, params);
-  var server = await shelf_io.serve(handler, 'localhost', 8080);
-  print('Proxying at http://${server.address.host}:${server.port}');
+
+  print('Proxying at http://localhost:8080');
+  return await shelf_io.serve(handler, 'localhost', 8080);
 }

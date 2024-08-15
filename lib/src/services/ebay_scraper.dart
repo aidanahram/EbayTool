@@ -39,7 +39,7 @@ class EbayScraper extends Service{
         print(response.body);
         throw Error();
       }
-      print(response.body);
+      print("Generated token");
       return jsonDecode(response.body);
     } on Exception catch (e) {
       print("THERE WAS AN ERROR AND LOGGING IS TOO DIFFICULT");
@@ -72,7 +72,7 @@ class EbayScraper extends Service{
         print(response.body);
         throw Error();
       }
-      print(response.body);
+      print("Refreshed token");
       return jsonDecode(response.body);
     } on Exception catch (e) {
       print("THERE WAS AN ERROR AND LOGGING IS TOO DIFFICULT");
@@ -87,27 +87,15 @@ class EbayScraper extends Service{
         print("User needs to reauthorize Ebay API");
         return;
       }
-      models.user.refreshToken();
+      await models.user.refreshToken();
       user = models.user.userProfile!;
     }
-    //   if(!user.ebayRefreshTokenValid){
-    //     print("User needs to reauthorize Ebay API");
-    //     return;
-    //   }
-    //   final profile = models.user.userProfile;
-    //   profile!.ebayAPI = await refreshToken(user);
-    //   if(profile.ebayAPI != null){
-    //     profile.ebayAPI!['refresh_token_valid_time'] = DateTime.now().millisecondsSinceEpoch + profile.ebayAPI!['refresh_token_expires_in'];
-    //     profile.ebayAPI!['token_valid_time'] = DateTime.now().millisecondsSinceEpoch + profile.ebayAPI!['expires_in'];
-    //     models.user.updateProfile(profile);
-    //   }
-    // }
     final uri = Uri.http(api, "/sell/feed/v1/inventory_task");;
     final Map<String, String> headers = {
       "Authorization": "Bearer ${user.ebayAPI!["access_token"]}",
       "Accept": "application/json",
       "Content-Type": "application/json",  
-      //"X-EBAY-C-MARKETPLACE-ID": "EBAY_US",
+      "X-EBAY-C-MARKETPLACE-ID": "EBAY_US",
     };
     final payload = jsonEncode({
       "schemaVersion": "1.0",
@@ -120,27 +108,16 @@ class EbayScraper extends Service{
         print(response.headers);
         print(response.statusCode);
         print(response.body);
-        throw Error();
+        //throw Error();
       }
-      print(response.body);
+      print(response.headers);
+      //print(response.headers['Location']);
+      //print(response.body);
     } on Exception catch (e) {
       print("THERE WAS AN ERROR AND LOGGING IS TOO DIFFICULT");
       print(e);
     }
   }
-
-  // Future<String> createTask() async {
-  //   final url = "$baseEndpoint/inventory_task";
-  //   final payload = {
-  //       "schemaVersion": "1.0",
-  //       "feedType": "LMS_ACTIVE_INVENTORY_REPORT",
-  //       "filterCriteria": {
-  //           "orderStatus": "ACTIVE"
-  //       }
-  //   };
-  //   final response = await http.post(url, headers: headers, json: payload);
-  //   return Future.value(response.headers["location"]);
-  // }
 
   // Future<String> checkStatus(String url) async {
   //   for(int i = 0; i < 3; i++){

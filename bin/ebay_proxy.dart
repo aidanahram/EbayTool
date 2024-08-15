@@ -2,6 +2,7 @@
 
 import 'package:shelf/shelf.dart';
 import 'package:shelf/shelf_io.dart' as shelf_io;
+import 'package:shelf_hotreload/shelf_hotreload.dart';
 import 'package:http/http.dart' as http;
 import 'dart:io';
 import 'dart:convert';
@@ -32,7 +33,6 @@ class EbayServer {
       // http://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html#sec9.8
       final requestUrl = uri.resolve(serverRequest.url.toString());
       if(serverRequest.method == "OPTIONS"){
-        print(serverRequest.headers);
         final clientResponse = Response.ok("trust me bro", headers: {
           "Access-Control-Allow-Origin": "*",
           "Access-Control-Allow-Credentials": "true",
@@ -47,7 +47,6 @@ class EbayServer {
           serverRequest =
               serverRequest.change(headers: {'authorization': 'Basic $auth'});
         }
-        print(serverRequest.headers);
         print("Sending a ${serverRequest.method} request to:\n$requestUrl");
         // final s = await serverRequest.readAsString();
         // print(s);
@@ -87,9 +86,8 @@ class EbayServer {
         addHeader(
             clientResponse.headers, "Access-Control-Allow-Credentials", "true");
         addHeader(clientResponse.headers, "Access-Control-Allow-Headers",
-            "Origin,Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,locale");
-        addHeader(clientResponse.headers, "Access-Control-Allow-Methods",
-            "POST, OPTIONS");
+            "Origin,Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,locale, X-EBAY-C-MARKETPLACE-ID, Location");
+        addHeader(clientResponse.headers, "Allow-Control-Allow-Methods", "GET, HEAD, POST, PUT, DELETE, TRACE, OPTIONS",);
             
         return Response(clientResponse.statusCode,
             body: clientResponse.stream, headers: clientResponse.headers);
@@ -103,6 +101,10 @@ class EbayServer {
 }
 
 void main() async {
+  withHotreload(() => createServer());
+}
+
+Future<HttpServer> createServer() async{
   final secrets = await File('C:\\Scripts\\Flutter\\Ebay\\ebay\\secrets.env')
       .readAsString();
   final data = await jsonDecode(secrets);
@@ -116,6 +118,7 @@ void main() async {
       .addHandler(serverFunctions.myHandler("https://api.ebay.com"));
 
   // params['sign'] = sign(appSecret, getProductApi, params);
-  var server = await shelf_io.serve(handler, 'localhost', 8081);
-  print('Proxying at http://${server.address.host}:${server.port}');
+  print('Proxying at http://localhost:8081');
+  return await shelf_io.serve(handler, 'localhost', 8081);
+  
 }
