@@ -64,6 +64,7 @@ class UserModel extends DataModel {
       return;
     }
     userProfile!.ebayAPI = await services.ebayScraper.refreshToken(userProfile!);
+    if(userProfile!.ebayAPI == null) return;
     saveTokenResponse();
     await services.database.saveUserProfile(userProfile!);
   }

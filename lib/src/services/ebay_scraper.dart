@@ -7,19 +7,25 @@ import "package:ebay/models.dart";
 
 
 class EbayScraper extends Service{
+  /// Url of the backend proxy server
   final api = "localhost:8081";
 
-  final client = http.Client();
+  /// [http.Client] to send requests from
+  late final client;
 
   EbayScraper();
 
   /// Function to initialize the scraper
   @override
-  Future<void> init() async {}
+  Future<void> init() async {
+    client = http.Client();
+  }
 
   /// Function to dispose of the scraper
   @override
-  Future<void> dispose() async {}
+  Future<void> dispose() async {
+    client.dispose();
+  }
 
   Future<Map<String, dynamic>?> generateToken(String code) async {
     final uri = Uri.http(api, "/identity/v1/oauth2/token");
@@ -116,12 +122,14 @@ class EbayScraper extends Service{
         print("Response missing location");
         throw Error();
       }
-      final location = response.headers['location'];
-      if(!await checkStatus(location!.split("/").last, {"Authorization": "Bearer ${user.ebayAPI!["access_token"]}",})){
+      final taskId = response.headers['location']!.split("/").last;
+      if(!await checkStatus(Uri.http(api, "/sell/feed/v1/inventory_task/$taskId"), {"Authorization": "Bearer ${user.ebayAPI!["access_token"]}",})){
         print("Task not ready after 10 seconds");
         throw Error();
       }
       print("task is ready");
+      if(!await downloadResultFile(Uri.http(api, "/sell/feed/v1/inventory_task/$taskId/download_result_file"), {"Authorization": "Bearer ${user.ebayAPI!["access_token"]}",})){
+      }
 
     } on Exception catch (e) {
       print("THERE WAS AN ERROR AND LOGGING IS TOO DIFFICULT");
@@ -129,8 +137,7 @@ class EbayScraper extends Service{
     }
   }
 
-  Future<bool> checkStatus(String taskId, Map<String, String> headers) async {
-    final uri = Uri.http(api, "/sell/feed/v1/inventory_task/$taskId");
+  Future<bool> checkStatus(Uri uri, Map<String, String> headers) async {
     for(int i = 0; i < 3; i++){
       final response = await client.get(uri, headers: headers);
       final json = jsonDecode(response.body);
@@ -140,6 +147,10 @@ class EbayScraper extends Service{
       await Future.delayed(const Duration(seconds: 3));
     }
     return false;
+  }
+
+  Future<bool> downloadResultFile(Uri uri, Map<String, String> headers) async {
+    return true;
   }
 
   // void downloadFile(String url) async {
