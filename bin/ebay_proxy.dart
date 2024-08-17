@@ -36,7 +36,7 @@ class EbayServer {
         final clientResponse = Response.ok("trust me bro", headers: {
           "Access-Control-Allow-Origin": "*",
           "Access-Control-Allow-Credentials": "true",
-          "Access-Control-Allow-Headers": "Origin,Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,locale",
+          "Access-Control-Allow-Headers": "Origin,Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token, X-EBAY-C-MARKETPLACE-ID, location, locale",
           "Access-Control-Allow-Methods": "POST, OPTIONS",
         });
         return clientResponse;
@@ -86,9 +86,9 @@ class EbayServer {
         addHeader(
             clientResponse.headers, "Access-Control-Allow-Credentials", "true");
         addHeader(clientResponse.headers, "Access-Control-Allow-Headers",
-            "Origin,Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,locale, X-EBAY-C-MARKETPLACE-ID, Location");
+            "Origin,Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,locale, X-EBAY-C-MARKETPLACE-ID, location");
         addHeader(clientResponse.headers, "Allow-Control-Allow-Methods", "GET, HEAD, POST, PUT, DELETE, TRACE, OPTIONS",);
-            
+        addHeader(clientResponse.headers, "Access-Control-Expose-Headers", "*");
         return Response(clientResponse.statusCode,
             body: clientResponse.stream, headers: clientResponse.headers);
       } on Exception catch (e) {
