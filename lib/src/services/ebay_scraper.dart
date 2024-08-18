@@ -1,9 +1,11 @@
 import "dart:convert";
+import "dart:io";
 
 import "package:ebay/data.dart";
 import "package:ebay/src/services/service.dart";
 import "package:http/http.dart" as http;
 import "package:ebay/models.dart";
+import 'package:archive/archive.dart';
 
 
 class EbayScraper extends Service{
@@ -58,7 +60,7 @@ class EbayScraper extends Service{
 
   Future<Map<String, dynamic>?> refreshToken(UserProfile user) async{
     if(!user.ebayTokenValid){
-      print("Ebay token not valid");
+      print(" Ebay token notvalid");
       return null;
     }
     final uri = Uri.http(api, "/identity/v1/oauth2/token");
@@ -124,11 +126,12 @@ class EbayScraper extends Service{
       }
       final taskId = response.headers['location']!.split("/").last;
       if(!await checkStatus(Uri.http(api, "/sell/feed/v1/inventory_task/$taskId"), {"Authorization": "Bearer ${user.ebayAPI!["access_token"]}",})){
-        print("Task not ready after 10 seconds");
+        print("Task not ready after 30 seconds");
         throw Error();
       }
       print("task is ready");
-      if(!await downloadResultFile(Uri.http(api, "/sell/feed/v1/inventory_task/$taskId/download_result_file"), {"Authorization": "Bearer ${user.ebayAPI!["access_token"]}",})){
+      if(!await downloadResultFile(Uri.http(api, "/sell/feed/v1/task/$taskId/download_result_file"), {"Authorization": "Bearer ${user.ebayAPI!["access_token"]}",})){
+        print("Unable to download result file");
       }
 
     } on Exception catch (e) {
@@ -138,18 +141,32 @@ class EbayScraper extends Service{
   }
 
   Future<bool> checkStatus(Uri uri, Map<String, String> headers) async {
-    for(int i = 0; i < 3; i++){
+    for(int i = 0; i < 5; i++){
       final response = await client.get(uri, headers: headers);
       final json = jsonDecode(response.body);
       if(json["status"] == "COMPLETED"){
         return true;
       }
-      await Future.delayed(const Duration(seconds: 3));
+      await Future.delayed(const Duration(seconds: 5));
     }
     return false;
   }
 
   Future<bool> downloadResultFile(Uri uri, Map<String, String> headers) async {
+    final response = await client.get(uri, headers: headers);
+    if(response.statusCode == 200){
+      final archive = ZipDecoder().decodeBytes(response.bodyBytes);
+      // Iterate through the files in the archive
+      print(archive.files);
+      for (final file in archive) {
+        // If it's a file, save it to the specified directory
+        if (file.isFile) {
+          print(String.fromCharCodes(file.content as List<int>));
+        }
+      }
+    } else {
+      return false;
+    }
     return true;
   }
 
