@@ -1,11 +1,11 @@
 //import 'package:flutter/material.dart';
 
-class Item {
+class Listing {
   final name;
   final price;
   final productLink;
 
-  const Item({
+  const Listing({
     required this.name,
     required this.price,
     required this.productLink,

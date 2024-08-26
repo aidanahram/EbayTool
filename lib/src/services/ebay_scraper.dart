@@ -3,8 +3,9 @@ import "dart:io";
 
 import "package:ebay/data.dart";
 import "package:ebay/src/services/service.dart";
-import "package:http/http.dart" as http;
 import "package:ebay/models.dart";
+import "package:http/http.dart" as http;
+import 'package:xml/xml.dart';
 import 'package:archive/archive.dart';
 
 
@@ -13,7 +14,7 @@ class EbayScraper extends Service{
   final api = "localhost:8081";
 
   /// [http.Client] to send requests from
-  late final client;
+  late final http.Client client;
 
   EbayScraper();
 
@@ -26,7 +27,7 @@ class EbayScraper extends Service{
   /// Function to dispose of the scraper
   @override
   Future<void> dispose() async {
-    client.dispose();
+    client.close();
   }
 
   Future<Map<String, dynamic>?> generateToken(String code) async {
@@ -162,6 +163,11 @@ class EbayScraper extends Service{
         // If it's a file, save it to the specified directory
         if (file.isFile) {
           print(String.fromCharCodes(file.content as List<int>));
+          final document = XmlDocument.parse(String.fromCharCodes(file.content as List<int>));
+          final itemIDs = document.findAllElements("ItemID");
+          itemIDs
+            .map((element) => element.innerText)
+            .forEach(print); 
         }
       }
     } else {

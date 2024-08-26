@@ -40,6 +40,11 @@ class Database extends Service {
     return users.doc(userId).getData();
   }
 
+  /// Saves a ebay listing to the database
+  Future<void> saveListing(Listing listing) async{
+    return;
+  }
+
   /// Saves a product to the database.
   // Future<void> saveProduct(Product product) =>
   //   products.doc(product.id).set(product);
