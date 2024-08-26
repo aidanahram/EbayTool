@@ -105,7 +105,8 @@ void main() async {
 }
 
 Future<HttpServer> createServer() async{
-  final secrets = await File('C:\\Scripts\\Flutter\\Ebay\\ebay\\secrets.env')
+  final directory = Directory.current;
+  final secrets = await File("${directory.path}//secrets.env")
       .readAsString();
   final data = await jsonDecode(secrets);
   final appSecret = data['ebayAppSecret'];
