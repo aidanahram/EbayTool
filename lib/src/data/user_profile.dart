@@ -1,5 +1,6 @@
 import "package:flutter/material.dart";
 
+import "listing.dart";
 import "types.dart";
 
 /// A user of the app. Can be a customer or seller.
@@ -16,6 +17,8 @@ class UserProfile {
   Json? ebayAPI;
   /// The API details from aliexpress
   Json? aliAPI;
+  /// The user's ebay listings
+  List<ItemID> listings;
 
   /// Creates a new User object.
   UserProfile({
@@ -25,6 +28,7 @@ class UserProfile {
     required this.ebayAPI,
     required this.aliAPI,
     required this.theme,
+    required this.listings,
   });
 
   bool get ebayRefreshTokenValid => ebayAPI != null && ebayAPI!['refresh_token_valid_time'] > DateTime.now().millisecondsSinceEpoch; 
@@ -40,7 +44,9 @@ class UserProfile {
     id = json["id"],
     ebayAPI = json["ebay"],
     aliAPI = json["ali"],
-    theme = json["theme"] == null ? ThemeMode.system : ThemeMode.values.byName(json["theme"]);
+    theme = json["theme"] == null ? ThemeMode.system : ThemeMode.values.byName(json["theme"]),
+    //TODO decode the json
+    listings = json["listings"] == null ? [] : [const ItemID("WE HAVE AT LEAST ONE THING")];
 
   /// Convert this user to its JSON representation
   Json toJson() => {
@@ -50,5 +56,6 @@ class UserProfile {
     "ebay": ebayAPI,
     "ali": aliAPI,
     "theme": theme.name,
+    "listings": listings,
   };
 }

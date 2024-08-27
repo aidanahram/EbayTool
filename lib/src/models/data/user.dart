@@ -59,8 +59,8 @@ class UserModel extends DataModel {
   }
 
   Future<void> refreshToken() async {
-    if(userProfile == null){
-      print("User not signed in");
+    if(!isSignedIn){
+      print("Can't refresh token: User not signed in");
       return;
     }
     userProfile!.ebayAPI = await services.ebayScraper.refreshToken(userProfile!);
@@ -75,7 +75,7 @@ class UserModel extends DataModel {
   }
 
   void saveTokenResponse() async {
-    if(userProfile == null){
+    if(!isSignedIn){
       print("Can't save api response: User is not logged in");
       return;
     }
@@ -85,5 +85,11 @@ class UserModel extends DataModel {
       userProfile!.ebayAPI!['token_valid_time'] = DateTime.now().millisecondsSinceEpoch + userProfile!.ebayAPI!['expires_in'] * 1000;
       await models.user.updateProfile(userProfile!);
     }
+  }
+
+  Future<void> updateListings(List<ItemID> items) async{
+    if(!isSignedIn) return;
+    userProfile!.listings = items;
+    await models.user.updateProfile(userProfile!);
   }
 }

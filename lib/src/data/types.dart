@@ -4,11 +4,8 @@ typedef Json = Map<String, dynamic>;
 /// A unique ID for every user.
 extension type const UserID(String id) { }
 
-/// A unique ID for every product.
-extension type const ProductID(String id) { }
-
-/// A unique ID for every Category
-extension type const CategoryID(String id) { }
+/// A unique ID for every ebay listing 
+extension type const ItemID(String id) {}
 
 /// Helpful methods on strings.
 extension StringUtils on String {

@@ -16,6 +16,12 @@ class Database extends Service {
     toJson: (user) => user.toJson(),
   );
 
+  /// A collection of [Listing] objects.
+  Collection<Listing, ItemID> get listings => firestore.collection("listings").convert(
+    fromJson: Listing.fromJson,
+    toJson: (listing) => listing.toJson(),
+  );
+
   /// A collection of [Product] objects.
   // Collection<Product, ProductID> get products => firestore.collection("products").convert(
   //   fromJson: Product.fromJson,
@@ -42,6 +48,8 @@ class Database extends Service {
 
   /// Saves a ebay listing to the database
   Future<void> saveListing(Listing listing) async{
+    print(listing.toJson());
+    listings.doc(listing.itemID).set(listing);
     return;
   }
 

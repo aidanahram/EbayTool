@@ -1,7 +1,8 @@
 import "dart:convert";
-import "dart:io";
+//import "dart:io";
 
 import "package:ebay/data.dart";
+import "package:ebay/services.dart";
 import "package:ebay/src/services/service.dart";
 import "package:ebay/models.dart";
 import "package:http/http.dart" as http;
@@ -131,7 +132,7 @@ class EbayScraper extends Service{
         throw Error();
       }
       print("task is ready");
-      if(!await downloadResultFile(Uri.http(api, "/sell/feed/v1/task/$taskId/download_result_file"), {"Authorization": "Bearer ${user.ebayAPI!["access_token"]}",})){
+      if(!await downloadResultFile(user, Uri.http(api, "/sell/feed/v1/task/$taskId/download_result_file"), {"Authorization": "Bearer ${user.ebayAPI!["access_token"]}",})){
         print("Unable to download result file");
       }
 
@@ -153,7 +154,7 @@ class EbayScraper extends Service{
     return false;
   }
 
-  Future<bool> downloadResultFile(Uri uri, Map<String, String> headers) async {
+  Future<bool> downloadResultFile(UserProfile user, Uri uri, Map<String, String> headers) async {
     final response = await client.get(uri, headers: headers);
     if(response.statusCode == 200){
       final archive = ZipDecoder().decodeBytes(response.bodyBytes);
@@ -164,10 +165,27 @@ class EbayScraper extends Service{
         if (file.isFile) {
           print(String.fromCharCodes(file.content as List<int>));
           final document = XmlDocument.parse(String.fromCharCodes(file.content as List<int>));
-          final itemIDs = document.findAllElements("ItemID");
-          itemIDs
-            .map((element) => element.innerText)
-            .forEach(print); 
+          final SKUs = document.findAllElements("SKUDetails");
+          final List<ItemID> items = [];
+          for(final sku in SKUs){
+            print("SKU: $sku");
+            print("Item ID: ${sku.findElements("ItemID").single.innerText}");
+            items.add(ItemID(sku.findElements("ItemID").single.innerText));
+            final listing = Listing(
+              itemID: ItemID(sku.findElements("ItemID").single.innerText),
+              owner: user.id,
+              quantity: int.parse(sku.findElements("Quantity").single.innerText),
+              price: double.parse(sku.findElements("Price").single.innerText),
+              aliExpressLink: "",
+            );
+            try{
+              await services.database.saveListing(listing);
+            } on Error{
+              print("lisintg had an error");
+              print(listing);
+            }
+          }
+          await models.user.updateListings(items);
         }
       }
     } else {

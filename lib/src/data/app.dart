@@ -4,7 +4,7 @@ import "dart:async";
 
 import "package:ebay/data.dart";
 import "package:ebay/models.dart";
-import "package:ebay/services.dart";
+//import "package:ebay/services.dart";
 
 /// The view model for the main page.
 class AppModel extends DataModel {

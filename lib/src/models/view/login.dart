@@ -76,6 +76,7 @@ class LoginViewModel extends BuilderModel<UserProfile> {
     ebayAPI: null,
     aliAPI: null,
     theme: theme,
+    listings: [],
   );
 
   /// Once the user is signed in, checks their profile and sets [showSignUp], if needed.

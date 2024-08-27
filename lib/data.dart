@@ -13,4 +13,3 @@ library data;
 export "src/data/listing.dart";
 export "src/data/user_profile.dart";
 export "src/data/types.dart";
-export "src/data/product.dart";
