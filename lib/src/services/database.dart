@@ -48,7 +48,6 @@ class Database extends Service {
 
   /// Saves a ebay listing to the database
   Future<void> saveListing(Listing listing) async{
-    print(listing.toJson());
     listings.doc(listing.itemID).set(listing);
     return;
   }

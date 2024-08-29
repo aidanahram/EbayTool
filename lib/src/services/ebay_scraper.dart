@@ -62,7 +62,7 @@ class EbayScraper extends Service{
 
   Future<Map<String, dynamic>?> refreshToken(UserProfile user) async{
     if(!user.ebayTokenValid){
-      print(" Ebay token notvalid");
+      print(" Ebay token not valid");
       return null;
     }
     final uri = Uri.http(api, "/identity/v1/oauth2/token");
@@ -93,15 +93,8 @@ class EbayScraper extends Service{
     }
   }
 
-  Future<void> getProducts(UserProfile user) async {
-    if(!user.ebayTokenValid){
-      if(!user.ebayRefreshTokenValid){
-        print("User needs to reauthorize Ebay API");
-        return;
-      }
-      await models.user.refreshToken();
-      user = models.user.userProfile!;
-    }
+  Future<bool> getProducts(UserProfile user) async {
+    if(! await verifyToken(user)) return false;
     final uri = Uri.http(api, "/sell/feed/v1/inventory_task");
     final Map<String, String> headers = {
       "Authorization": "Bearer ${user.ebayAPI!["access_token"]}",
@@ -115,31 +108,28 @@ class EbayScraper extends Service{
     });
     try {
       final response = await client.post(uri, headers: headers, body: payload);
-      if (response.statusCode >= 400) {
-        print("Recieved error code from server");
+      if(response.statusCode >= 400) {
         print(response.headers);
         print(response.statusCode);
         print(response.body);
-        throw Error();
+        throw Exception("Recieved error code from server");
       }
       if(response.headers['location'] == null){
-        print("Response missing location");
-        throw Error();
+        throw Exception("Response missing location");
       }
       final taskId = response.headers['location']!.split("/").last;
       if(!await checkStatus(Uri.http(api, "/sell/feed/v1/inventory_task/$taskId"), {"Authorization": "Bearer ${user.ebayAPI!["access_token"]}",})){
-        print("Task not ready after 30 seconds");
-        throw Error();
+        throw Exception("Task not ready after 30 seconds");
       }
       print("task is ready");
       if(!await downloadResultFile(user, Uri.http(api, "/sell/feed/v1/task/$taskId/download_result_file"), {"Authorization": "Bearer ${user.ebayAPI!["access_token"]}",})){
         print("Unable to download result file");
       }
-
     } on Exception catch (e) {
       print("THERE WAS AN ERROR AND LOGGING IS TOO DIFFICULT");
       print(e);
     }
+    return true;
   }
 
   Future<bool> checkStatus(Uri uri, Map<String, String> headers) async {
@@ -159,31 +149,21 @@ class EbayScraper extends Service{
     if(response.statusCode == 200){
       final archive = ZipDecoder().decodeBytes(response.bodyBytes);
       // Iterate through the files in the archive
-      print(archive.files);
       for (final file in archive) {
         // If it's a file, save it to the specified directory
         if (file.isFile) {
-          print(String.fromCharCodes(file.content as List<int>));
           final document = XmlDocument.parse(String.fromCharCodes(file.content as List<int>));
-          final SKUs = document.findAllElements("SKUDetails");
+          final skus = document.findAllElements("SKUDetails");
           final List<ItemID> items = [];
-          for(final sku in SKUs){
-            print("SKU: $sku");
-            print("Item ID: ${sku.findElements("ItemID").single.innerText}");
+          for(final sku in skus){
             items.add(ItemID(sku.findElements("ItemID").single.innerText));
             final listing = Listing(
               itemID: ItemID(sku.findElements("ItemID").single.innerText),
               owner: user.id,
               quantity: int.parse(sku.findElements("Quantity").single.innerText),
               price: double.parse(sku.findElements("Price").single.innerText),
-              aliExpressLink: "",
             );
-            try{
-              await services.database.saveListing(listing);
-            } on Error{
-              print("lisintg had an error");
-              print(listing);
-            }
+            await getItemLegacy(user, listing);
           }
           await models.user.updateListings(items);
         }
@@ -194,26 +174,42 @@ class EbayScraper extends Service{
     return true;
   }
 
-  // void downloadFile(String url) async {
-  //   headers = {"Authorization": "Bearer $token", "Accept": "*/*"};
-  //   final response = await http.get(url, headers: headers);
-  //   try{
-
-  //   } on Exception catch (e) {
-  //     print(response.headers);
-  //     print(response.body);
-  //     rethrow;
-  //   }
-  // }
-
-  // void gatherProductData() async {
-  //   final url = await createTask();
-  //   print(url);
-  //   final taskId = await checkStatus(url);
-  //   downloadFile("$baseEndpoint/task/$taskId/download_result_file");
-  // }
+  Future<bool> getItemLegacy(UserProfile user, Listing listing) async{
+    if(!await verifyToken(user)) return false;
+    final uri = Uri.http(api, "/buy/browse/v1/item/get_item_by_legacy_id", {"legacy_item_id" : listing.itemID});
+    final Map<String, String> headers = {
+      "Authorization": "Bearer ${user.ebayAPI!["access_token"]}",
+    };
+    try{
+      final response = await client.get(uri, headers: headers);
+      if(response.statusCode >= 400) {
+        print(response.headers);
+        print(response.statusCode);
+        print(response.body);
+        throw Exception("Recieved error code from server: ${response.statusCode}");
+      }
+      final json = jsonDecode(response.body);
+      listing.productName = json["title"];
+      listing.mainImage = json["image"]["imageUrl"];
+      listing.sku = json["sku"];
+      await services.database.saveListing(listing);
+    } on Exception catch(e) {
+      print("Couldn't get information for Item: ${listing.itemID}");
+      print(e);
+      return false;
+    }
+    return true;
+  }
 }
 
-void main() async {
-
+Future<bool> verifyToken(UserProfile user) async {
+  if(!user.ebayTokenValid){
+    if(!user.ebayRefreshTokenValid){
+      print("User needs to reauthorize Ebay API");
+      return false;
+    }
+    await models.user.refreshToken();
+    user = models.user.userProfile!;
+  }
+  return true;
 }
