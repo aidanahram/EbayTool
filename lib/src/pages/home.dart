@@ -146,7 +146,8 @@ class _HomePageState extends State<HomePage> {
       ),
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             const SizedBox(height: 10),
             SearchBar(
@@ -158,6 +159,17 @@ class _HomePageState extends State<HomePage> {
                 print(value);
               },
             ),
+            const SizedBox(height: 10,),
+            PaginatedDataTable(
+              columns: const <DataColumn>[
+                DataColumn(label: Text("Main Image")),
+                DataColumn(label: Text("Title")),
+                DataColumn(label: Text("Price")),
+                DataColumn(label: Text("Quantity")),
+                DataColumn(label: Text("Item ID")),
+              ], 
+              source: DataSource(),
+            ),
           ],
         ),
       ),
@@ -168,4 +180,53 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
+}
+
+class DataSource extends DataTableSource {
+  @override
+  int get rowCount => models.user.userProfile!.listings.length;
+
+  @override
+  DataRow? getRow(int index) {
+    switch (index) {
+      case 0:
+        return const DataRow(
+          cells: <DataCell>[
+            DataCell(Text('Sarah')),
+            DataCell(Text('19')),
+            DataCell(Text('Student')),
+            DataCell(Text('Student')),
+            DataCell(Text('Student')),
+          ],
+        );
+      case 1:
+        return const DataRow(
+          cells: <DataCell>[
+            DataCell(Text('Sarah')),
+            DataCell(Text('19')),
+            DataCell(Text('Student')),
+            DataCell(Text('Student')),
+            DataCell(Text('Student')),
+          ],
+        );
+      case 2:
+        return const DataRow(
+          cells: <DataCell>[
+            DataCell(Text('Sarah')),
+            DataCell(Text('19')),
+            DataCell(Text('Student')),
+            DataCell(Text('Student')),
+            DataCell(Text('Student')),
+          ],
+        );
+      default:
+        return null;
+    }
+  }
+
+  @override
+  bool get isRowCountApproximate => false;
+
+  @override
+  int get selectedRowCount => 0;
 }
