@@ -193,6 +193,7 @@ class EbayScraper extends Service{
       listing.mainImage = json["image"]["imageUrl"];
       listing.sku = json["sku"];
       await services.database.saveListing(listing);
+      user.listings.add(listing);
     } on Exception catch(e) {
       print("Couldn't get information for Item: ${listing.itemID}");
       print(e);

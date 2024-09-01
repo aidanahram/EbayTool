@@ -89,7 +89,9 @@ class UserModel extends DataModel {
 
   Future<void> updateListings(List<ItemID> items) async{
     if(!isSignedIn) return;
-    userProfile!.listings = items;
+    userProfile!.listingIDs = items;
     await models.user.updateProfile(userProfile!);
   }
+
+
 }

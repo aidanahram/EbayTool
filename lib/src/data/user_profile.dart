@@ -17,8 +17,10 @@ class UserProfile {
   Json? ebayAPI;
   /// The API details from aliexpress
   Json? aliAPI;
+  /// The user's ebay listingIDs which gets saved to the database
+  List<ItemID> listingIDs;
   /// The user's ebay listings
-  List<ItemID> listings;
+  List<Listing> listings = [];
 
   /// Creates a new User object.
   UserProfile({
@@ -28,7 +30,7 @@ class UserProfile {
     required this.ebayAPI,
     required this.aliAPI,
     required this.theme,
-    required this.listings,
+    required this.listingIDs,
   });
 
   bool get ebayRefreshTokenValid => ebayAPI != null && ebayAPI!['refresh_token_valid_time'] > DateTime.now().millisecondsSinceEpoch; 
@@ -46,7 +48,7 @@ class UserProfile {
     aliAPI = json["ali"],
     theme = json["theme"] == null ? ThemeMode.system : ThemeMode.values.byName(json["theme"]),
     //TODO decode the json
-    listings = json["listings"] == null ? [] : [const ItemID("WE HAVE AT LEAST ONE THING")];
+    listingIDs = json["listingIDs"] == null ? [] : [const ItemID("WE HAVE AT LEAST ONE THING")];
 
   /// Convert this user to its JSON representation
   Json toJson() => {
@@ -56,6 +58,6 @@ class UserProfile {
     "ebay": ebayAPI,
     "ali": aliAPI,
     "theme": theme.name,
-    "listings": listings,
+    "listingIDs": listingIDs,
   };
 }

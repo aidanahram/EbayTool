@@ -4,6 +4,7 @@ import 'package:ebay/services.dart';
 import 'package:ebay/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:ebay/pages.dart';
+import 'package:flutter/widgets.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class HomePage extends StatefulWidget {
@@ -12,6 +13,86 @@ class HomePage extends StatefulWidget {
   @override
   State<HomePage> createState() => _HomePageState();
 }
+
+class DataSource extends DataTableSource {
+  String missingImage = "https://media.istockphoto.com/id/1472933890/vector/no-image-vector-symbol-missing-available-icon-no-gallery-for-this-moment-placeholder.jpg?s=612x612&w=0&k=20&c=Rdn-lecwAj8ciQEccm0Ep2RX50FCuUJOaEM8qQjiLL0=";
+  @override
+  //int get rowCount => 3;
+  int get rowCount => models.user.userProfile!.listings.length;
+
+  @override 
+  DataRow? getRow(int index) {
+    print(index);
+    if(index < 0 || index >= rowCount){
+      return null;
+    } else {
+      final listing = models.user.userProfile!.listings[index];
+      //return DataRow(
+        // cells: <DataCell>[
+        //   DataCell(Image.network(listing.mainImage ?? missingImage)),
+        //   DataCell(Text(listing.productName ?? "missing name")),
+        //   DataCell(Text(listing.price.toString())),
+        //   DataCell(Text(listing.quantity.toString())),
+        //   DataCell(Text(listing.itemID.toString())),
+        // ]
+      return const DataRow(
+        cells: <DataCell>[
+          DataCell(Text("Bruh")),
+          DataCell(Text("Bruh")),
+          DataCell(Text("Bruh")),
+          DataCell(Text("Bruh")),
+          DataCell(Text("Bruh")),
+        ]
+      );
+    }
+  }
+
+  // @override
+  // DataRow? getRow(int index) {
+  //   switch (index) {
+  //     case 0:
+  //       return const DataRow(
+  //         cells: <DataCell>[
+  //           DataCell(Text('Sarah')),
+  //           DataCell(Text('19')),
+  //           DataCell(Text('Student')),
+  //           DataCell(Text('Student')),
+  //           DataCell(Text('Student')),
+  //         ],
+  //       );
+  //     case 1:
+  //       return const DataRow(
+  //         cells: <DataCell>[
+  //           DataCell(Text('Sarah')),
+  //           DataCell(Text('209')),
+  //           DataCell(Text('Student')),
+  //           DataCell(Text('Student')),
+  //           DataCell(Text('Student')),
+  //         ],
+  //       );
+  //     case 2:
+  //       return const DataRow(
+  //         cells: <DataCell>[
+  //           DataCell(Text('Sarah')),
+  //           DataCell(Text('20')),
+  //           DataCell(Text('Student')),
+  //           DataCell(Text('Student')),
+  //           DataCell(Text('Student')),
+  //         ],
+  //       );
+  //     default:
+  //       return null;
+  //   }
+  
+
+  @override
+  bool get isRowCountApproximate => false;
+
+  @override
+  int get selectedRowCount => 0;
+}
+
+final DataTableSource dataSource = DataSource();
 
 class _HomePageState extends State<HomePage> {
   static const redirectUrl =
@@ -39,7 +120,7 @@ class _HomePageState extends State<HomePage> {
         ),
         actions: [IconButton(
           icon: const Icon(Icons.refresh),
-          onPressed: () => models.user.isSignedIn ? services.ebayScraper.getProducts(models.user.userProfile!) : print("user is not signed in")         
+          onPressed: () => models.user.isSignedIn ? services.ebayScraper.getProducts(models.user.userProfile!) : print("user is not signed in"),    
         ),]
       ),
       drawer: Drawer(
@@ -159,16 +240,20 @@ class _HomePageState extends State<HomePage> {
                 print(value);
               },
             ),
-            const SizedBox(height: 10,),
-            PaginatedDataTable(
-              columns: const <DataColumn>[
-                DataColumn(label: Text("Main Image")),
-                DataColumn(label: Text("Title")),
-                DataColumn(label: Text("Price")),
-                DataColumn(label: Text("Quantity")),
-                DataColumn(label: Text("Item ID")),
-              ], 
-              source: DataSource(),
+            Container(
+              width: MediaQuery.of(context).size.width,
+              margin: const EdgeInsets.symmetric(vertical: 30, horizontal: 100), 
+              child: PaginatedDataTable(
+                columns: const <DataColumn>[
+                  DataColumn(label: Text("Main Image")),
+                  DataColumn(label: Text("Title")),
+                  DataColumn(label: Text("Price")),
+                  DataColumn(label: Text("Quantity")),
+                  DataColumn(label: Text("Item ID")),
+                ], 
+                source: dataSource,
+                showEmptyRows: false,
+              ),
             ),
           ],
         ),
@@ -182,51 +267,3 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
-class DataSource extends DataTableSource {
-  @override
-  int get rowCount => models.user.userProfile!.listings.length;
-
-  @override
-  DataRow? getRow(int index) {
-    switch (index) {
-      case 0:
-        return const DataRow(
-          cells: <DataCell>[
-            DataCell(Text('Sarah')),
-            DataCell(Text('19')),
-            DataCell(Text('Student')),
-            DataCell(Text('Student')),
-            DataCell(Text('Student')),
-          ],
-        );
-      case 1:
-        return const DataRow(
-          cells: <DataCell>[
-            DataCell(Text('Sarah')),
-            DataCell(Text('19')),
-            DataCell(Text('Student')),
-            DataCell(Text('Student')),
-            DataCell(Text('Student')),
-          ],
-        );
-      case 2:
-        return const DataRow(
-          cells: <DataCell>[
-            DataCell(Text('Sarah')),
-            DataCell(Text('19')),
-            DataCell(Text('Student')),
-            DataCell(Text('Student')),
-            DataCell(Text('Student')),
-          ],
-        );
-      default:
-        return null;
-    }
-  }
-
-  @override
-  bool get isRowCountApproximate => false;
-
-  @override
-  int get selectedRowCount => 0;
-}
