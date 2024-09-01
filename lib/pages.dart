@@ -40,9 +40,10 @@ extension on Object? {
 }
 
 /// Redirects users to the login page if they are not signed in.
-String? authRedirect(BuildContext context, GoRouterState state) =>  
-  (!models.user.isSignedIn && state.matchedLocation != Routes.login) 
-    ? "${Routes.login}?redirect=${state.matchedLocation}" : null;
+String? authRedirect(BuildContext context, GoRouterState state) =>
+    (!models.user.isSignedIn && state.matchedLocation != Routes.login)
+        ? "${Routes.login}?redirect=${state.matchedLocation}"
+        : null;
 
 /// The [GoRouter] that controls the routing logic for the app.
 final GoRouter router = GoRouter(
@@ -56,36 +57,37 @@ final GoRouter router = GoRouter(
     GoRoute(
       path: "/login",
       name: "Login",
-      builder: (context, state) => LoginPage(redirect: state.uri.queryParameters["redirect"]),
+      builder: (context, state) =>
+          LoginPage(redirect: state.uri.queryParameters["redirect"]),
     ),
     ShellRoute(
-      pageBuilder: (context, state, child) => NoTransitionPage(
-        child: Title(
-          title: state.topRoute?.name ?? "Dropper",
-          color: Colors.green,
-          child: child,
-        ),
-      ),
-      routes: [
-        GoRoute(
-          path: Routes.home,
-          name: "Home",
-          pageBuilder: (context, state) => const NoTransitionPage(child: HomePage()),
-          routes: [
-            GoRoute(
-              path: "add_item",
-              name: "Add an item",
-              builder: (context, state) => const AddItemPage(),
+        pageBuilder: (context, state, child) => NoTransitionPage(
+              child: Title(
+                title: state.topRoute?.name ?? "Dropper",
+                color: Colors.green,
+                child: child,
+              ),
             ),
-            GoRoute(
-              path: "settings",
-              name: "Settings",
-              builder: (context, state) => SettingsPage(),
-            ),
-          ],
-        ),
-      ]
-    ),
+        routes: [
+          GoRoute(
+            path: Routes.home,
+            name: "Home",
+            pageBuilder: (context, state) =>
+                const NoTransitionPage(child: HomePage()),
+            routes: [
+              GoRoute(
+                path: "add_item",
+                name: "Add an item",
+                builder: (context, state) => const AddItemPage(),
+              ),
+              GoRoute(
+                path: "settings",
+                name: "Settings",
+                builder: (context, state) => SettingsPage(),
+              ),
+            ],
+          ),
+        ]),
     //     // GoRoute(
     //     //   path: Routes.profile,
     //     //   name: "My profile",

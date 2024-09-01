@@ -15,81 +15,41 @@ class HomePage extends StatefulWidget {
 }
 
 class DataSource extends DataTableSource {
-  String missingImage = "https://media.istockphoto.com/id/1472933890/vector/no-image-vector-symbol-missing-available-icon-no-gallery-for-this-moment-placeholder.jpg?s=612x612&w=0&k=20&c=Rdn-lecwAj8ciQEccm0Ep2RX50FCuUJOaEM8qQjiLL0=";
-  
-  @override 
-  DataSource(){
+  String missingImage =
+      "https://media.istockphoto.com/id/1472933890/vector/no-image-vector-symbol-missing-available-icon-no-gallery-for-this-moment-placeholder.jpg?s=612x612&w=0&k=20&c=Rdn-lecwAj8ciQEccm0Ep2RX50FCuUJOaEM8qQjiLL0=";
+
+  @override
+  DataSource() {
     print(rowCount);
-    print(models.user.userProfile!.listingIDs);
+    print(models.user.userProfile!.listings);
   }
 
   @override
   //int get rowCount => 3;
-  int get rowCount => models.user.userProfile!.listingIDs.length;
+  int get rowCount => models.user.userProfile!.listings.length;
 
-  @override 
+  @override
   DataRow? getRow(int index) {
-    if(index < 0 || index >= rowCount){
+    if (index < 0 || index >= rowCount) {
       return null;
     } else {
-      final listing = models.user.userProfile!.listingIDs[index];
-      //return DataRow(
-        // cells: <DataCell>[
-        //   DataCell(Image.network(listing.mainImage ?? missingImage)),
-        //   DataCell(Text(listing.productName ?? "missing name")),
-        //   DataCell(Text(listing.price.toString())),
-        //   DataCell(Text(listing.quantity.toString())),
-        //   DataCell(Text(listing.itemID.toString())),
-        // ]
-      return const DataRow(
-        cells: <DataCell>[
-          DataCell(Text("Bruh")),
-          DataCell(Text("Bruh")),
-          DataCell(Text("Bruh")),
-          DataCell(Text("Bruh")),
-          DataCell(Text("Bruh")),
-        ]
-      );
+      final listing = models.user.userProfile!.listings[index];
+      return DataRow(cells: <DataCell>[
+        DataCell(Image.network(listing.mainImage ?? missingImage)),
+        DataCell(Text(listing.title ?? "missing name")),
+        DataCell(Text(listing.price.toString())),
+        DataCell(Text(listing.quantity.toString())),
+        DataCell(Text(listing.itemID.toString())),
+      ]);
+      // return const DataRow(cells: <DataCell>[
+      //   DataCell(Text("Bruh")),
+      //   DataCell(Text("Bruh")),
+      //   DataCell(Text("Bruh")),
+      //   DataCell(Text("Bruh")),
+      //   DataCell(Text("Bruh")),
+      // ]);
     }
   }
-
-  // @override
-  // DataRow? getRow(int index) {
-  //   switch (index) {
-  //     case 0:
-  //       return const DataRow(
-  //         cells: <DataCell>[
-  //           DataCell(Text('Sarah')),
-  //           DataCell(Text('19')),
-  //           DataCell(Text('Student')),
-  //           DataCell(Text('Student')),
-  //           DataCell(Text('Student')),
-  //         ],
-  //       );
-  //     case 1:
-  //       return const DataRow(
-  //         cells: <DataCell>[
-  //           DataCell(Text('Sarah')),
-  //           DataCell(Text('209')),
-  //           DataCell(Text('Student')),
-  //           DataCell(Text('Student')),
-  //           DataCell(Text('Student')),
-  //         ],
-  //       );
-  //     case 2:
-  //       return const DataRow(
-  //         cells: <DataCell>[
-  //           DataCell(Text('Sarah')),
-  //           DataCell(Text('20')),
-  //           DataCell(Text('Student')),
-  //           DataCell(Text('Student')),
-  //           DataCell(Text('Student')),
-  //         ],
-  //       );
-  //     default:
-  //       return null;
-  //   }
-  
 
   @override
   bool get isRowCountApproximate => false;
@@ -112,59 +72,62 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.orange,
-        title: const Text("Ebay Drop Shipping Tool"),
-        leading: Builder(
-          builder: (context) {
-            return IconButton(
-              icon: const Icon(Icons.menu),
-              onPressed: () {
-                Scaffold.of(context).openDrawer();
-              },
-            );
-          },
-        ),
-        actions: [IconButton(
-          icon: const Icon(Icons.refresh),
-          onPressed: () => models.user.isSignedIn ? services.ebayScraper.getProducts(models.user.userProfile!) : print("user is not signed in"),    
-        ),]
-      ),
+          backgroundColor: Colors.orange,
+          title: const Text("Ebay Drop Shipping Tool"),
+          leading: Builder(
+            builder: (context) {
+              return IconButton(
+                icon: const Icon(Icons.menu),
+                onPressed: () {
+                  Scaffold.of(context).openDrawer();
+                },
+              );
+            },
+          ),
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.refresh),
+              onPressed: () => models.user.isSignedIn
+                  ? services.ebayScraper.getProducts(models.user.userProfile!)
+                  : print("user is not signed in"),
+            ),
+          ]),
       drawer: Drawer(
         child: Column(
           children: [
             DrawerHeader(
-              child: Row(
-                children: [
-                  Builder(
-                    builder: (context) {
-                      return IconButton(
-                        icon: const Icon(Icons.menu),
-                        onPressed: () {
-                          Scaffold.of(context).closeDrawer();
-                        },
-                      );
-                    },
-                  ),
-                  const Text("Menu"),
-                ],
+                child: Row(
+              children: [
+                Builder(
+                  builder: (context) {
+                    return IconButton(
+                      icon: const Icon(Icons.menu),
+                      onPressed: () {
+                        Scaffold.of(context).closeDrawer();
+                      },
+                    );
+                  },
+                ),
+                const Text("Menu"),
+              ],
             )),
             ListTile(
-              title: const Text("Verify Ali Express Account"),
-              onTap: () async {
-                final url = Uri.parse(aliSignOn);
-                if (await canLaunchUrl(url)) {
-                  await launchUrl(url);
-                  if (context.mounted) {
-                    showDialog<void>(
-                        context: context,
-                        builder: (_) => const APIEditor(
-                              website: "AliExpress",
-                            ));
+                title: const Text("Verify Ali Express Account"),
+                onTap: () async {
+                  final url = Uri.parse(aliSignOn);
+                  if (await canLaunchUrl(url)) {
+                    await launchUrl(url);
+                    if (context.mounted) {
+                      showDialog<void>(
+                          context: context,
+                          builder: (_) => const APIEditor(
+                                website: "AliExpress",
+                              ));
+                    }
+                  } else {
+                    throw "Could not launch $url";
                   }
-                } else {
-                  throw "Could not launch $url";
-                }
-              }),
+                }),
             const Divider(
               color: Colors.grey,
             ),
@@ -189,7 +152,7 @@ class _HomePageState extends State<HomePage> {
               color: Colors.grey,
             ),
             Expanded(
-                child: Align(
+              child: Align(
                   alignment: FractionalOffset.bottomCenter,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.end,
@@ -218,16 +181,14 @@ class _HomePageState extends State<HomePage> {
                         title: const Text('Logout'),
                         onTap: () async {
                           await models.user.signOut();
-                          if(context.mounted){
+                          if (context.mounted) {
                             Navigator.of(context).pop();
                           }
                         },
                       ),
                     ],
-                  )
-                ),
-              )
-
+                  )),
+            )
           ],
         ),
       ),
@@ -248,7 +209,7 @@ class _HomePageState extends State<HomePage> {
             ),
             Container(
               width: MediaQuery.of(context).size.width,
-              margin: const EdgeInsets.symmetric(vertical: 30, horizontal: 100), 
+              margin: const EdgeInsets.symmetric(vertical: 30, horizontal: 100),
               child: PaginatedDataTable(
                 columns: const <DataColumn>[
                   DataColumn(label: Text("Main Image")),
@@ -256,7 +217,7 @@ class _HomePageState extends State<HomePage> {
                   DataColumn(label: Text("Price")),
                   DataColumn(label: Text("Quantity")),
                   DataColumn(label: Text("Item ID")),
-                ], 
+                ],
                 source: dataSource,
                 showEmptyRows: false,
               ),
@@ -272,4 +233,3 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
-

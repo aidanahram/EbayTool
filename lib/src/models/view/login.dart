@@ -11,13 +11,13 @@ class LoginViewModel extends BuilderModel<UserProfile> {
 
   /// The user ID, if the user is signed in.
   UserID? get userID => services.auth.userID;
-  
+
   /// The text controller for the first name text field.
   final firstNameController = TextEditingController();
 
   /// The text controller for the last name text field.
   final lastNameController = TextEditingController();
-  
+
   /// The username entered in the text field, if any.
   String? get firstName => firstNameController.text.trim().nullIfEmpty;
 
@@ -63,28 +63,26 @@ class LoginViewModel extends BuilderModel<UserProfile> {
   }
 
   @override
-  bool get isReady => userID != null
-    && firstName != null
-    && lastName != null
-    && !isSaving;  
+  bool get isReady =>
+      userID != null && firstName != null && lastName != null && !isSaving;
 
   @override
   UserProfile build() => UserProfile(
-    firstName: firstName!, 
-    lastName: lastName!, 
-    id: userID!,
-    ebayAPI: null,
-    aliAPI: null,
-    theme: theme,
-    listingIDs: [],
-  );
+        firstName: firstName!,
+        lastName: lastName!,
+        id: userID!,
+        ebayAPI: null,
+        aliAPI: null,
+        theme: theme,
+        listingIDs: [],
+      );
 
   /// Once the user is signed in, checks their profile and sets [showSignUp], if needed.
   Future<void> onAuth() async {
     error = null;
     notifyListeners();
     await services.auth.signIn();
-    await models.user.signIn(); 
+    await models.user.signIn();
     final email = services.auth.user?.email;
     if (email == null) return;
     if (models.user.isSignedIn) {
@@ -111,9 +109,9 @@ class LoginViewModel extends BuilderModel<UserProfile> {
 
   Future<void> updateUserProfile() async {
     final profile = models.user.userProfile;
-    if(profile == null) return;
+    if (profile == null) return;
     isSaving = true;
-    profile.firstName = firstName!; 
+    profile.firstName = firstName!;
     profile.lastName = lastName!;
     profile.theme = theme;
     notifyListeners();

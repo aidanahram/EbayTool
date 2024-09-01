@@ -1,4 +1,3 @@
-
 import "package:flutter/material.dart";
 import "dart:async";
 
@@ -9,6 +8,7 @@ import "package:ebay/models.dart";
 /// The view model for the main page.
 class AppModel extends DataModel {
   ThemeMode _theme = ThemeMode.system;
+
   /// The current theme mode: light, dark, or system default.
   ThemeMode get theme => _theme;
 
@@ -22,7 +22,7 @@ class AppModel extends DataModel {
   Future<void> onSignIn(UserProfile profile) async => setTheme(profile.theme);
 
   @override
-  Future<void> onSignOut() async { }
+  Future<void> onSignOut() async {}
 
   /// A hook into the UI, to call [ScaffoldMessenger.of] with.
   BuildContext? context;
@@ -43,8 +43,8 @@ class AppModel extends DataModel {
 extension ThemeModeUtils on ThemeMode {
   /// A human-friendly name for this option.
   String get displayName => switch (this) {
-    ThemeMode.dark => "Dark",
-    ThemeMode.light => "Light",
-    ThemeMode.system => "System",
-  };
+        ThemeMode.dark => "Dark",
+        ThemeMode.light => "Light",
+        ThemeMode.system => "System",
+      };
 }

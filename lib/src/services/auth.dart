@@ -5,7 +5,8 @@ import "package:flutter/foundation.dart";
 
 import "service.dart";
 
-const googleID = "1095906260558-d54anrdq5j0cr18vfm4paq7trvfvi09q.apps.googleusercontent.com";
+const googleID =
+    "1095906260558-d54anrdq5j0cr18vfm4paq7trvfvi09q.apps.googleusercontent.com";
 
 /// Handles authentication for the app.
 class AuthService extends Service {
@@ -13,10 +14,10 @@ class AuthService extends Service {
   late final FirebaseAuth firebase = FirebaseAuth.instance;
 
   @override
-  Future<void> init() async { }
+  Future<void> init() async {}
 
   @override
-  Future<void> dispose() async { }
+  Future<void> dispose() async {}
 
   /// Signs the user out of Firebase.
   Future<void> signOut() async {

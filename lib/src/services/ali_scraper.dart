@@ -6,7 +6,7 @@ import 'package:http/http.dart' as http;
 import 'service.dart';
 
 /// Class to send requests to the aliexpress api
-class AliScraper extends Service{
+class AliScraper extends Service {
   final api = 'localhost:8080';
   AliScraper();
 

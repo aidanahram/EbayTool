@@ -39,12 +39,16 @@ export "src/services/service.dart";
 class Services {
   /// The aliExpress service
   final aliScraper = AliScraper();
+
   /// The eBay scraper service
   final ebayScraper = EbayScraper();
+
   /// The authentication service.
   final auth = AuthService();
+
   /// The database service.
   final database = Database();
+
   /// The Firebase service
   final firebase = FirebaseService();
 

@@ -36,6 +36,7 @@ class UserModel extends DataModel {
   @override
   Future<void> onSignIn(UserProfile profile) async {
     userProfile = profile;
+    getListingsInformation();
     notifyListeners();
   }
 
@@ -49,7 +50,7 @@ class UserModel extends DataModel {
   }
 
   @override
-  Future<void> onSignOut() async { }
+  Future<void> onSignOut() async {}
 
   /// Updates the user's profile.
   Future<void> updateProfile(UserProfile newProfile) async {
@@ -59,12 +60,13 @@ class UserModel extends DataModel {
   }
 
   Future<void> refreshToken() async {
-    if(!isSignedIn){
+    if (!isSignedIn) {
       print("Can't refresh token: User not signed in");
       return;
     }
-    userProfile!.ebayAPI = await services.ebayScraper.refreshToken(userProfile!);
-    if(userProfile!.ebayAPI == null) return;
+    userProfile!.ebayAPI =
+        await services.ebayScraper.refreshToken(userProfile!);
+    if (userProfile!.ebayAPI == null) return;
     saveTokenResponse();
     await services.database.saveUserProfile(userProfile!);
   }
@@ -75,23 +77,35 @@ class UserModel extends DataModel {
   }
 
   void saveTokenResponse() async {
-    if(!isSignedIn){
+    if (!isSignedIn) {
       print("Can't save api response: User is not logged in");
       return;
     }
-    if(userProfile!.ebayAPI != null){
-      userProfile!.ebayAPI!['refresh_token_valid_time'] = DateTime.now().millisecondsSinceEpoch + userProfile!.ebayAPI!['refresh_token_expires_in'];
+    if (userProfile!.ebayAPI != null) {
+      userProfile!.ebayAPI!['refresh_token_valid_time'] =
+          DateTime.now().millisecondsSinceEpoch +
+              userProfile!.ebayAPI!['refresh_token_expires_in'];
+
       /// userProfile!.ebayAPI!['expires_in'] is in seconds -- multiply by 1000 to get milliseconds
-      userProfile!.ebayAPI!['token_valid_time'] = DateTime.now().millisecondsSinceEpoch + userProfile!.ebayAPI!['expires_in'] * 1000;
+      userProfile!.ebayAPI!['token_valid_time'] =
+          DateTime.now().millisecondsSinceEpoch +
+              userProfile!.ebayAPI!['expires_in'] * 1000;
       await models.user.updateProfile(userProfile!);
     }
   }
 
-  Future<void> updateListings(List<ItemID> items) async{
-    if(!isSignedIn) return;
+  Future<void> updateListings(List<ItemID> items) async {
+    if (!isSignedIn) return;
     userProfile!.listingIDs = items;
     await models.user.updateProfile(userProfile!);
   }
 
-
+  Future<void> getListingsInformation() async {
+    if (!isSignedIn) return;
+    userProfile!.listings = [];
+    for (final itemID in userProfile!.listingIDs) {
+      await services.ebayScraper.getItemLegacyNoDataBase(userProfile!, itemID);
+    }
+    notifyListeners();
+  }
 }

@@ -22,7 +22,6 @@ export "src/models/model.dart";
 export "src/models/data/settings.dart";
 export "src/data/app.dart";
 
-
 // Builder models
 export "src/models/data/api_builder.dart";
 export "src/models/view/builders/builder.dart";

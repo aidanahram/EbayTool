@@ -42,29 +42,29 @@ class InputContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Column(
-    children: [
-      Align(
-        alignment: Alignment.centerLeft,
-        child: Text(
-          text,
-          style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-        ),
-      ),
-      TextField(
-        controller: controller,
-        textCapitalization: capitalization,
-        inputFormatters: [
-          if (formatter != null) formatter!,
+        children: [
+          Align(
+            alignment: Alignment.centerLeft,
+            child: Text(
+              text,
+              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+          ),
+          TextField(
+            controller: controller,
+            textCapitalization: capitalization,
+            inputFormatters: [
+              if (formatter != null) formatter!,
+            ],
+            keyboardType: inputType,
+            decoration: InputDecoration(
+              border: const OutlineInputBorder(),
+              hintText: hint,
+              errorText: errorText,
+              prefixIcon: prefixIcon,
+            ),
+          ),
+          const SizedBox(height: 12),
         ],
-        keyboardType: inputType,
-        decoration: InputDecoration(
-          border: const OutlineInputBorder(),
-          hintText: hint,
-          errorText: errorText,
-          prefixIcon: prefixIcon,
-        ),
-      ),
-      const SizedBox(height: 12),
-    ],
-  );
+      );
 }

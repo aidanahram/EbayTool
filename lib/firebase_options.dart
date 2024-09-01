@@ -64,7 +64,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '1095906260558',
     projectId: 'dropper-c7adc',
     storageBucket: 'dropper-c7adc.appspot.com',
-    iosClientId: '1095906260558-hh9t3o8v1upqjdoho8dogn629jq0st3n.apps.googleusercontent.com',
+    iosClientId:
+        '1095906260558-hh9t3o8v1upqjdoho8dogn629jq0st3n.apps.googleusercontent.com',
     iosBundleId: 'com.example.ebay',
   );
 
@@ -74,7 +75,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '1095906260558',
     projectId: 'dropper-c7adc',
     storageBucket: 'dropper-c7adc.appspot.com',
-    iosClientId: '1095906260558-hh9t3o8v1upqjdoho8dogn629jq0st3n.apps.googleusercontent.com',
+    iosClientId:
+        '1095906260558-hh9t3o8v1upqjdoho8dogn629jq0st3n.apps.googleusercontent.com',
     iosBundleId: 'com.example.ebay',
   );
 
@@ -87,5 +89,4 @@ class DefaultFirebaseOptions {
     storageBucket: 'dropper-c7adc.appspot.com',
     measurementId: 'G-QQ3PWR9E0T',
   );
-
 }

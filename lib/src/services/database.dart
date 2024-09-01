@@ -11,16 +11,18 @@ class Database extends Service {
   FirebaseFirestore get firestore => FirebaseFirestore.instance;
 
   /// A collection of [UserProfile] objects.
-  Collection<UserProfile, UserID> get users => firestore.collection("users").convert(
-    fromJson: UserProfile.fromJson,
-    toJson: (user) => user.toJson(),
-  );
+  Collection<UserProfile, UserID> get users =>
+      firestore.collection("users").convert(
+            fromJson: UserProfile.fromJson,
+            toJson: (user) => user.toJson(),
+          );
 
   /// A collection of [Listing] objects.
-  Collection<Listing, ItemID> get listings => firestore.collection("listings").convert(
-    fromJson: Listing.fromJson,
-    toJson: (listing) => listing.toJson(),
-  );
+  Collection<Listing, ItemID> get listings =>
+      firestore.collection("listings").convert(
+            fromJson: Listing.fromJson,
+            toJson: (listing) => listing.toJson(),
+          );
 
   /// A collection of [Product] objects.
   // Collection<Product, ProductID> get products => firestore.collection("products").convert(
@@ -29,25 +31,24 @@ class Database extends Service {
   // );
 
   @override
-  Future<void> init() async { }
+  Future<void> init() async {}
 
   @override
-  Future<void> dispose() async { }
+  Future<void> dispose() async {}
 
   /// Gets the currently signed-in user's profile.
-  Future<UserProfile?> getUserProfile(UserID userId) => 
-    users.doc(userId).getData();
+  Future<UserProfile?> getUserProfile(UserID userId) =>
+      users.doc(userId).getData();
 
   /// Saves the user's profile to their user document (in [users]).
   Future<void> saveUserProfile(UserProfile user) =>
-    users.doc(user.id).set(user);
+      users.doc(user.id).set(user);
 
   /// Saves a ebay listing to the database
   Future<void> saveListing(Listing listing) =>
-    listings.doc(listing.itemID).set(listing);
+      listings.doc(listing.itemID).set(listing);
 
-  Future<Listing?> getListing(ItemID itemID) =>
-    listings.doc(itemID).getData(); 
+  Future<Listing?> getListing(ItemID itemID) => listings.doc(itemID).getData();
 
   /// Saves a product to the database.
   // Future<void> saveProduct(Product product) =>

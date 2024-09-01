@@ -135,10 +135,10 @@ class AliServer {
 void main() async {
   withHotreload(() => createServer());
 }
+
 Future<HttpServer> createServer() async {
   final directory = Directory.current;
-  final secrets = await File("${directory.path}//secrets.env")
-      .readAsString();
+  final secrets = await File("${directory.path}//secrets.env").readAsString();
   final data = await jsonDecode(secrets);
   final appSecret = data['aliAppSecret'];
   final appId = data['aliAppId'];
@@ -148,7 +148,6 @@ Future<HttpServer> createServer() async {
   final handler = const Pipeline()
       .addMiddleware(logRequests())
       .addHandler(serverFunctions.myHandler("https://api-sg.aliexpress.com"));
-
 
   print('Proxying at http://localhost:8080');
   return await shelf_io.serve(handler, 'localhost', 8080);

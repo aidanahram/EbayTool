@@ -24,21 +24,21 @@ class APIBuilder extends ValueBuilder<void> {
     final uri = Uri.parse(url.text);
     try {
       final code = uri.queryParameters['code'];
-      if(code == null){
+      if (code == null) {
         print("Unable to save code");
         return;
       }
       final profile = models.user.userProfile;
-      if(profile == null){
+      if (profile == null) {
         print("user not logged in");
         return;
       }
       switch (website) {
         case ("AliExpress"):
           profile.aliAPI = await services.aliScraper.generateToken(code);
-          if(profile.aliAPI != null){
+          if (profile.aliAPI != null) {
             models.user.updateProfile(profile);
-          }  
+          }
         case ("Ebay"):
           models.user.generateToken(code);
       }

@@ -13,5 +13,5 @@ class FirebaseService extends Service {
   }
 
   @override
-  Future<void> dispose() async { }
+  Future<void> dispose() async {}
 }

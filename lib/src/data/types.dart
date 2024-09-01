@@ -2,9 +2,9 @@
 typedef Json = Map<String, dynamic>;
 
 /// A unique ID for every user.
-extension type const UserID(String id) { }
+extension type const UserID(String id) {}
 
-/// A unique ID for every ebay listing 
+/// A unique ID for every ebay listing
 extension type const ItemID(String id) {}
 
 /// Helpful methods on strings.
@@ -45,7 +45,8 @@ Iterable<int> range(int end) sync* {
 
 /// Like Python's zip function.
 Iterable<(E1, E2)> zip<E1, E2>(List<E1> list1, List<E2> list2) sync* {
-  if (list1.length != list2.length) throw ArgumentError("Trying to zip lists of different lengths");
+  if (list1.length != list2.length)
+    throw ArgumentError("Trying to zip lists of different lengths");
   for (var index = 0; index < list1.length; index++) {
     yield (list1[index], list2[index]);
   }
@@ -54,5 +55,6 @@ Iterable<(E1, E2)> zip<E1, E2>(List<E1> list1, List<E2> list2) sync* {
 /// Utils on [Map].
 extension MapUtils<K, V> on Map<K, V> {
   /// Gets all the keys and values as 2-element records.
-	Iterable<(K, V)> get records => entries.map((entry) => (entry.key, entry.value));
+  Iterable<(K, V)> get records =>
+      entries.map((entry) => (entry.key, entry.value));
 }

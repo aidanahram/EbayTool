@@ -32,11 +32,12 @@ class EbayServer {
     return (serverRequest) async {
       // http://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html#sec9.8
       final requestUrl = uri.resolve(serverRequest.url.toString());
-      if(serverRequest.method == "OPTIONS"){
+      if (serverRequest.method == "OPTIONS") {
         final clientResponse = Response.ok("trust me bro", headers: {
           "Access-Control-Allow-Origin": "*",
           "Access-Control-Allow-Credentials": "true",
-          "Access-Control-Allow-Headers": "Origin,Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token, X-EBAY-C-MARKETPLACE-ID, location, locale",
+          "Access-Control-Allow-Headers":
+              "Origin,Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token, X-EBAY-C-MARKETPLACE-ID, location, locale",
           "Access-Control-Allow-Methods": "POST, OPTIONS",
         });
         return clientResponse;
@@ -87,7 +88,11 @@ class EbayServer {
             clientResponse.headers, "Access-Control-Allow-Credentials", "true");
         addHeader(clientResponse.headers, "Access-Control-Allow-Headers",
             "Origin,Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,locale, X-EBAY-C-MARKETPLACE-ID, location");
-        addHeader(clientResponse.headers, "Allow-Control-Allow-Methods", "GET, HEAD, POST, PUT, DELETE, TRACE, OPTIONS",);
+        addHeader(
+          clientResponse.headers,
+          "Allow-Control-Allow-Methods",
+          "GET, HEAD, POST, PUT, DELETE, TRACE, OPTIONS",
+        );
         addHeader(clientResponse.headers, "Access-Control-Expose-Headers", "*");
         return Response(clientResponse.statusCode,
             body: clientResponse.stream, headers: clientResponse.headers);
@@ -104,10 +109,9 @@ void main() async {
   withHotreload(() => createServer());
 }
 
-Future<HttpServer> createServer() async{
+Future<HttpServer> createServer() async {
   final directory = Directory.current;
-  final secrets = await File("${directory.path}//secrets.env")
-      .readAsString();
+  final secrets = await File("${directory.path}//secrets.env").readAsString();
   final data = await jsonDecode(secrets);
   final appSecret = data['ebayAppSecret'];
   final appKey = data['ebayAppId'];
@@ -121,5 +125,4 @@ Future<HttpServer> createServer() async{
   // params['sign'] = sign(appSecret, getProductApi, params);
   print('Proxying at http://localhost:8081');
   return await shelf_io.serve(handler, 'localhost', 8081);
-  
 }
