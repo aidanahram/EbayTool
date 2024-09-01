@@ -19,8 +19,8 @@ class UserProfile {
   Json? aliAPI;
   /// The user's ebay listingIDs which gets saved to the database
   List<ItemID> listingIDs;
-  /// The user's ebay listings
-  List<Listing> listings = [];
+
+  dynamic raw;
 
   /// Creates a new User object.
   UserProfile({
@@ -48,7 +48,8 @@ class UserProfile {
     aliAPI = json["ali"],
     theme = json["theme"] == null ? ThemeMode.system : ThemeMode.values.byName(json["theme"]),
     //TODO decode the json
-    listingIDs = json["listingIDs"] == null ? [] : [const ItemID("WE HAVE AT LEAST ONE THING")];
+    listingIDs = json["listingIDs"] == null ? [] : List<ItemID>.from(json['listingIDs'] as List),
+    raw = json["listingIDs"];
 
   /// Convert this user to its JSON representation
   Json toJson() => {

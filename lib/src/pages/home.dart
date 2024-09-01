@@ -16,17 +16,23 @@ class HomePage extends StatefulWidget {
 
 class DataSource extends DataTableSource {
   String missingImage = "https://media.istockphoto.com/id/1472933890/vector/no-image-vector-symbol-missing-available-icon-no-gallery-for-this-moment-placeholder.jpg?s=612x612&w=0&k=20&c=Rdn-lecwAj8ciQEccm0Ep2RX50FCuUJOaEM8qQjiLL0=";
+  
+  @override 
+  DataSource(){
+    print(rowCount);
+    print(models.user.userProfile!.listingIDs);
+  }
+
   @override
   //int get rowCount => 3;
-  int get rowCount => models.user.userProfile!.listings.length;
+  int get rowCount => models.user.userProfile!.listingIDs.length;
 
   @override 
   DataRow? getRow(int index) {
-    print(index);
     if(index < 0 || index >= rowCount){
       return null;
     } else {
-      final listing = models.user.userProfile!.listings[index];
+      final listing = models.user.userProfile!.listingIDs[index];
       //return DataRow(
         // cells: <DataCell>[
         //   DataCell(Image.network(listing.mainImage ?? missingImage)),

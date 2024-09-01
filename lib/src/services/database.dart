@@ -35,16 +35,12 @@ class Database extends Service {
   Future<void> dispose() async { }
 
   /// Gets the currently signed-in user's profile.
-  Future<UserProfile?> getUserProfile(UserID userId) =>
+  Future<UserProfile?> getUserProfile(UserID userId) => 
     users.doc(userId).getData();
 
   /// Saves the user's profile to their user document (in [users]).
   Future<void> saveUserProfile(UserProfile user) =>
     users.doc(user.id).set(user);
-
-  Future<void> saveEbayApi(UserID userId, dynamic response){
-    return users.doc(userId).getData();
-  }
 
   /// Saves a ebay listing to the database
   Future<void> saveListing(Listing listing) =>
