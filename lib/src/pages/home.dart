@@ -15,7 +15,7 @@ class DataSource extends DataTableSource {
 
   @override
   //int get rowCount => 3;
-  int get rowCount => models.user.userProfile!.listingIDs.length;
+  int get rowCount => model.listings.length;
 
   @override
   DataRow? getRow(int index) {
@@ -191,7 +191,7 @@ class HomePage extends ReactiveWidget<HomeViewModel> {
             ),
             Container(
               width: MediaQuery.of(context).size.width,
-              margin: const EdgeInsets.symmetric(vertical: 30, horizontal: 100),
+              margin: const EdgeInsets.symmetric(vertical: 30.0, horizontal: 80.0),
               child: PaginatedDataTable(
                 columns: const <DataColumn>[
                   DataColumn(label: Text("Main Image")),
