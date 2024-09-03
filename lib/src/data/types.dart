@@ -45,8 +45,9 @@ Iterable<int> range(int end) sync* {
 
 /// Like Python's zip function.
 Iterable<(E1, E2)> zip<E1, E2>(List<E1> list1, List<E2> list2) sync* {
-  if (list1.length != list2.length)
+  if (list1.length != list2.length){
     throw ArgumentError("Trying to zip lists of different lengths");
+  }
   for (var index = 0; index < list1.length; index++) {
     yield (list1[index], list2[index]);
   }

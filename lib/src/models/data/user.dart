@@ -26,7 +26,6 @@ class UserModel extends DataModel {
   Future<void> signIn() async {
     final uid = services.auth.userID;
     if (uid == null) return;
-    print("retreiving user $uid from database");
     final profile = await services.database.getUserProfile(uid);
     if (profile == null) return;
     await models.onSignIn(profile);

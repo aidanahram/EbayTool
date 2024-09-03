@@ -60,7 +60,6 @@ class UserProfile {
         theme = json["theme"] == null
             ? ThemeMode.system
             : ThemeMode.values.byName(json["theme"]),
-        //TODO decode the json
         listingIDs = json["listingIDs"] == null
             ? []
             : List<ItemID>.from(json['listingIDs'] as List);

@@ -73,7 +73,7 @@ final GoRouter router = GoRouter(
             path: Routes.home,
             name: "Home",
             pageBuilder: (context, state) =>
-                NoTransitionPage(child: HomePage()),
+                const NoTransitionPage(child: HomePage()),
             routes: [
               GoRoute(
                 path: "add_item",
