@@ -1,6 +1,5 @@
 import "package:flutter/material.dart";
 
-import "listing.dart";
 import "types.dart";
 
 /// A user of the app. Can be a customer or seller.

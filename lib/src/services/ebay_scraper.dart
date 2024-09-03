@@ -3,7 +3,6 @@ import "dart:convert";
 
 import "package:ebay/data.dart";
 import "package:ebay/services.dart";
-import "package:ebay/src/services/service.dart";
 import "package:ebay/models.dart";
 import "package:http/http.dart" as http;
 import 'package:xml/xml.dart';
@@ -241,7 +240,7 @@ class EbayScraper extends Service {
     } on Exception catch (e) {
       print("Couldn't get information for Item: $itemID");
       print(e);
-      return Listing(itemID: itemID, price: -1.0, quantity: -1);;
+      return Listing(itemID: itemID, price: -1.0, quantity: -1);
     }
   }
 }
