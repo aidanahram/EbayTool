@@ -27,6 +27,7 @@ export "src/models/data/api_builder.dart";
 export "src/models/view/builders/builder.dart";
 
 export 'src/models/view/login.dart';
+export "src/models/view/home.dart";
 
 /// A wrapper model around all other data models used by the app.
 ///

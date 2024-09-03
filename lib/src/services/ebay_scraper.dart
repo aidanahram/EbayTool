@@ -162,7 +162,6 @@ class EbayScraper extends Service {
               String.fromCharCodes(file.content as List<int>));
           final skus = document.findAllElements("SKUDetails");
           final List<ItemID> items = [];
-          user.listings = [];
           for (final sku in skus) {
             items.add(ItemID(sku.findElements("ItemID").single.innerText));
             final listing = Listing(
@@ -204,7 +203,6 @@ class EbayScraper extends Service {
       listing.mainImage = json["image"]["imageUrl"];
       listing.sku = json["sku"];
       await services.database.saveListing(listing);
-      user.listings.add(listing);
     } on Exception catch (e) {
       print("Couldn't get information for Item: ${listing.itemID}");
       print(e);
@@ -213,8 +211,8 @@ class EbayScraper extends Service {
     return true;
   }
 
-  Future<bool> getItemLegacyNoDataBase(UserProfile user, ItemID itemID) async {
-    if (!await verifyToken(user)) return false;
+  Future<Listing> getItemLegacyNoDataBase(UserProfile user, ItemID itemID) async {
+    if (!await verifyToken(user)) return Listing(itemID: itemID, price: -1.0, quantity: -1);
     final uri = Uri.http(api, "/buy/browse/v1/item/get_item_by_legacy_id",
         {"legacy_item_id": itemID});
     final Map<String, String> headers = {
@@ -239,13 +237,12 @@ class EbayScraper extends Service {
         mainImage: json["image"]["imageUrl"],
         sku: json["sku"],
       );
-      user.listings.add(listing);
+      return listing;
     } on Exception catch (e) {
       print("Couldn't get information for Item: $itemID");
       print(e);
-      return false;
+      return Listing(itemID: itemID, price: -1.0, quantity: -1);;
     }
-    return true;
   }
 }
 

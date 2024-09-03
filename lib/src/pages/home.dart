@@ -1,53 +1,35 @@
-// import 'package:ebay/app.dart';
 import 'package:ebay/models.dart';
-import 'package:ebay/services.dart';
 import 'package:ebay/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:ebay/pages.dart';
-import 'package:flutter/widgets.dart';
 import 'package:url_launcher/url_launcher.dart';
-
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
-
-  @override
-  State<HomePage> createState() => _HomePageState();
-}
 
 class DataSource extends DataTableSource {
   String missingImage =
       "https://media.istockphoto.com/id/1472933890/vector/no-image-vector-symbol-missing-available-icon-no-gallery-for-this-moment-placeholder.jpg?s=612x612&w=0&k=20&c=Rdn-lecwAj8ciQEccm0Ep2RX50FCuUJOaEM8qQjiLL0=";
 
+  final HomeViewModel model;
+
   @override
-  DataSource() {
-    print(rowCount);
-    print(models.user.userProfile!.listings);
-  }
+  DataSource({required this.model});
 
   @override
   //int get rowCount => 3;
-  int get rowCount => models.user.userProfile!.listings.length;
+  int get rowCount => models.user.userProfile!.listingIDs.length;
 
   @override
   DataRow? getRow(int index) {
     if (index < 0 || index >= rowCount) {
       return null;
     } else {
-      final listing = models.user.userProfile!.listings[index];
+      final listing = model.listings[index];
       return DataRow(cells: <DataCell>[
-        DataCell(Image.network(listing.mainImage ?? missingImage)),
+        DataCell(Image.network(listing.mainImage ?? missingImage, width: 20, height: 20)),
         DataCell(Text(listing.title ?? "missing name")),
         DataCell(Text(listing.price.toString())),
         DataCell(Text(listing.quantity.toString())),
         DataCell(Text(listing.itemID.toString())),
       ]);
-      // return const DataRow(cells: <DataCell>[
-      //   DataCell(Text("Bruh")),
-      //   DataCell(Text("Bruh")),
-      //   DataCell(Text("Bruh")),
-      //   DataCell(Text("Bruh")),
-      //   DataCell(Text("Bruh")),
-      // ]);
     }
   }
 
@@ -58,9 +40,7 @@ class DataSource extends DataTableSource {
   int get selectedRowCount => 0;
 }
 
-final DataTableSource dataSource = DataSource();
-
-class _HomePageState extends State<HomePage> {
+class HomePage extends ReactiveWidget<HomeViewModel> {
   static const redirectUrl =
       "https://webhook.site/492b6fc0-eb70-4d3e-bfb4-a9c23409f82e";
   static const aliSignOn =
@@ -68,8 +48,10 @@ class _HomePageState extends State<HomePage> {
   static const ebaySignOn =
       "https://auth.ebay.com/oauth2/authorize?client_id=AidanAhr-first-PRD-9f5c11990-5d41c06c&response_type=code&redirect_uri=Aidan_Ahram-AidanAhr-first--jssslhkm&scope=https://api.ebay.com/oauth/api_scope https://api.ebay.com/oauth/api_scope/sell.marketing.readonly https://api.ebay.com/oauth/api_scope/sell.marketing https://api.ebay.com/oauth/api_scope/sell.inventory.readonly https://api.ebay.com/oauth/api_scope/sell.inventory https://api.ebay.com/oauth/api_scope/sell.account.readonly https://api.ebay.com/oauth/api_scope/sell.account https://api.ebay.com/oauth/api_scope/sell.fulfillment.readonly https://api.ebay.com/oauth/api_scope/sell.fulfillment https://api.ebay.com/oauth/api_scope/sell.analytics.readonly https://api.ebay.com/oauth/api_scope/sell.finances https://api.ebay.com/oauth/api_scope/sell.payment.dispute https://api.ebay.com/oauth/api_scope/commerce.identity.readonly https://api.ebay.com/oauth/api_scope/sell.reputation https://api.ebay.com/oauth/api_scope/sell.reputation.readonly https://api.ebay.com/oauth/api_scope/commerce.notification.subscription https://api.ebay.com/oauth/api_scope/commerce.notification.subscription.readonly https://api.ebay.com/oauth/api_scope/sell.stores https://api.ebay.com/oauth/api_scope/sell.stores.readonly";
 
+  const HomePage({super.key});
+
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, HomeViewModel model) {
     return Scaffold(
       appBar: AppBar(
           backgroundColor: Colors.orange,
@@ -88,7 +70,7 @@ class _HomePageState extends State<HomePage> {
             IconButton(
               icon: const Icon(Icons.refresh),
               onPressed: () => models.user.isSignedIn
-                  ? services.ebayScraper.getProducts(models.user.userProfile!)
+                  ? model.refreshListings()
                   : print("user is not signed in"),
             ),
           ]),
@@ -194,13 +176,13 @@ class _HomePageState extends State<HomePage> {
       ),
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             const SizedBox(height: 10),
             SearchBar(
               hintText: "Search for a product",
-              padding: const MaterialStatePropertyAll<EdgeInsets>(
+              padding: const WidgetStatePropertyAll<EdgeInsets>(
                   EdgeInsets.symmetric(horizontal: 16.0)),
               leading: const Icon(Icons.search),
               onSubmitted: (value) {
@@ -218,9 +200,10 @@ class _HomePageState extends State<HomePage> {
                   DataColumn(label: Text("Quantity")),
                   DataColumn(label: Text("Item ID")),
                 ],
-                source: dataSource,
+                source: DataSource(model: model),
                 showEmptyRows: false,
               ),
+              //child: const Placeholder(),
             ),
           ],
         ),
@@ -232,4 +215,8 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
+
+  @override
+  HomeViewModel createModel() => HomeViewModel();
+
 }

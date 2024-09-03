@@ -100,12 +100,12 @@ class UserModel extends DataModel {
     await models.user.updateProfile(userProfile!);
   }
 
-  Future<void> getListingsInformation() async {
-    if (!isSignedIn) return;
-    userProfile!.listings = [];
+  Future<List<Listing>> getListingsInformation() async {
+    if (!isSignedIn) return [];
+    final List<Listing> listings = [];
     for (final itemID in userProfile!.listingIDs) {
-      await services.ebayScraper.getItemLegacyNoDataBase(userProfile!, itemID);
+      listings.add(await services.ebayScraper.getItemLegacyNoDataBase(userProfile!, itemID));
     }
-    notifyListeners();
+    return listings;
   }
 }

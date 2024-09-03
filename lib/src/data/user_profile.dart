@@ -26,8 +26,6 @@ class UserProfile {
   /// The user's ebay listingIDs which gets saved to the database
   List<ItemID> listingIDs;
 
-  List<Listing> listings = [];
-
   /// Creates a new User object.
   UserProfile({
     required this.id,
