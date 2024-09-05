@@ -15,14 +15,14 @@ class DataSource extends DataTableSource {
 
   @override
   //int get rowCount => 3;
-  int get rowCount => model.listings.length;
+  int get rowCount => model.filteredListing.length;
 
   @override
   DataRow? getRow(int index) {
     if (index < 0 || index >= rowCount) {
       return null;
     } else {
-      final listing = model.listings[index];
+      final listing = model.filteredListing[index];
       return DataRow(cells: <DataCell>[
         DataCell(Image.network(listing.mainImage ?? missingImage, width: 20, height: 20)),
         DataCell(Text(listing.title ?? "missing name")),
@@ -185,9 +185,7 @@ class HomePage extends ReactiveWidget<HomeViewModel> {
               padding: const WidgetStatePropertyAll<EdgeInsets>(
                   EdgeInsets.symmetric(horizontal: 16.0)),
               leading: const Icon(Icons.search),
-              onSubmitted: (value) {
-                print(value);
-              },
+              onChanged: model.search,
             ),
             Container(
               width: MediaQuery.of(context).size.width,

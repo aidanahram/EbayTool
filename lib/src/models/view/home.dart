@@ -12,16 +12,29 @@ class HomeViewModel extends ViewModel {
   /// List of [Listing] to be displayed in the UI
   List<Listing> listings = [];
 
+  String query = "";
+
+  List<Listing> get filteredListing =>
+    listings.where(filter).toList();
+
+  bool filter(Listing l) => l.title!.toLowerCase().contains(query);
+
   HomeViewModel();
 
   @override
   Future<void> init() async {
     isLoading = true;
     await refreshListings();
+    notifyListeners();
     isLoading = false;
   }
 
   Future<void> refreshListings() async {
     listings = await models.user.getListingsInformation();
+  }
+
+  void search(String input){
+    query = input.toLowerCase();
+    notifyListeners();
   }
 }
