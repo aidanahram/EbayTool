@@ -17,7 +17,7 @@ class HomeViewModel extends ViewModel {
   List<Listing> get filteredListing =>
     listings.where(filter).toList();
 
-  bool filter(Listing l) => l.title!.toLowerCase().contains(query);
+  bool filter(Listing l) => l.title!.toLowerCase().contains(query) || l.itemID.id.contains(query);
 
   HomeViewModel();
 
@@ -25,12 +25,20 @@ class HomeViewModel extends ViewModel {
   Future<void> init() async {
     isLoading = true;
     await refreshListings();
-    notifyListeners();
     isLoading = false;
+    notifyListeners();
   }
 
   Future<void> refreshListings() async {
+    isLoading = true;
+    notifyListeners();
     listings = await models.user.getListingsInformation();
+    isLoading = false;
+    notifyListeners();
+  }
+
+  void update() {
+    notifyListeners();
   }
 
   void search(String input){

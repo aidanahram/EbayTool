@@ -1,3 +1,5 @@
+import "package:loading_animation_widget/loading_animation_widget.dart";
+
 import 'package:ebay/models.dart';
 import 'package:ebay/widgets.dart';
 import 'package:flutter/material.dart';
@@ -23,13 +25,16 @@ class DataSource extends DataTableSource {
       return null;
     } else {
       final listing = model.filteredListing[index];
-      return DataRow(cells: <DataCell>[
-        DataCell(Image.network(listing.mainImage ?? missingImage, width: 20, height: 20)),
-        DataCell(Text(listing.title ?? "missing name")),
-        DataCell(Text(listing.price.toString())),
-        DataCell(Text(listing.quantity.toString())),
-        DataCell(Text(listing.itemID.toString())),
-      ]);
+      return DataRow(
+        cells: <DataCell>[
+          DataCell(Image.network(listing.mainImage ?? missingImage, width: 20, height: 20)),
+          DataCell(SelectableText(listing.title ?? "missing name")),
+          DataCell(SelectableText(listing.price.toString())),
+          DataCell(SelectableText(listing.quantity.toString())),
+          DataCell(SelectableText(listing.itemID.toString())),
+        ],
+        onLongPress: () => launchUrl(Uri.parse("https://www.ebay.com/itm/${listing.itemID}")),
+      );
     }
   }
 
@@ -102,7 +107,8 @@ class HomePage extends ReactiveWidget<HomeViewModel> {
                     if (context.mounted) {
                       showDialog<void>(
                           context: context,
-                          builder: (_) => const APIEditor(
+                          builder: (_) => APIEditor(
+                                homeModel: model,
                                 website: "AliExpress",
                               ));
                     }
@@ -122,7 +128,8 @@ class HomePage extends ReactiveWidget<HomeViewModel> {
                     if (context.mounted) {
                       showDialog<void>(
                           context: context,
-                          builder: (_) => const APIEditor(
+                          builder: (_) => APIEditor(
+                                homeModel: model,
                                 website: "Ebay",
                               ));
                     }
@@ -189,8 +196,8 @@ class HomePage extends ReactiveWidget<HomeViewModel> {
             ),
             Container(
               width: MediaQuery.of(context).size.width,
-              margin: const EdgeInsets.symmetric(vertical: 30.0, horizontal: 80.0),
-              child: PaginatedDataTable(
+              margin: model.isLoading ? const EdgeInsets.symmetric(vertical: 100.0, horizontal: 80.0) : const EdgeInsets.symmetric(vertical: 30.0, horizontal: 80.0),
+              child: model.isLoading ? LoadingAnimationWidget.hexagonDots(color: Colors.black, size:  100.0) : PaginatedDataTable(
                 columns: const <DataColumn>[
                   DataColumn(label: Text("Main Image")),
                   DataColumn(label: Text("Title")),

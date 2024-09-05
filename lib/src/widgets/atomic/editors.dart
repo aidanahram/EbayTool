@@ -7,7 +7,8 @@ import "package:ebay/widgets.dart";
 /// A widget to edit a color, backed by [APIBuilder].
 class APIEditor extends ReactiveWidget<APIBuilder> {
   final String website;
-  const APIEditor({super.key, required this.website});
+  final HomeViewModel homeModel;
+  const APIEditor({super.key, required this.homeModel, required this.website});
 
   @override
   APIBuilder createModel() => APIBuilder(website: website);
@@ -38,6 +39,7 @@ class APIEditor extends ReactiveWidget<APIBuilder> {
                 ? () {
                     model.save();
                     Navigator.of(context).pop();
+                    homeModel.update();
                   }
                 : null,
             child: const Text("Save"),
