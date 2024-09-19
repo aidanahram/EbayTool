@@ -20,16 +20,15 @@ class OrdersViewModel extends ViewModel {
   @override
   Future<void> init() async {
     isLoading = true;
-    await refreshListings();
+    await refreshOrders();
     isLoading = false;
     notifyListeners();
   }
 
-  ///TODO
-  Future<void> refreshListings() async {
+  Future<void> refreshOrders() async {
     isLoading = true;
     notifyListeners();
-    //orders = await models.user.getListingsInformation();
+    orders = await models.user.getOrdersInformation();
     isLoading = false;
     notifyListeners();
   }

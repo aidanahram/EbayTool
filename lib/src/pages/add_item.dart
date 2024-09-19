@@ -15,7 +15,7 @@ class AddItemPage extends ReactiveWidget<AliProductModel> {
   @override
   Widget build(BuildContext context, AliProductModel model) => Scaffold(
     appBar: AppBar(
-      backgroundColor: Colors.black,
+      backgroundColor: Colors.orange,
       title: const Text("Add a new item"),
     ),
     body: Center(

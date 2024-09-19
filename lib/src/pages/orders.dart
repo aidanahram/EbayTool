@@ -17,6 +17,14 @@ class OrdersPage extends ReactiveWidget<OrdersViewModel> {
     appBar: AppBar(
       backgroundColor: Colors.orange,
       title: const Text("Orders"),
+      actions: [
+        IconButton(
+          icon: const Icon(Icons.refresh),
+          onPressed: () => models.user.isSignedIn
+              ? model.refreshOrders()
+              : print("user is not signed in"),
+        ),
+      ],
     ),
   );
 }

@@ -11,8 +11,8 @@ import "package:ebay/models.dart";
 import "package:ebay/pages.dart";
 import "package:ebay/widgets.dart";
 
-/// The classic Binghamton green.
-const ebayYellow = Color.fromARGB(255, 255, 238, 0);
+/// The color used accross the app
+const ebayOrange = Colors.orange;
 
 /// The main class for the app.
 class AppDashboard extends ReusableReactiveWidget<AppModel> {
@@ -28,18 +28,18 @@ class AppDashboard extends ReusableReactiveWidget<AppModel> {
         theme: ThemeData(
           useMaterial3: false,
           colorScheme: const ColorScheme.light(
-            primary: ebayYellow,
-            secondary: ebayYellow,
+            primary: ebayOrange,
+            secondary: Colors.white,
           ),
           appBarTheme: const AppBarTheme(
-            backgroundColor: ebayYellow,
-            foregroundColor: ebayYellow,
+            backgroundColor: ebayOrange,
+            foregroundColor: Colors.white,
           ),
         ),
         darkTheme: ThemeData.from(
           colorScheme: const ColorScheme.dark(
-            primary: ebayYellow,
-            secondary: ebayYellow,
+            primary: ebayOrange,
+            secondary: Colors.black,
           ),
         ),
       );

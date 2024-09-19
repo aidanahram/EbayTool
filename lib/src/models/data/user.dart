@@ -116,4 +116,13 @@ class UserModel extends DataModel {
     }
     return listings;
   }
+
+  Future<List<Order>> getOrdersInformation() async {
+    if(!isSignedIn) return [];
+    final orders = await services.ebayScraper.getOrders(userProfile!);
+    if(orders.isEmpty){
+      return [];
+    }
+    return orders;
+  }
 }

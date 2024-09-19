@@ -17,7 +17,9 @@ class SettingsPage extends ReactiveWidget<LoginViewModel> {
 
   @override
   Widget build(BuildContext context, LoginViewModel model) => Scaffold(
-        appBar: AppBar(title: const Text("My Profile")),
+        appBar: AppBar(
+          title: const Text("My Profile")
+        ),
         body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,

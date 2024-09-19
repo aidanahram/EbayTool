@@ -245,8 +245,8 @@ class EbayScraper extends Service {
     }
   }
 
-  Future<bool> getOrders(UserProfile user) async {
-    if(! await verifyToken(user)) return false;
+  Future<List<Order>> getOrders(UserProfile user) async {
+    if(! await verifyToken(user)) return [];
     final uri = Uri.http(api, "/sell/fulfillment/v1/order");
     final Map<String, String> headers = {
       "Authorization": "Bearer ${user.ebayAPI!["access_token"]}",
@@ -257,16 +257,16 @@ class EbayScraper extends Service {
         print(response.headers);
         print(response.statusCode);
         print(response.body);
-        throw Exception(
-            "Recieved error code from server: ${response.statusCode}");
+        throw Exception("Recieved error code from server: ${response.statusCode}");
       }
       final json = jsonDecode(response.body);
+      print(json);
     } on Exception catch (e) {
       print(e);
       print("Can't get orders");
-      return false;
+      return [];
     }
-    return true;
+    return [];
   }
 }
 
