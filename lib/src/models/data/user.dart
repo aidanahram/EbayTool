@@ -108,4 +108,14 @@ class UserModel extends DataModel {
     }
     return listings;
   }
+
+  Future<List<Listing>> getListingsInformationFromDatabase() async {
+    if (!isSignedIn) return [];
+    final List<Listing> listings = [];
+    for(final itemId in userProfile!.listingIDs){
+      final listing = await services.database.getListing(itemId);
+      if(listing != null) listings.add(listing);
+    }
+    return listings;
+  }
 }

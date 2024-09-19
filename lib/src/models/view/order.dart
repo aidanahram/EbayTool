@@ -1,21 +1,21 @@
 import "package:ebay/data.dart";
 import "package:ebay/models.dart";
 
-/// A view model to show the home page.
-class HomeViewModel extends ViewModel {
+/// A view model to show the order page.
+class OrdersViewModel extends ViewModel {
   /// Whether the model is loading
   bool isLoading = false;
   /// List of [Listing] to be displayed in the UI
-  List<Listing> listings = [];
+  List<Order> orders = [];
 
   String query = "";
 
-  List<Listing> get filteredListing =>
-    listings.where(filter).toList();
+  List<Order> get filteredListing =>
+    orders.where(filter).toList();
 
-  bool filter(Listing l) => l.title!.toLowerCase().contains(query) || l.itemID.id.contains(query);
+  bool filter(Order l) => l.title!.toLowerCase().contains(query) || l.itemID.id.contains(query);
 
-  HomeViewModel();
+  OrdersViewModel();
 
   @override
   Future<void> init() async {
@@ -25,10 +25,11 @@ class HomeViewModel extends ViewModel {
     notifyListeners();
   }
 
+  ///TODO
   Future<void> refreshListings() async {
     isLoading = true;
     notifyListeners();
-    listings = await models.user.getListingsInformation();
+    //orders = await models.user.getListingsInformation();
     isLoading = false;
     notifyListeners();
   }

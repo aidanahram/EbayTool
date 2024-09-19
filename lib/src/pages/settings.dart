@@ -58,9 +58,9 @@ class SettingsPage extends ReactiveWidget<LoginViewModel> {
                   FilledButton(
                     style: const ButtonStyle(
                       backgroundColor:
-                          MaterialStatePropertyAll<Color>(Colors.grey),
+                          WidgetStatePropertyAll<Color>(Colors.grey),
                     ),
-                    onPressed: () => Navigator.of(context).pop(),
+                    onPressed: () => router.go("/home"),
                     child: const Text("Cancel"),
                   ),
                   const SizedBox(

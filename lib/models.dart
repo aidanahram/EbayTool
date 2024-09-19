@@ -26,8 +26,9 @@ export "src/data/app.dart";
 export "src/models/data/api_builder.dart";
 export "src/models/view/builders/builder.dart";
 
-export 'src/models/view/login.dart';
+export "src/models/view/login.dart";
 export "src/models/view/home.dart";
+export "src/models/view/order.dart";
 
 /// A wrapper model around all other data models used by the app.
 ///
@@ -46,7 +47,7 @@ class Models extends DataModel {
   /// Caches the settings and updates them to all listeners.
   final settings = SettingsModel();
 
-  /// Contains persistent data about the dashboard's current state.
+  /// Contains persistent data about the app's current state.
   final app = AppModel();
 
   /// The user data model.
@@ -64,7 +65,6 @@ class Models extends DataModel {
   @override
   void dispose() {
     settings.dispose();
-
     super.dispose();
   }
 

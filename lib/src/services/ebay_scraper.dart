@@ -4,6 +4,7 @@ import "dart:convert";
 import "package:ebay/data.dart";
 import "package:ebay/services.dart";
 import "package:ebay/models.dart";
+import "package:firebase_auth/firebase_auth.dart";
 import "package:http/http.dart" as http;
 import 'package:xml/xml.dart';
 import 'package:archive/archive.dart';
@@ -243,8 +244,35 @@ class EbayScraper extends Service {
       return Listing(itemID: itemID, price: -1.0, quantity: -1);
     }
   }
+
+  Future<bool> getOrders(UserProfile user) async {
+    if(! await verifyToken(user)) return false;
+    final uri = Uri.http(api, "/sell/fulfillment/v1/order");
+    final Map<String, String> headers = {
+      "Authorization": "Bearer ${user.ebayAPI!["access_token"]}",
+    };
+    try {
+      final response = await client.get(uri, headers: headers);
+      if (response.statusCode >= 400) {
+        print(response.headers);
+        print(response.statusCode);
+        print(response.body);
+        throw Exception(
+            "Recieved error code from server: ${response.statusCode}");
+      }
+      final json = jsonDecode(response.body);
+    } on Exception catch (e) {
+      print(e);
+      print("Can't get orders");
+      return false;
+    }
+    return true;
+  }
 }
 
+/// Verifies the provided [user] has an valid token
+/// 
+/// If token has expired but the [user]'s refresh token is valid a new token is generated for the [user]
 Future<bool> verifyToken(UserProfile user) async {
   if (!user.ebayTokenValid) {
     if (!user.ebayRefreshTokenValid) {

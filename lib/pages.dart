@@ -16,6 +16,7 @@ import "src/pages/home.dart";
 import "src/pages/add_item.dart";
 import "src/pages/login.dart";
 import "src/pages/settings.dart";
+import "src/pages/orders.dart";
 
 /// All the routes in the app.
 class Routes {
@@ -30,6 +31,9 @@ class Routes {
 
   /// The route for the settings page
   static const settings = "/settings";
+
+  /// The route for the orders page
+  static const orders = "/orders";
 
   /// All the routes on the bottom nav bar. Used in [ShellPage].
   static const branches = [home, login];
@@ -55,7 +59,7 @@ final GoRouter router = GoRouter(
       redirect: (_, __) => Routes.home,
     ),
     GoRoute(
-      path: "/login",
+      path: Routes.login,
       name: "Login",
       builder: (context, state) =>
           LoginPage(redirect: state.uri.queryParameters["redirect"]),
@@ -81,9 +85,14 @@ final GoRouter router = GoRouter(
                 builder: (context, state) => const AddItemPage(),
               ),
               GoRoute(
-                path: "settings",
+                path: "Settings",
                 name: "Settings",
                 builder: (context, state) => const SettingsPage(),
+              ),
+              GoRoute(
+                path: "orders",
+                name: "Orders",
+                builder: (context, state) => const OrdersPage(),
               ),
             ],
           ),

@@ -55,172 +55,176 @@ class HomePage extends ReactiveWidget<HomeViewModel> {
   const HomePage({super.key});
 
   @override
-  Widget build(BuildContext context, HomeViewModel model) {
-    return Scaffold(
-      appBar: AppBar(
-          backgroundColor: Colors.orange,
-          title: const Text("Ebay Drop Shipping Tool"),
-          leading: Builder(
-            builder: (context) {
-              return IconButton(
-                icon: const Icon(Icons.menu),
-                onPressed: () {
-                  Scaffold.of(context).openDrawer();
-                },
-              );
-            },
-          ),
-          actions: [
-            IconButton(
-              icon: const Icon(Icons.refresh),
-              onPressed: () => models.user.isSignedIn
-                  ? model.refreshListings()
-                  : print("user is not signed in"),
-            ),
-          ]),
-      drawer: Drawer(
-        child: Column(
-          children: [
-            DrawerHeader(
-                child: Row(
-              children: [
-                Builder(
-                  builder: (context) {
-                    return IconButton(
-                      icon: const Icon(Icons.menu),
-                      onPressed: () {
-                        Scaffold.of(context).closeDrawer();
-                      },
-                    );
-                  },
-                ),
-                const Text("Menu"),
-              ],
-            )),
-            ListTile(
-                title: const Text("Verify Ali Express Account"),
-                onTap: () async {
-                  final url = Uri.parse(aliSignOn);
-                  if (await canLaunchUrl(url)) {
-                    await launchUrl(url);
-                    if (context.mounted) {
-                      showDialog<void>(
-                          context: context,
-                          builder: (_) => APIEditor(
-                                homeModel: model,
-                                website: "AliExpress",
-                              ));
-                    }
-                  } else {
-                    throw "Could not launch $url";
-                  }
-                }),
-            const Divider(
-              color: Colors.grey,
-            ),
-            ListTile(
-                title: const Text("Verify eBay Account"),
-                onTap: () async {
-                  final url = Uri.parse(ebaySignOn); //
-                  if (await canLaunchUrl(url)) {
-                    await launchUrl(url, mode: LaunchMode.inAppWebView);
-                    if (context.mounted) {
-                      showDialog<void>(
-                          context: context,
-                          builder: (_) => APIEditor(
-                                homeModel: model,
-                                website: "Ebay",
-                              ));
-                    }
-                  } else {
-                    throw "Could not launch $url";
-                  }
-                }),
-            const Divider(
-              color: Colors.grey,
-            ),
-            Expanded(
-              child: Align(
-                  alignment: FractionalOffset.bottomCenter,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      ListTile(
-                        hoverColor: Colors.blue,
-                        dense: true,
-                        visualDensity: const VisualDensity(vertical: -4),
-                        leading: const Icon(
-                          Icons.settings,
-                          color: Colors.black,
-                        ),
-                        title: const Text('Settings'),
-                        onTap: () {
-                          router.go("/home/settings");
-                        },
-                      ),
-                      ListTile(
-                        hoverColor: Colors.blue,
-                        dense: true,
-                        visualDensity: const VisualDensity(vertical: -4),
-                        leading: const Icon(
-                          Icons.logout,
-                          color: Colors.black,
-                        ),
-                        title: const Text('Logout'),
-                        onTap: () async {
-                          await models.user.signOut();
-                          if (context.mounted) {
-                            Navigator.of(context).pop();
-                          }
-                        },
-                      ),
-                    ],
-                  )),
-            )
-          ],
-        ),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            const SizedBox(height: 10),
-            SearchBar(
-              hintText: "Search for a product",
-              padding: const WidgetStatePropertyAll<EdgeInsets>(
-                  EdgeInsets.symmetric(horizontal: 16.0)),
-              leading: const Icon(Icons.search),
-              onChanged: model.search,
-            ),
-            Container(
-              width: MediaQuery.of(context).size.width,
-              margin: model.isLoading ? const EdgeInsets.symmetric(vertical: 100.0, horizontal: 80.0) : const EdgeInsets.symmetric(vertical: 30.0, horizontal: 80.0),
-              child: model.isLoading ? LoadingAnimationWidget.hexagonDots(color: Colors.black, size:  100.0) : PaginatedDataTable(
-                columns: const <DataColumn>[
-                  DataColumn(label: Text("Main Image")),
-                  DataColumn(label: Text("Title")),
-                  DataColumn(label: Text("Price")),
-                  DataColumn(label: Text("Quantity")),
-                  DataColumn(label: Text("Item ID")),
-                ],
-                source: DataSource(model: model),
-                showEmptyRows: false,
-              ),
-              //child: const Placeholder(),
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => router.go("/home/add_item"),
-        tooltip: 'Add new product',
-        child: const Icon(Icons.add),
-      ),
-    );
-  }
-
-  @override
   HomeViewModel createModel() => HomeViewModel();
 
+  @override
+  Widget build(BuildContext context, HomeViewModel model) => Scaffold(
+    appBar: AppBar(
+        backgroundColor: Colors.orange,
+        title: const Text("Ebay Drop Shipping Tool"),
+        leading: Builder(
+          builder: (context) {
+            return IconButton(
+              icon: const Icon(Icons.menu),
+              onPressed: () {
+                Scaffold.of(context).openDrawer();
+              },
+            );
+          },
+        ),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.refresh),
+            onPressed: () => models.user.isSignedIn
+                ? model.refreshListings()
+                : print("user is not signed in"),
+          ),
+        ]),
+    drawer: Drawer(
+      child: Column(
+        children: [
+          DrawerHeader(
+              child: Row(
+            children: [
+              Builder(
+                builder: (context) {
+                  return IconButton(
+                    icon: const Icon(Icons.menu),
+                    onPressed: () {
+                      Scaffold.of(context).closeDrawer();
+                    },
+                  );
+                },
+              ),
+              const Text("Menu"),
+            ],
+          )),
+          ListTile(
+              title: const Text("Verify Ali Express Account"),
+              onTap: () async {
+                final url = Uri.parse(aliSignOn);
+                if (await canLaunchUrl(url)) {
+                  await launchUrl(url);
+                  if (context.mounted) {
+                    showDialog<void>(
+                        context: context,
+                        builder: (_) => APIEditor(
+                              homeModel: model,
+                              website: "AliExpress",
+                            ));
+                  }
+                } else {
+                  throw "Could not launch $url";
+                }
+              }),
+          const Divider(
+            color: Colors.grey,
+          ),
+          ListTile(
+            title: const Text("Verify eBay Account"),
+            onTap: () async {
+              final url = Uri.parse(ebaySignOn); //
+              if (await canLaunchUrl(url)) {
+                await launchUrl(url, mode: LaunchMode.inAppWebView);
+                if (context.mounted) {
+                  showDialog<void>(
+                      context: context,
+                      builder: (_) => APIEditor(
+                            homeModel: model,
+                            website: "Ebay",
+                          ));
+                }
+              } else {
+                throw "Could not launch $url";
+              }
+            }),
+          const Divider(
+            color: Colors.grey,
+          ),
+          ListTile(
+            title: const Text("Orders"),
+            onTap: () => router.go("/home/orders"),
+          ),
+          const Divider(
+            color: Colors.grey,
+          ),
+          Expanded(
+            child: Align(
+                alignment: FractionalOffset.bottomCenter,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    ListTile(
+                      hoverColor: Colors.blue,
+                      dense: true,
+                      visualDensity: const VisualDensity(vertical: -4),
+                      leading: const Icon(
+                        Icons.settings,
+                        color: Colors.black,
+                      ),
+                      title: const Text('Settings'),
+                      onTap: () {
+                        router.go("/home/settings");
+                      },
+                    ),
+                    ListTile(
+                      hoverColor: Colors.blue,
+                      dense: true,
+                      visualDensity: const VisualDensity(vertical: -4),
+                      leading: const Icon(
+                        Icons.logout,
+                        color: Colors.black,
+                      ),
+                      title: const Text('Logout'),
+                      onTap: () async {
+                        await models.user.signOut();
+                        if (context.mounted) {
+                          Navigator.of(context).pop();
+                        }
+                      },
+                    ),
+                  ],
+                )),
+          )
+        ],
+      ),
+    ),
+    body: Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          const SizedBox(height: 10),
+          SearchBar(
+            hintText: "Search for a product",
+            padding: const WidgetStatePropertyAll<EdgeInsets>(
+                EdgeInsets.symmetric(horizontal: 16.0)),
+            leading: const Icon(Icons.search),
+            onChanged: model.search,
+          ),
+          Container(
+            width: MediaQuery.of(context).size.width,
+            margin: model.isLoading ? const EdgeInsets.symmetric(vertical: 100.0, horizontal: 80.0) : const EdgeInsets.symmetric(vertical: 30.0, horizontal: 80.0),
+            child: model.isLoading ? LoadingAnimationWidget.hexagonDots(color: Colors.black, size:  100.0) : PaginatedDataTable(
+              columns: const <DataColumn>[
+                DataColumn(label: Text("Main Image")),
+                DataColumn(label: Text("Title")),
+                DataColumn(label: Text("Price")),
+                DataColumn(label: Text("Quantity")),
+                DataColumn(label: Text("Item ID")),
+              ],
+              source: DataSource(model: model),
+              showEmptyRows: false,
+            ),
+            //child: const Placeholder(),
+          ),
+        ],
+      ),
+    ),
+    floatingActionButton: FloatingActionButton(
+      onPressed: () => router.go("/home/add_item"),
+      tooltip: 'Add new product',
+      child: const Icon(Icons.add),
+    ),
+  );
 }
