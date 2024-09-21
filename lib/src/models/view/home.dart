@@ -20,7 +20,9 @@ class HomeViewModel extends ViewModel {
   @override
   Future<void> init() async {
     isLoading = true;
-    await refreshListings();
+    if(models.user.isSignedIn && models.user.userProfile!.ebayRefreshTokenValid){
+      await refreshListings();
+    }
     isLoading = false;
     notifyListeners();
   }

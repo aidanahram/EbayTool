@@ -211,40 +211,6 @@ class EbayScraper extends Service {
     return true;
   }
 
-  Future<Listing> getItemLegacyNoDataBase(UserProfile user, ItemID itemID) async {
-    if (!await verifyToken(user)) return Listing(itemID: itemID, price: -1.0, quantity: -1);
-    final uri = Uri.http(api, "/buy/browse/v1/item/get_item_by_legacy_id",
-        {"legacy_item_id": itemID});
-    final Map<String, String> headers = {
-      "Authorization": "Bearer ${user.ebayAPI!["access_token"]}",
-    };
-    try {
-      final response = await client.get(uri, headers: headers);
-      if (response.statusCode >= 400) {
-        print(response.headers);
-        print(response.statusCode);
-        print(response.body);
-        throw Exception(
-            "Recieved error code from server: ${response.statusCode}");
-      }
-      final json = jsonDecode(response.body);
-      final listing = Listing(
-        itemID: itemID,
-        price: double.parse(json["price"]["value"]),
-        title: json["title"],
-        quantity: json["estimatedAvailabilities"][0]
-            ["estimatedAvailableQuantity"],
-        mainImage: json["image"]["imageUrl"],
-        sku: json["sku"],
-      );
-      return listing;
-    } on Exception catch (e) {
-      print("Couldn't get information for Item: $itemID");
-      print(e);
-      return Listing(itemID: itemID, price: -1.0, quantity: -1);
-    }
-  }
-
   Future<List<Order>> getOrders(UserProfile user) async {
     if(! await verifyToken(user)) return [];
     final uri = Uri.http(api, "/sell/fulfillment/v1/order");

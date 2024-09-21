@@ -102,7 +102,8 @@ class UserModel extends DataModel {
     if (!isSignedIn) return [];
     final List<Listing> listings = [];
     for (final itemID in userProfile!.listingIDs) {
-      listings.add(await services.ebayScraper.getItemLegacyNoDataBase(userProfile!, itemID));
+      final listing = await services.database.getListing(itemID);
+      listing != null ? listings.add(listing) : ;
     }
     return listings;
   }
