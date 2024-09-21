@@ -39,7 +39,7 @@ class APIEditor extends ReactiveWidget<APIBuilder> {
                 ? () {
                     model.save();
                     Navigator.of(context).pop();
-                    homeModel.update();
+                    homeModel.refreshListings();
                   }
                 : null,
             child: const Text("Save"),
