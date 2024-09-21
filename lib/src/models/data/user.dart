@@ -57,16 +57,13 @@ class UserModel extends DataModel {
     notifyListeners();
   }
 
-  Future<void> refreshToken() async {
-    if (!isSignedIn) {
-      print("Can't refresh token: User not signed in");
-      return;
-    }
-    userProfile!.ebayAPI =
-        await services.ebayScraper.refreshToken(userProfile!);
-    if (userProfile!.ebayAPI == null) return;
+  Future<bool> refreshToken() async {
+    if (!isSignedIn) {print("Can't refresh token: User not signed in"); return false;}
+    if (!userProfile!.ebayTokenValid) {print("Need to reauthorize ebay, refresh token expired"); return false;}
+    userProfile!.ebayAPI = await services.ebayScraper.refreshToken(userProfile!);
+    if (userProfile!.ebayAPI == null) return false;
     saveTokenResponse();
-    await services.database.saveUserProfile(userProfile!);
+    return true;
   }
 
   Future<void> generateToken(String code) async {
@@ -100,6 +97,11 @@ class UserModel extends DataModel {
 
   Future<List<Listing>> getListingsInformation() async {
     if (!isSignedIn) return [];
+    if (!userProfile!.ebayRefreshTokenValid){
+      if(!await refreshToken()){
+        return [];
+      }
+    }
     final List<Listing> listings = [];
     for (final itemID in userProfile!.listingIDs) {
       final listing = await services.database.getListing(itemID);
