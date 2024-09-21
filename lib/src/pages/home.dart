@@ -16,6 +16,7 @@ class DataSource extends DataTableSource {
   DataSource({required this.model});
 
   @override
+  //int get rowCount => 3;
   int get rowCount => model.filteredListing.length;
 
   @override
@@ -28,7 +29,7 @@ class DataSource extends DataTableSource {
         cells: <DataCell>[
           DataCell(Image.network(listing.mainImage ?? missingImage, width: 20, height: 20)),
           DataCell(SelectableText(listing.title ?? "missing name")),
-          DataCell(SelectableText("\$${listing.price.toStringAsFixed(2)}")),
+          DataCell(SelectableText(listing.price.toString())),
           DataCell(SelectableText(listing.quantity.toString())),
           DataCell(SelectableText(listing.itemID.toString())),
         ],
