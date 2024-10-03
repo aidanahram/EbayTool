@@ -1,12 +1,12 @@
 import "types.dart";
 
+/// Data for an eBay order
 class Order {
   ItemID itemID;
   UserID? owner;
   String? title;
   double price;
   int quantity;
-  String? aliExpressLink;
   String? sku;
   String? mainImage;
 
@@ -15,7 +15,6 @@ class Order {
     this.owner,
     required this.price,
     required this.quantity,
-    this.aliExpressLink,
     this.title,
     this.sku,
     this.mainImage,
@@ -26,8 +25,7 @@ class Order {
         owner = json["owner"],
         title = json["title"],
         price = json["price"],
-        quantity = int.parse(json["quantity"]),
-        aliExpressLink = json["aliExpressLink"],
+        quantity = json["quantity"],
         sku = json["sku"],
         mainImage = json["mainImage"];
 
@@ -37,7 +35,6 @@ class Order {
         "title": title ?? "",
         "price": price,
         "quantity": quantity,
-        "aliExpressLink": aliExpressLink ?? "",
         "sku": sku ?? "",
         "mainImage": mainImage ?? "",
       };

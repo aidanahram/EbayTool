@@ -6,14 +6,14 @@ import 'package:flutter/material.dart';
 import 'package:ebay/pages.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class DataSource extends DataTableSource {
+class ListingsDataSource extends DataTableSource {
   String missingImage =
       "https://media.istockphoto.com/id/1472933890/vector/no-image-vector-symbol-missing-available-icon-no-gallery-for-this-moment-placeholder.jpg?s=612x612&w=0&k=20&c=Rdn-lecwAj8ciQEccm0Ep2RX50FCuUJOaEM8qQjiLL0=";
 
   final HomeViewModel model;
 
   @override
-  DataSource({required this.model});
+  ListingsDataSource({required this.model});
 
   @override
   int get rowCount => model.filteredListing.length;
@@ -39,7 +39,7 @@ class DataSource extends DataTableSource {
 
   @override
   bool get isRowCountApproximate => false;
-
+  
   @override
   int get selectedRowCount => 0;
 }
@@ -202,27 +202,31 @@ class HomePage extends ReactiveWidget<HomeViewModel> {
             leading: const Icon(Icons.search),
             onChanged: model.search,
           ),
-          Container(
-            width: MediaQuery.of(context).size.width,
-            margin: model.isLoading ? const EdgeInsets.symmetric(vertical: 100.0, horizontal: 80.0) : const EdgeInsets.symmetric(vertical: 30.0, horizontal: 80.0),
-            child: model.isLoading ? LoadingAnimationWidget.hexagonDots(color: Colors.black, size:  100.0) : PaginatedDataTable(
-              columns: const <DataColumn>[
-                DataColumn(label: Text("Main Image")),
-                DataColumn(label: Text("Title")),
-                DataColumn(label: Text("Price")),
-                DataColumn(label: Text("Quantity")),
-                DataColumn(label: Text("Item ID")),
-              ],
-              source: DataSource(model: model),
-              showEmptyRows: false,
+          LayoutBuilder(
+            builder: (context, constraints) => Container(
+            //width: MediaQuery.of(context).size.width,
+            //height: MediaQuery.of(context).size.height,
+              margin: model.isLoading ? const EdgeInsets.symmetric(vertical: 100.0, horizontal: 80.0) : const EdgeInsets.symmetric(horizontal: 80.0),
+              constraints: BoxConstraints(maxWidth: constraints.maxWidth, maxHeight: constraints.maxHeight),
+              child: model.isLoading ? LoadingAnimationWidget.hexagonDots(color: Colors.black, size:  100.0) : PaginatedDataTable(
+                columns: const <DataColumn>[
+                  DataColumn(label: Text("Main Image")),
+                  DataColumn(label: Text("Title")),
+                  DataColumn(label: Text("Price")),
+                  DataColumn(label: Text("Quantity")),
+                  DataColumn(label: Text("Item ID")),
+                ],
+                source: ListingsDataSource(model: model),
+                showEmptyRows: false,
+              ),
             ),
-            //child: const Placeholder(),
+              // margin: model.isLoading ? const EdgeInsets.symmetric(vertical: 100.0, horizontal: 80.0) : const EdgeInsets.symmetric(vertical: 30.0, horizontal: 80.0),
           ),
         ],
       ),
     ),
     floatingActionButton: FloatingActionButton(
-      onPressed: () => router.go("/home/add_item"),
+      onPressed: () => router.go("/home/addItem"),
       tooltip: 'Add new product',
       child: const Icon(Icons.add),
     ),
