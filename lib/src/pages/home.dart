@@ -202,6 +202,7 @@ class HomePage extends ReactiveWidget<HomeViewModel> {
             leading: const Icon(Icons.search),
             onChanged: model.search,
           ),
+          const SizedBox(height: 10),
           LayoutBuilder(
             builder: (context, constraints) => Container(
             //width: MediaQuery.of(context).size.width,
@@ -220,7 +221,6 @@ class HomePage extends ReactiveWidget<HomeViewModel> {
                 showEmptyRows: false,
               ),
             ),
-              // margin: model.isLoading ? const EdgeInsets.symmetric(vertical: 100.0, horizontal: 80.0) : const EdgeInsets.symmetric(vertical: 30.0, horizontal: 80.0),
           ),
         ],
       ),

@@ -2,40 +2,23 @@ import "types.dart";
 
 /// Data for an eBay order
 class Order {
+  OrderID orderID;
   ItemID itemID;
-  UserID? owner;
-  String? title;
-  double price;
+  String buyerUsername;
+  String title;
+  double soldPrice;
+  double payout;
   int quantity;
   String? sku;
-  String? mainImage;
 
   Order({
+    required this.orderID,
     required this.itemID,
-    this.owner,
-    required this.price,
+    required this.buyerUsername,
+    required this.soldPrice,
+    required this.payout,
     required this.quantity,
-    this.title,
+    required this.title,
     this.sku,
-    this.mainImage,
   });
-
-  Order.fromJson(Json json)
-      : itemID = json["itemID"],
-        owner = json["owner"],
-        title = json["title"],
-        price = json["price"],
-        quantity = json["quantity"],
-        sku = json["sku"],
-        mainImage = json["mainImage"];
-
-  Json toJson() => {
-        "itemID": itemID,
-        "owner": owner,
-        "title": title ?? "",
-        "price": price,
-        "quantity": quantity,
-        "sku": sku ?? "",
-        "mainImage": mainImage ?? "",
-      };
 }

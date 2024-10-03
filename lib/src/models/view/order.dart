@@ -10,10 +10,10 @@ class OrdersViewModel extends ViewModel {
 
   String query = "";
 
-  List<Order> get filteredListing =>
+  List<Order> get filteredOrders =>
     orders.where(filter).toList();
 
-  bool filter(Order l) => l.title!.toLowerCase().contains(query) || l.itemID.id.contains(query);
+  bool filter(Order o) => o.title.toLowerCase().contains(query) || o.itemID.id.contains(query) || o.orderID.id.contains(query);
 
   OrdersViewModel();
 

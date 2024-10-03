@@ -94,16 +94,14 @@ class UserModel extends DataModel {
     await models.user.updateProfile(userProfile!);
   }
 
-  Future<List<Listing>> refreshListingsInformation() async {
-    if (!isSignedIn) return [];
+  Future<bool> refreshListingsInformation() async {
+    if (!isSignedIn) return false;
     if (!userProfile!.ebayRefreshTokenValid){
       if(!await refreshToken()){
-        return [];
+        return false;
       }
     }
-    final List<Listing> listings = [];
-    await services.ebayScraper.getListings(userProfile!);
-    return listings;
+    return services.ebayScraper.getListings(userProfile!);
   }
 
   Future<List<Listing>> getListingsInformationFromDatabase() async {
@@ -118,10 +116,6 @@ class UserModel extends DataModel {
 
   Future<List<Order>> getOrdersInformation() async {
     if(!isSignedIn) return [];
-    final orders = await services.ebayScraper.getOrders(userProfile!);
-    if(orders.isEmpty){
-      return [];
-    }
-    return orders;
+    return services.ebayScraper.getOrders(userProfile!);
   }
 }

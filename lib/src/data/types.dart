@@ -7,6 +7,9 @@ extension type const UserID(String id) {}
 /// A unique ID for every ebay listing
 extension type const ItemID(String id) {}
 
+/// A unique ID for every ebay order
+extension type const OrderID(String id) {}
+
 /// Helpful methods on strings.
 extension StringUtils on String {
   /// Returns this string, or null if it's empty.

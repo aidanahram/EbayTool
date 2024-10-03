@@ -232,14 +232,26 @@ class EbayScraper extends Service {
         print(response.body);
         throw Exception("Recieved error code from server: ${response.statusCode}");
       }
+      final List<Order> orders = [];
       final json = jsonDecode(response.body);
-      print(response.body);
+      for(final order in json["orders"]){
+        final newOrder = Order(
+          orderID: order["orderId"],
+          itemID: order["lineItems"][0]["legacyItemId"],
+          buyerUsername: order["buyer"]["username"],
+          soldPrice: double.parse(order["pricingSummary"]["priceSubtotal"]["value"]),
+          payout: double.parse(order["paymentSummary"]["totalDueSeller"]["value"]),
+          title: order["lineItems"][0]["title"],
+          quantity: order["lineItems"][0]["quantity"],
+        );
+        orders.add(newOrder);
+      }
+      return orders;
     } on Exception catch (e) {
       print(e);
       print("Can't get orders");
       return [];
     }
-    return [];
   }
 }
 
