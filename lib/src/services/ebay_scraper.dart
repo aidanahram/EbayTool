@@ -1,10 +1,7 @@
 import "dart:convert";
-//import "dart:io";
-
 import "package:ebay/data.dart";
 import "package:ebay/services.dart";
 import "package:ebay/models.dart";
-import "package:firebase_auth/firebase_auth.dart";
 import "package:http/http.dart" as http;
 import 'package:xml/xml.dart';
 import 'package:archive/archive.dart';
@@ -92,7 +89,15 @@ class EbayScraper extends Service {
     }
   }
 
-  Future<bool> getProducts(UserProfile user) async {
+  /// Retrives a [user] listings from ebay and saves them to databse
+  /// 
+  /// The flow for this function is as follows:
+  ///   1. Create Inventory Task
+  ///   2. Check that the task succesful
+  ///   3. If sucessful, calls [downloadResultFile], which through [getItemLegacy] saves each item to database
+  /// 
+  /// If at any point the flow fails the function returns false
+  Future<bool> getListings(UserProfile user) async {
     if (!await verifyToken(user)) return false;
     final uri = Uri.http(api, "/sell/feed/v1/inventory_task");
     final Map<String, String> headers = {
@@ -123,7 +128,6 @@ class EbayScraper extends Service {
       })) {
         throw Exception("Task not ready after 30 seconds");
       }
-      print("task is ready");
       if (!await downloadResultFile(user,
           Uri.http(api, "/sell/feed/v1/task/$taskId/download_result_file"), {
         "Authorization": "Bearer ${user.ebayAPI!["access_token"]}",
@@ -137,6 +141,7 @@ class EbayScraper extends Service {
     return true;
   }
 
+  /// Checks the status of a task created through eBay API
   Future<bool> checkStatus(Uri uri, Map<String, String> headers) async {
     for (int i = 0; i < 5; i++) {
       final response = await client.get(uri, headers: headers);
@@ -149,6 +154,9 @@ class EbayScraper extends Service {
     return false;
   }
 
+  /// Downloads result file of listings from eBay.
+  /// 
+  /// Calls [getItemLegacy] which saves each listing to the databsase
   Future<bool> downloadResultFile(
       UserProfile user, Uri uri, Map<String, String> headers) async {
     final response = await client.get(uri, headers: headers);
@@ -176,10 +184,9 @@ class EbayScraper extends Service {
           await models.user.updateListings(items);
         }
       }
-    } else {
-      return false;
-    }
-    return true;
+      return true;
+    } 
+    return false;
   }
 
   Future<bool> getItemLegacy(UserProfile user, Listing listing) async {
@@ -226,7 +233,7 @@ class EbayScraper extends Service {
         throw Exception("Recieved error code from server: ${response.statusCode}");
       }
       final json = jsonDecode(response.body);
-      print(json);
+      print(response.body);
     } on Exception catch (e) {
       print(e);
       print("Can't get orders");

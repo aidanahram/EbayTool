@@ -21,7 +21,7 @@ class HomeViewModel extends ViewModel {
   Future<void> init() async {
     isLoading = true;
     if(models.user.isSignedIn && models.user.userProfile!.ebayRefreshTokenValid){
-      await refreshListings();
+      listings = await models.user.getListingsInformationFromDatabase();
     }
     isLoading = false;
     notifyListeners();
@@ -30,7 +30,8 @@ class HomeViewModel extends ViewModel {
   Future<void> refreshListings() async {
     isLoading = true;
     notifyListeners();
-    listings = await models.user.getListingsInformation();
+    await models.user.refreshListingsInformation();
+    listings = await models.user.getListingsInformationFromDatabase();
     isLoading = false;
     notifyListeners();
   }

@@ -26,7 +26,7 @@ class Listing {
         owner = json["owner"],
         title = json["title"],
         price = json["price"],
-        quantity = int.parse(json["quantity"]),
+        quantity = json["quantity"],
         aliExpressLink = json["aliExpressLink"],
         sku = json["sku"],
         mainImage = json["mainImage"];

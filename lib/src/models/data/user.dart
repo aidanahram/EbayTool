@@ -34,7 +34,6 @@ class UserModel extends DataModel {
   @override
   Future<void> onSignIn(UserProfile profile) async {
     userProfile = profile;
-    getListingsInformation();
     notifyListeners();
   }
 
@@ -95,7 +94,7 @@ class UserModel extends DataModel {
     await models.user.updateProfile(userProfile!);
   }
 
-  Future<List<Listing>> getListingsInformation() async {
+  Future<List<Listing>> refreshListingsInformation() async {
     if (!isSignedIn) return [];
     if (!userProfile!.ebayRefreshTokenValid){
       if(!await refreshToken()){
@@ -103,10 +102,7 @@ class UserModel extends DataModel {
       }
     }
     final List<Listing> listings = [];
-    for (final itemID in userProfile!.listingIDs) {
-      final listing = await services.database.getListing(itemID);
-      listing != null ? listings.add(listing) : ;
-    }
+    await services.ebayScraper.getListings(userProfile!);
     return listings;
   }
 
