@@ -9,6 +9,7 @@ class Order {
   double soldPrice;
   double payout;
   int quantity;
+  bool shipped;
   String? sku;
 
   Order({
@@ -19,6 +20,7 @@ class Order {
     required this.payout,
     required this.quantity,
     required this.title,
+    required this.shipped,
     this.sku,
   });
 }

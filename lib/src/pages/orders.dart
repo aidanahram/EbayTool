@@ -32,6 +32,11 @@ class OrdersDataSource extends DataTableSource {
           DataCell(SelectableText("\$${order.payout.toStringAsFixed(2)}")),
           DataCell(SelectableText(order.quantity.toString())),
           DataCell(SelectableText(order.itemID.toString())),
+          DataCell(DecoratedBox(
+            decoration: BoxDecoration(
+              color: order.shipped ? Colors.green : Colors.red,
+            ),
+          ),),
         ],
         onLongPress: () => launchUrl(Uri.parse("https://www.ebay.com/mesh/ord/details?orderid=${order.orderID}")),
       );
@@ -93,6 +98,7 @@ class OrdersPage extends ReactiveWidget<OrdersViewModel> {
                   DataColumn(label: Text("Payout")),
                   DataColumn(label: Text("Quantity")),
                   DataColumn(label: Text("Item ID")),
+                  DataColumn(label: Text("Shipepd")),
                 ],
                 source: OrdersDataSource(model: model),
                 showEmptyRows: false,

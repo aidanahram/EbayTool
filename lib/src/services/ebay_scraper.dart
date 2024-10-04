@@ -57,8 +57,8 @@ class EbayScraper extends Service {
   }
 
   Future<Map<String, dynamic>?> refreshToken(UserProfile user) async {
-    if (!user.ebayTokenValid) {
-      print(" Ebay token not valid");
+    if (!user.ebayRefreshTokenValid) {
+      print("eBay refresh token not valid");
       return null;
     }
     final uri = Uri.http(api, "/identity/v1/oauth2/token");
@@ -218,8 +218,9 @@ class EbayScraper extends Service {
     return true;
   }
 
+  /// Gets a list of eBay orders from given [user] account
   Future<List<Order>> getOrders(UserProfile user) async {
-    if(! await verifyToken(user)) return [];
+    if(!await verifyToken(user)) return [];
     final uri = Uri.http(api, "/sell/fulfillment/v1/order");
     final Map<String, String> headers = {
       "Authorization": "Bearer ${user.ebayAPI!["access_token"]}",
@@ -243,6 +244,7 @@ class EbayScraper extends Service {
           payout: double.parse(order["paymentSummary"]["totalDueSeller"]["value"]),
           title: order["lineItems"][0]["title"],
           quantity: order["lineItems"][0]["quantity"],
+          shipped: order["orderFulfillmentStatus"] == "FULFILLED",
         );
         orders.add(newOrder);
       }
@@ -258,6 +260,8 @@ class EbayScraper extends Service {
 /// Verifies the provided [user] has an valid token
 /// 
 /// If token has expired but the [user]'s refresh token is valid a new token is generated for the [user]
+/// 
+/// returns false if token is expired, true if token is valid or valid one could be generated
 Future<bool> verifyToken(UserProfile user) async {
   if (!user.ebayTokenValid) {
     if (!user.ebayRefreshTokenValid) {
@@ -265,7 +269,6 @@ Future<bool> verifyToken(UserProfile user) async {
       return false;
     }
     await models.user.refreshToken();
-    user = models.user.userProfile!;
   }
   return true;
 }

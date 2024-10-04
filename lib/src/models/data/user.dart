@@ -56,24 +56,26 @@ class UserModel extends DataModel {
     notifyListeners();
   }
 
+  /// Gets a new token using the user's refresh token
   Future<bool> refreshToken() async {
     if (!isSignedIn) {print("Can't refresh token: User not signed in"); return false;}
-    if (!userProfile!.ebayTokenValid) {print("Need to reauthorize ebay, refresh token expired"); return false;}
-    userProfile!.ebayAPI = await services.ebayScraper.refreshToken(userProfile!);
-    if (userProfile!.ebayAPI == null) return false;
-    saveTokenResponse();
-    return true;
+    if (!userProfile!.ebayRefreshTokenValid) {print("Need to reauthorize ebay, refresh token expired"); return false;}
+    final refreshTokenResponse = await services.ebayScraper.refreshToken(userProfile!);
+    if (refreshTokenResponse == null) return false;
+    userProfile!.ebayAPI!["expires_in"] = refreshTokenResponse["expires_in"];
+    userProfile!.ebayAPI!["access_token"] = refreshTokenResponse["access_token"];
+    return saveTokenResponse();
   }
 
-  Future<void> generateToken(String code) async {
+  Future<bool> generateToken(String code) async {
     userProfile!.ebayAPI = await services.ebayScraper.generateToken(code);
-    saveTokenResponse();
+    return saveTokenResponse();
   }
 
-  void saveTokenResponse() async {
+  Future<bool> saveTokenResponse() async {
     if (!isSignedIn) {
       print("Can't save api response: User is not logged in");
-      return;
+      return false;
     }
     if (userProfile!.ebayAPI != null) {
       userProfile!.ebayAPI!['refresh_token_valid_time'] =
@@ -85,7 +87,9 @@ class UserModel extends DataModel {
           DateTime.now().millisecondsSinceEpoch +
               userProfile!.ebayAPI!['expires_in'] * 1000;
       await models.user.updateProfile(userProfile!);
+      return true;
     }
+    return false;
   }
 
   Future<void> updateListings(List<ItemID> items) async {
