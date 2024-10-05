@@ -210,6 +210,7 @@ class HomePage extends ReactiveWidget<HomeViewModel> {
               margin: model.isLoading ? const EdgeInsets.symmetric(vertical: 100.0, horizontal: 80.0) : const EdgeInsets.symmetric(horizontal: 80.0),
               constraints: BoxConstraints(maxWidth: constraints.maxWidth, maxHeight: constraints.maxHeight),
               child: model.isLoading ? LoadingAnimationWidget.hexagonDots(color: Colors.black, size:  100.0) : PaginatedDataTable(
+                columnSpacing: 15.0,
                 columns: const <DataColumn>[
                   DataColumn(label: Text("Main Image")),
                   DataColumn(label: Text("Title")),

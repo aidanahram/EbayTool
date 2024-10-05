@@ -26,17 +26,16 @@ class OrdersDataSource extends DataTableSource {
       final order = model.filteredOrders[index];
       return DataRow(
         cells: <DataCell>[
-          DataCell(SelectableText(order.orderID.toString())),
+          DataCell(SelectableText(
+            order.shipped ? "Shipped" : "Awaiting Shipment",
+            style: TextStyle(color: order.shipped ? Colors.green : Colors.red),
+          )),
           DataCell(SelectableText(order.title)),
           DataCell(SelectableText("\$${order.soldPrice.toStringAsFixed(2)}")),
           DataCell(SelectableText("\$${order.payout.toStringAsFixed(2)}")),
           DataCell(SelectableText(order.quantity.toString())),
+          DataCell(SelectableText(order.orderID.toString())),
           DataCell(SelectableText(order.itemID.toString())),
-          DataCell(DecoratedBox(
-            decoration: BoxDecoration(
-              color: order.shipped ? Colors.green : Colors.red,
-            ),
-          ),),
         ],
         onLongPress: () => launchUrl(Uri.parse("https://www.ebay.com/mesh/ord/details?orderid=${order.orderID}")),
       );
@@ -91,14 +90,15 @@ class OrdersPage extends ReactiveWidget<OrdersViewModel> {
               margin: model.isLoading ? const EdgeInsets.symmetric(vertical: 100.0, horizontal: 80.0) : const EdgeInsets.symmetric(horizontal: 80.0),
               constraints: BoxConstraints(maxWidth: constraints.maxWidth, maxHeight: constraints.maxHeight),
               child: model.isLoading ? LoadingAnimationWidget.hexagonDots(color: Colors.black, size:  100.0) : PaginatedDataTable(
+                columnSpacing: 15.0,
                 columns: const <DataColumn>[
-                  DataColumn(label: Text("Order Id")),
+                  DataColumn(label: Text("Status")),
                   DataColumn(label: Text("Title")),
                   DataColumn(label: Text("Sold Price")),
                   DataColumn(label: Text("Payout")),
                   DataColumn(label: Text("Quantity")),
+                  DataColumn(label: Text("Order ID")),
                   DataColumn(label: Text("Item ID")),
-                  DataColumn(label: Text("Shipepd")),
                 ],
                 source: OrdersDataSource(model: model),
                 showEmptyRows: false,
