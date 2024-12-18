@@ -1,5 +1,6 @@
 import "package:ebay/data.dart";
 import "package:ebay/models.dart";
+import "package:ebay/services.dart";
 
 /// A view model to show the home page.
 class HomeViewModel extends ViewModel {
@@ -21,7 +22,9 @@ class HomeViewModel extends ViewModel {
   Future<void> init() async {
     isLoading = true;
     if(models.user.isSignedIn){
+      //services.logger.info("Getting listing from database");
       listings = await models.user.getListingsInformationFromDatabase();
+      //services.logger.info("Retrieved listings");
     }
     isLoading = false;
     notifyListeners();

@@ -27,6 +27,7 @@ class UserModel extends DataModel {
     final uid = services.auth.userID;
     if (uid == null) return;
     final profile = await services.database.getUserProfile(uid);
+    //services.logger.finest("User $uid, profile: $profile");
     if (profile == null) return;
     await models.onSignIn(profile);
   }
@@ -112,7 +113,9 @@ class UserModel extends DataModel {
     if (!isSignedIn) return [];
     final List<Listing> listings = [];
     for(final itemId in userProfile!.listingIDs){
+      //services.logger.finest("Getting $itemId");
       final listing = await services.database.getListing(itemId);
+      //services.logger.finest("Got ${listing?.title}");
       if(listing != null) listings.add(listing);
     }
     return listings;
