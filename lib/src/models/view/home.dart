@@ -22,9 +22,7 @@ class HomeViewModel extends ViewModel {
   Future<void> init() async {
     isLoading = true;
     if(models.user.isSignedIn){
-      //services.logger.info("Getting listing from database");
       listings = await models.user.getListingsInformationFromDatabase();
-      //services.logger.info("Retrieved listings");
     }
     isLoading = false;
     notifyListeners();
@@ -33,10 +31,10 @@ class HomeViewModel extends ViewModel {
   Future<void> refreshListings() async {
     isLoading = true;
     notifyListeners();
+    print("Refreshing listings called");
     if(! await models.user.refreshListingsInformation()){
-      print("cant refresh listing");
+      print("Cannot refresh listing");
     }
-    listings = await models.user.getListingsInformationFromDatabase();
     isLoading = false;
     notifyListeners();
   }

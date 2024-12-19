@@ -2,6 +2,7 @@ import "package:loading_animation_widget/loading_animation_widget.dart";
 
 import 'package:ebay/models.dart';
 import 'package:ebay/widgets.dart';
+import 'package:ebay/services.dart';
 import 'package:flutter/material.dart';
 import 'package:ebay/pages.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -101,6 +102,7 @@ class HomePage extends ReactiveWidget<HomeViewModel> {
           )),
           ListTile(
               title: const Text("Verify Ali Express Account"),
+              tileColor: models.user.userProfile != null && models.user.userProfile!.aliTokenValid ? Colors.green : Colors.red,
               onTap: () async {
                 final url = Uri.parse(aliSignOn);
                 if (await canLaunchUrl(url)) {
@@ -122,6 +124,7 @@ class HomePage extends ReactiveWidget<HomeViewModel> {
           ),
           ListTile(
             title: const Text("Verify eBay Account"),
+            tileColor: models.user.userProfile != null && models.user.userProfile!.ebayRefreshTokenValid ? Colors.green : Colors.red,
             onTap: () async {
               final url = Uri.parse(ebaySignOn); //
               if (await canLaunchUrl(url)) {

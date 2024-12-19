@@ -1,9 +1,9 @@
 import "package:cloud_firestore/cloud_firestore.dart";
 
 import "package:ebay/data.dart";
+import "package:ebay/services.dart";
 
 import "firestore.dart";
-import "service.dart";
 
 /// A service to interface with our database, Firebase's Cloud Firestore.
 class Database extends Service {
@@ -46,22 +46,7 @@ class Database extends Service {
 
   /// Saves a ebay listing to the database
   Future<void> saveListing(Listing listing) =>
-      listings.doc(listing.itemID).set(listing);
+      listings.doc(listing.itemID).set(listing).catchError((err) => print(err));
 
-  Future<Listing?> getListing(ItemID itemID) => listings.doc(itemID).getData();
-
-  /// Saves a product to the database.
-  // Future<void> saveProduct(Product product) =>
-  //   products.doc(product.id).set(product);
-
-  /// Gets a list of products listed by the seller with the given [sellerID].
-  // Future<List<Product>> getProductsBySellerID(SellerID sellerID) =>
-  //   products.where("sellerID", isEqualTo: sellerID).limit(20).getAll();
-
-  // /// Gets the product from the the given product ID
-  // Future<Product?> getProduct(ProductID productID) =>
-  //   products.doc(productID).getData();
-
-  // /// Deletes a product from the database.
-  // Future<void> deleteProduct(ProductID id) => products.doc(id).delete();
+  Future<Listing?> getListing(ItemID itemID) => listings.doc(itemID).getData().catchError((err) {print("$itemID $err"); return null;});
 }

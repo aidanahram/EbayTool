@@ -84,7 +84,7 @@ class LoginViewModel extends BuilderModel<UserProfile> {
     await services.auth.signIn();
     await models.user.signIn();
     final email = services.auth.user?.email;
-    //services.logger.info("User $email: is signed in?: ${models.user.isSignedIn}");
+    //print("User $email: is signed in?: ${models.user.isSignedIn}");
     if (email == null) return;
     if (models.user.isSignedIn) {
       router.go(redirect);

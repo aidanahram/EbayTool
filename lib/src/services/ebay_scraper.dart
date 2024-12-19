@@ -112,6 +112,7 @@ class EbayScraper extends Service {
     });
     try {
       final response = await client.post(uri, headers: headers, body: payload);
+      print("Sending POST request to $uri");
       if (response.statusCode >= 400) {
         print(response.headers);
         print(response.statusCode);
@@ -135,7 +136,7 @@ class EbayScraper extends Service {
         print("Unable to download result file");
       }
     } on Exception catch (e) {
-      print("THERE WAS AN ERROR AND LOGGING IS TOO DIFFICULT");
+      print("Exception occured while calling getListings");
       print(e);
     }
     return true;
@@ -157,8 +158,8 @@ class EbayScraper extends Service {
   /// Downloads result file of listings from eBay.
   /// 
   /// Calls [getItemLegacy] which saves each listing to the databsase
-  Future<bool> downloadResultFile(
-      UserProfile user, Uri uri, Map<String, String> headers) async {
+  Future<bool> downloadResultFile(UserProfile user, Uri uri, Map<String, String> headers) async {
+    print("Downloading result file");
     final response = await client.get(uri, headers: headers);
     if (response.statusCode == 200) {
       final archive = ZipDecoder().decodeBytes(response.bodyBytes);
@@ -186,9 +187,11 @@ class EbayScraper extends Service {
       }
       return true;
     } 
+    print("Cannot download result file");
     return false;
   }
 
+  /// Takes a [UserProfile] and a [Listing], gets information from ebay and saves to database
   Future<bool> getItemLegacy(UserProfile user, Listing listing) async {
     if (!await verifyToken(user)) return false;
     final uri = Uri.http(api, "/buy/browse/v1/item/get_item_by_legacy_id",
@@ -209,6 +212,7 @@ class EbayScraper extends Service {
       listing.title = json["title"];
       listing.mainImage = json["image"]["imageUrl"];
       listing.sku = json["sku"];
+      listing.owner = user.id;
       await services.database.saveListing(listing);
     } on Exception catch (e) {
       print("Couldn't get information for Item: ${listing.itemID}");

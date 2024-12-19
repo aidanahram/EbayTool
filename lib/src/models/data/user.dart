@@ -27,7 +27,7 @@ class UserModel extends DataModel {
     final uid = services.auth.userID;
     if (uid == null) return;
     final profile = await services.database.getUserProfile(uid);
-    //services.logger.finest("User $uid, profile: $profile");
+    print("User $uid logged in: ${profile?.lastName}, ${profile?.firstName}");
     if (profile == null) return;
     await models.onSignIn(profile);
   }
@@ -100,12 +100,19 @@ class UserModel extends DataModel {
   }
 
   Future<bool> refreshListingsInformation() async {
-    if (!isSignedIn) return false;
+    if (!isSignedIn){
+      print("Cannot refresh listing becuase user not signed in");
+      return false;
+    }
     if (!userProfile!.ebayRefreshTokenValid){
+      print("Ebay token not valid...trying to refresh token");
       if(!await refreshToken()){
+        print("Cannot refresh listing and cannot refresh Token. Must reconnect ebay API");
         return false;
       }
+      print("Ebay token refreshed");
     }
+    print("Getting listings");
     return services.ebayScraper.getListings(userProfile!);
   }
 
@@ -113,9 +120,7 @@ class UserModel extends DataModel {
     if (!isSignedIn) return [];
     final List<Listing> listings = [];
     for(final itemId in userProfile!.listingIDs){
-      //services.logger.finest("Getting $itemId");
       final listing = await services.database.getListing(itemId);
-      //services.logger.finest("Got ${listing?.title}");
       if(listing != null) listings.add(listing);
     }
     return listings;

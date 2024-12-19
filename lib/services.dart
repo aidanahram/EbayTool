@@ -27,6 +27,8 @@ export "src/services/firebase.dart";
 export "src/services/database.dart";
 export "src/services/service.dart";
 
+import "package:logging/logging.dart";
+
 /// A dependency injection service that manages the lifecycle of other services.
 ///
 /// All services must only be used by accessing them from this class, and this class will take care
