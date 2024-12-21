@@ -35,7 +35,7 @@ class AliScraper extends Service {
       print(response.body);
       return jsonDecode(response.body);
     } on Exception catch (e) {
-      print('THERE WAS AN ERROR AND LOGGING IS TOO DIFFICULT');
+      print('There was an error generating aliexpress token');
       print(e);
       return null;
     }
@@ -68,6 +68,8 @@ class AliScraper extends Service {
     return true;
   }
 
+  /// Get a product from the aliexpress api
+  /// [productID] is the id to get found in the url of the product
   Future<String> getProduct(String productID) async {
     const getProductApi = 'aliexpress.ds.product.get';
     final params = {

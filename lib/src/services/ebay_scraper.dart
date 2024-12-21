@@ -182,6 +182,7 @@ class EbayScraper extends Service {
             );
             await getItemLegacy(user, listing);
           }
+          print("Saving listings to firestore");
           await models.user.updateListings(items);
         }
       }
@@ -191,7 +192,7 @@ class EbayScraper extends Service {
     return false;
   }
 
-  /// Takes a [UserProfile] and a [Listing], gets information from ebay and saves to database
+  /// Takes a [UserProfile] and a [Listing], gets information from ebay and saves to listings database
   Future<bool> getItemLegacy(UserProfile user, Listing listing) async {
     if (!await verifyToken(user)) return false;
     final uri = Uri.http(api, "/buy/browse/v1/item/get_item_by_legacy_id",
@@ -213,6 +214,7 @@ class EbayScraper extends Service {
       listing.mainImage = json["image"]["imageUrl"];
       listing.sku = json["sku"];
       listing.owner = user.id;
+      print("Saving listing to firestore ${listing.title}");
       await services.database.saveListing(listing);
     } on Exception catch (e) {
       print("Couldn't get information for Item: ${listing.itemID}");

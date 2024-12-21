@@ -44,9 +44,9 @@ class Database extends Service {
   Future<void> saveUserProfile(UserProfile user) =>
       users.doc(user.id).set(user);
 
-  /// Saves a ebay listing to the database
+  /// Saves a ebay listing to the listings database
   Future<void> saveListing(Listing listing) =>
-      listings.doc(listing.itemID).set(listing).catchError((err) => print(err));
+      listings.doc(listing.itemID).set(listing, SetOptions(merge: true)).catchError((err) => print("Error saving ${listing.itemID} $err"));
 
   Future<Listing?> getListing(ItemID itemID) => listings.doc(itemID).getData().catchError((err) {print("$itemID $err"); return null;});
 }
