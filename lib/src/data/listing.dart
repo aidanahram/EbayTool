@@ -41,4 +41,7 @@ class Listing {
         "sku": sku ?? "",
         "mainImage": mainImage ?? "",
       };
+
+  @override
+  String toString() => "Listing($itemID, $title, $owner, $price, $quantity)";
 }

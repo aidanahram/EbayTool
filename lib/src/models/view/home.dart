@@ -33,7 +33,7 @@ class HomeViewModel extends ViewModel {
     notifyListeners();
     print("Refreshing listings called");
     if(! await models.user.refreshListingsInformation()){
-      print("Cannot refresh listing");
+      print("[ERROR] Cannot refresh listing");
     }
     isLoading = false;
     notifyListeners();

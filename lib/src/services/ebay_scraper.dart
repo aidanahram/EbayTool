@@ -47,10 +47,10 @@ class EbayScraper extends Service {
         print(response.body);
         throw Error();
       }
-      print("Generated token");
+      print("Sucessfully generated ebay token");
       return jsonDecode(response.body);
     } on Exception catch (e) {
-      print("THERE WAS AN ERROR AND LOGGING IS TOO DIFFICULT");
+      print("[ERROR] There was an error generating ebay token");
       print(e);
       return null;
     }

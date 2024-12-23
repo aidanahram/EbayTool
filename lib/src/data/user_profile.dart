@@ -37,7 +37,7 @@ class UserProfile {
   });
 
   bool get ebayRefreshTokenValid =>
-      ebayAPI != null &&
+      ebayAPI != null && ebayAPI!['refresh_token_valid_time'] != null &&
       ebayAPI!['refresh_token_valid_time'] >
           DateTime.now().millisecondsSinceEpoch;
 
@@ -46,7 +46,7 @@ class UserProfile {
       ebayAPI!['token_valid_time'] > DateTime.now().millisecondsSinceEpoch;
 
   bool get aliTokenValid =>
-      aliAPI != null &&
+      aliAPI != null && aliAPI!['refresh_token_valid_time'] != null &&
       aliAPI!['refresh_token_valid_time'] >
           DateTime.now().millisecondsSinceEpoch;
 

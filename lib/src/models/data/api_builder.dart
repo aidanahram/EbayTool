@@ -27,12 +27,12 @@ class APIBuilder extends ValueBuilder<void> {
     try {
       final code = uri.queryParameters['code'];
       if (code == null) {
-        print("Unable to save code");
+        print("[ERROR] Unable to find code in URL");
         return;
       }
       final profile = models.user.userProfile;
       if (profile == null) {
-        print("user not logged in");
+        print("[ERROR] User not logged in");
         return;
       }
       switch (website) {
@@ -45,7 +45,7 @@ class APIBuilder extends ValueBuilder<void> {
           models.user.generateToken(code);
       }
     } on Exception catch (e) {
-      print("Unable to save code");
+      print("[ERROR] Unable to save code");
       print(e);
       return;
     }
