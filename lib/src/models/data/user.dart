@@ -68,6 +68,8 @@ class UserModel extends DataModel {
     return saveTokenResponse();
   }
 
+  /// Generates a new token using the code from the API
+  /// Save token response to the user profile
   Future<bool> generateToken(String code) async {
     userProfile!.ebayAPI = await services.ebayScraper.generateToken(code);
     return saveTokenResponse();
@@ -93,9 +95,18 @@ class UserModel extends DataModel {
     return false;
   }
 
-  Future<void> updateListings(List<ItemID> items) async {
+  /// Updates the user's listing information
+  /// Removes any listings that were saved before and don't exist anymore
+  Future<void> updateListings(List<ItemID> newItems) async {
     if (!isSignedIn) return;
-    userProfile!.listingIDs = items;
+    print("Updating listings in database");
+    final oldItems = userProfile!.listingIDs;
+    for (final item in oldItems){
+      if (!newItems.contains(item)){
+        await services.database.deleteListing(item);
+      }
+    }
+    userProfile!.listingIDs = newItems;
     await models.user.updateProfile(userProfile!);
   }
 
@@ -118,6 +129,7 @@ class UserModel extends DataModel {
 
   Future<List<Listing>> getListingsInformationFromDatabase() async {
     if (!isSignedIn) return [];
+    print("Getting listings from database");
     final List<Listing> listings = [];
     for(final itemId in userProfile!.listingIDs){
       final listing = await services.database.getListing(itemId);

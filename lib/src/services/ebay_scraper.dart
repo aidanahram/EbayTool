@@ -83,7 +83,7 @@ class EbayScraper extends Service {
       print("Refreshed token");
       return jsonDecode(response.body);
     } on Exception catch (e) {
-      print("THERE WAS AN ERROR AND LOGGING IS TOO DIFFICULT");
+      print("[ERROR] There was an error refreshing ebay token");
       print(e);
       return null;
     }
@@ -168,8 +168,9 @@ class EbayScraper extends Service {
         // If it's a file, save it to the specified directory
         if (file.isFile) {
           final document = XmlDocument.parse(
-              String.fromCharCodes(file.content as List<int>));
+              String.fromCharCodes(file.content as List<int>)); 
           final skus = document.findAllElements("SKUDetails");
+          print("Found ${skus.length} listings");
           final List<ItemID> items = [];
           for (final sku in skus) {
             items.add(ItemID(sku.findElements("ItemID").single.innerText));

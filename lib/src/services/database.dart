@@ -47,12 +47,21 @@ class Database extends Service {
   /// Saves a ebay listing to the listings database
   Future<void> saveListing(Listing listing) =>
       listings.doc(listing.itemID).set(listing, SetOptions(merge: true)).catchError((err) {
-        print("Error saving $listing");
-        print("Error: $err");
+        print("[ERROR] saving $listing");
+        print("Response: $err");
       });
 
+  /// Gets a listing from the database
   Future<Listing?> getListing(ItemID itemID) => listings.doc(itemID).getData().catchError((err) {
     print("$itemID $err"); 
     return null;
+  });
+
+  /// Checks if a listing exists in the database
+  Future<bool> listingExists(ItemID itemID) => listings.doc(itemID).get().then((value) => value.exists);
+
+  /// Deletes a listing from the database
+  Future<void> deleteListing(ItemID itemID) => listings.doc(itemID).delete().catchError((err) {
+    print("[ERROR] $itemID $err");
   });
 }

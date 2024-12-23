@@ -36,10 +36,9 @@ class APIEditor extends ReactiveWidget<APIBuilder> {
               onPressed: () => Navigator.of(context).pop()),
           ElevatedButton(
             onPressed: model.isValid
-                ? () {
-                    model.save();
+                ? () async {
                     Navigator.of(context).pop();
-                    homeModel.refreshListings();
+                    await model.save() ? homeModel.refreshListings() : null;
                   }
                 : null,
             child: const Text("Save"),

@@ -22,32 +22,34 @@ class APIBuilder extends ValueBuilder<void> {
   void update(_) => notifyListeners();
 
   /// Saves the code
-  void save() async {
+  Future<bool> save() async {
     final uri = Uri.parse(url.text);
     try {
       final code = uri.queryParameters['code'];
       if (code == null) {
         print("[ERROR] Unable to find code in URL");
-        return;
+        return false;
       }
       final profile = models.user.userProfile;
       if (profile == null) {
         print("[ERROR] User not logged in");
-        return;
+        return false;
       }
       switch (website) {
         case ("AliExpress"):
           profile.aliAPI = await services.aliScraper.generateToken(code);
           if (profile.aliAPI != null) {
             models.user.updateProfile(profile);
+            return true;
           }
         case ("Ebay"):
-          models.user.generateToken(code);
+          return await models.user.generateToken(code);
       }
     } on Exception catch (e) {
       print("[ERROR] Unable to save code");
       print(e);
-      return;
+      return false;
     }
+    return false;
   }
 }
